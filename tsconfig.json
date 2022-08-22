@@ -1,0 +1,38 @@
+{
+  "include": ["src/**/*.ts", "src/**/*.vue", "src/types/**/*.d.ts"],
+  "exclude": ["node_modules", "dist", "tsc"],
+  "compilerOptions": {
+    "baseUrl": "./",
+    "rootDir": "./src",
+    "target": "ESNext",
+    "module": "ESNext",
+    "strict": true,
+    "isolatedModules": true,
+    "lib": ["ESNext", "DOM"],
+    "useDefineForClassFields": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "paths": {
+      "@/*": ["src/*"],
+      "@/components/*": ["src/components/*"],
+      "@/svg/*": ["src/assets/svg/*"]
+    },
+    "types": [
+      "node",
+      "@intlify/vite-plugin-vue-i18n/client",
+      "vite/client",
+      "vite-plugin-pages/client",
+      "vite-plugin-svg-icons/client"
+    ]
+  },
+  "vueCompilerOptions": {
+    "experimentalDisableTemplateSupport": true,
+    "experimentalShamefullySupportOptionsApi": true
+  }
+}

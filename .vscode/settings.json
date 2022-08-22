@@ -1,0 +1,26 @@
+{
+  "alias-skip.rootpath": "package.json",
+  "alias-skip.mappings": {
+    "@": "/src", // 默认只有`@`映射，映射到`/src`，你可以添加更多映射，映射路径必须以`/`开头
+    // ...更多映射关系
+    "@/svg": "/src/assets/svg"
+  },
+  "i18n-ally.localesPaths": ["src/i18n"],
+  "i18n-ally.pathMatcher": "{locale}.yaml",
+  "i18n-ally.dirStructure": "auto",
+  "i18n-ally.enabledParsers": ["yaml"],
+  "i18n-ally.translate.engines": ["google", "deepl"],
+  "i18n-ally.translate.deepl.useFreeApiEntry": true,
+  "i18n-ally.translate.fallbackToKey": true,
+  "i18n-ally.sourceLanguage": "en",
+  "i18n-ally.displayLanguage": "zh",
+  "i18n-ally.theme.annotationMissing": "rgba(153, 153, 153, .3)",
+  "i18n-ally.theme.annotation": "rgba(255, 255, 255, .8)",
+  "i18n-ally.theme.annotationBorder": "none",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSaveMode": "file",
+  "i18n-ally.keystyle": "nested",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true // 保存时整理 import ，去掉没用的导包
+  }
+}
