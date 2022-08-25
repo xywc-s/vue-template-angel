@@ -18,7 +18,7 @@
         </div>
 
         <template v-for="{ path, children } in $router.options.routes" :key="path">
-          <template v-if="!children[0].hidden">
+          <template v-if="!children[0].hidden && $hasPermission(children[0].meta.permission)">
             <el-sub-menu v-if="children[0].children" :index="path">
               <template #title>
                 <div>{{ children[0].meta.title }}</div>
@@ -37,7 +37,6 @@
 </template>
 
 <script setup lang="ts">
-import UserInfo from '@/components/UserInfo.vue'
 import { useApp } from '@/stores/app'
 import { useUser } from '@/stores/user'
 import { useRoute } from 'vue-router'

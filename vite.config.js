@@ -21,7 +21,7 @@ export default defineConfig(({ command, mode }) => {
         '@': '/src'
       }
     },
-    base: '/project-web/', // 项目基础路径
+    base: './',
     server: {
       port: env.VITE_DEV_PORT
       // proxy: {
@@ -38,8 +38,9 @@ export default defineConfig(({ command, mode }) => {
           manualChunks: {
             // 不支持 tree-shaking 的运行时依赖包或库, 直接打包到单独的chunk
             'vxe-table': ['vxe-table', 'xe-utils'],
-            utils: ['dayjs', 'js-base64', 'qs', 'mitt'],
-            axios: ['axios']
+            dayjs: ['dayjs'],
+            axios: ['axios'],
+            utils: ['js-base64', 'qs', 'mitt']
           }
         }
       }

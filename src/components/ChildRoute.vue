@@ -1,6 +1,6 @@
 <template>
   <template v-for="{ path, meta, hidden, children } in routes" :key="basePath + '/' + path">
-    <template v-if="!hidden"></template>
+    <template v-if="!hidden && $hasPermission(meta.permission)"></template>
     <el-sub-menu v-if="children" :index="basePath + '/' + path">
       <template #title>
         <div>{{ meta.title }}</div>
