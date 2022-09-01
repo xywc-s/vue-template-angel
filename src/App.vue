@@ -1,31 +1,23 @@
 <template>
-  <el-config-provider :locale="locale">
+  <ElConfigProvider :locale="locale">
     <router-view />
-  </el-config-provider>
+  </ElConfigProvider>
 </template>
 
-<script setup>
-import { computed, getCurrentInstance, reactive } from 'vue'
-import { useApp } from '@/stores/app'
-import { ElConfigProvider } from 'element-plus'
+<script lang="ts" setup>
 import { en, zhCn } from 'element-plus/lib/locales'
-const { proxy } = getCurrentInstance()
+import { ElConfigProvider } from 'element-plus'
+import { computed, reactive } from 'vue'
+import { useApp } from '@/stores/app'
+
 const appStore = useApp()
-const locales = reactive({
+const locales: Record<string, any> = reactive({
   en,
   zh: zhCn
 })
+
 const locale = computed(() => {
-  return locales[Object.keys(locales).find((key) => appStore.isLanguage(key))]
+  const currentLocale = Object.keys(locales).find((key) => appStore.isLanguage(key))
+  return currentLocale ? locales[currentLocale] : 'zh'
 })
-
-console.log('proxy:', proxy)
-console.log('app:', app)
-console.log('store:', proxy.$pinia)
 </script>
-
-<style>
-.vxe-grid--pager-wrapper {
-  margin-top: 10px;
-}
-</style>

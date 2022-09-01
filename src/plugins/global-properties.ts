@@ -1,25 +1,26 @@
-import { useApp } from '@/stores/app'
-import { useUser } from '@/stores/user'
-import { envjudge } from '@/utils'
 import { useClipboard, useDateFormat } from '@vueuse/core'
 import { ElMessage } from 'element-plus'
 import { encode } from 'js-base64'
 import { unref } from 'vue'
 import VueScrollTo from 'vue-scrollto'
-import i18n from './i18n'
+import { envjudge } from '@/utils'
+import { useUser } from '@/stores/user'
+import { useApp } from '@/stores/app'
+import i18n from '@/plugins/i18n'
+import type { App } from 'vue'
 
-const { copy, copied } = useClipboard()
+const { copy } = useClipboard()
 
 export default {
-  install: (app) => {
+  install: (app: App) => {
     app.config.globalProperties.$dateFormater = (val: string, format = 'YYYY-MM-DD HH:mm:ss') => {
       if (!val) return val
       return unref(useDateFormat(val, format))
     }
     app.config.globalProperties.$previewFile = (url: string) => {
       const appStore = useApp()
-      //如果是企业微信手机端预览文件则直接打开文件
-      if ('com-wx-mobile' === envjudge()) {
+      // 如果是企业微信手机端预览文件则直接打开文件
+      if (envjudge() === 'com-wx-mobile') {
         return window.open(appStore.minioPath + url)
       } else {
         if (/^\/middle\/.*/.test(url)) {

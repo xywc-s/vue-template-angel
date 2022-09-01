@@ -1,6 +1,8 @@
 <template>
   <template v-for="{ path, meta, hidden, children } in routes" :key="basePath + '/' + path">
-    <template v-if="!hidden && $hasPermission(meta.permission)"></template>
+    <template
+      v-if="!hidden && (meta.permission ? $hasPermission(meta.permission) : true)"
+    ></template>
     <el-sub-menu v-if="children" :index="basePath + '/' + path">
       <template #title>
         <div>{{ meta.title }}</div>
@@ -11,7 +13,13 @@
   </template>
 </template>
 
-<script setup>
-const props = defineProps(['routes', 'basePath'])
-const { routes, basePath } = props
+<script setup lang="ts">
+import { toRef } from 'vue'
+import type { RouteLocation } from 'vue-router'
+const props = defineProps<{
+  routes: RouteLocation[]
+  basePath: string
+}>()
+const routes = toRef(props, 'routes')
+const basePath = toRef(props, 'basePath')
 </script>

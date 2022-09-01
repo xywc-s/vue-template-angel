@@ -3,9 +3,9 @@ import 'uno.css'
 import '@/styles/index.scss'
 import 'virtual:svg-icons-register'
 
+import { createApp } from 'vue'
 import App from '@/App.vue'
 import VXETable from '@/plugins/vxe-table'
-import { createApp } from 'vue'
 import directives from '@/directives'
 import globalProperties from '@/plugins/global-properties'
 import i18n from '@/plugins/i18n'
@@ -23,4 +23,4 @@ app.mount('#app')
 
 console.log('app:', app)
 
-window.app = app
+export default app

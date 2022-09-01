@@ -13,7 +13,7 @@ export default Pages({
     // }
     // return 'async'
     // Load about page synchronously, all other pages are async.
-    // return filepath.includes('about') ? 'sync' : 'async'
+    return filepath.includes('login') ? 'sync' : 'async'
   },
   extendRoute(route, parent) {
     // // Augment the route with meta that indicates that the route requires authentication.

@@ -1,3 +1,5 @@
+import { ElLoading, ElMessageBox, ElNotification, notificationTypes } from 'element-plus'
+import { isObject, isString, merge } from 'lodash-es'
 import i18n from '@/plugins/i18n'
 import { useApp } from '@/stores/app'
 import type {
@@ -6,8 +8,6 @@ import type {
   MessageBoxData,
   NotificationParams
 } from 'element-plus'
-import { ElLoading, ElMessageBox, ElNotification, notificationTypes } from 'element-plus'
-import { isObject, isString, merge } from 'lodash-es'
 
 /**
  * 创建一个在响应失败时会自动取消的loading实例, 也可以通过返回的实例来手动取消loading
@@ -21,6 +21,7 @@ export function useLoading(
   >
 ) {
   const loading = ElLoading.service(options)
+  // @ts-ignore
   useApp().loading = loading
   return loading
 }
@@ -30,7 +31,7 @@ export function useLoading(
  * 默认执行过度时间2500ms
  */
 export function useNotify(options: NotificationParams, type?: typeof notificationTypes[number]) {
-  let Params = {
+  const Params = {
     duration: 2500
   }
   if (isString(options)) {
@@ -47,10 +48,10 @@ export function useNotify(options: NotificationParams, type?: typeof notificatio
  */
 export function useConfirm(
   handle: (data: MessageBoxData) => any,
-  errorHandle: () => any,
+  errorHandle: (err: any) => any,
   options?: ElMessageBoxOptions
 ) {
-  if (!errorHandle) errorHandle = (err) => {}
+  if (!errorHandle) errorHandle = () => {}
   ElMessageBox.confirm(
     i18n.global.t('Are you sure to delete it?') +
       i18n.global.t('Once deleted, the data cannot be recovered.'),

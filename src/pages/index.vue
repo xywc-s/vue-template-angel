@@ -1,6 +1,10 @@
-<template></template>
+<template>首页</template>
 
-<script lang="ts" setup></script>
+<script lang="ts">
+export default {
+  name: 'AppHome'
+}
+</script>
 
 <route lang="yaml">
 meta:
