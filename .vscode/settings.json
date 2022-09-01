@@ -1,4 +1,18 @@
 {
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSaveMode": "file",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true // 保存后自动修复格式
+  },
+  "git.branchProtection": ["cloud"],
+  "eslint.enable": true,
+  "eslint.codeActionsOnSave.mode": "all",
+  "eslint.validate": ["javascript", "typescript", "vue"],
+  "eslint.packageManager": "pnpm",
+  // 扩展设置
+  "volar.autoCompleteRefs": true,
+  "volar.vueserver.useSecondServer": true,
+  "volar-language-features.trace.server": "messages",
   "alias-skip.rootpath": "package.json",
   "alias-skip.mappings": {
     "@": "/src", // 默认只有`@`映射，映射到`/src`，你可以添加更多映射，映射路径必须以`/`开头
@@ -17,10 +31,7 @@
   "i18n-ally.theme.annotationMissing": "rgba(153, 153, 153, .3)",
   "i18n-ally.theme.annotation": "rgba(255, 255, 255, .8)",
   "i18n-ally.theme.annotationBorder": "none",
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSaveMode": "file",
   "i18n-ally.keystyle": "nested",
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": true // 保存时整理 import ，去掉没用的导包
-  }
+  "typescript.tsdk": "node_modules/typescript/lib"
+  // 使用项目当前的ts版本, 开发统一
 }

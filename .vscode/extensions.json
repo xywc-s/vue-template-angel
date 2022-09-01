@@ -1,8 +1,10 @@
 {
   "recommendations": [
-    "lokalise.i18n-ally",
-    "vue.volar",
     "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "vue.volar",
+    "antfu.unocss",
+    "lokalise.i18n-ally",
     "lihuiwang.vue-alias-skip",
     "mikestead.dotenv"
   ]
