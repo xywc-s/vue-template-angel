@@ -1,5 +1,5 @@
-import { createPinia } from 'pinia';
+import { createPinia } from 'pinia'
 const store = createPinia()
-//plugins
+// plugins
 // store.use()
 export default store
