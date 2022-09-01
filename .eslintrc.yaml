@@ -1,0 +1,25 @@
+parser: 'vue-eslint-parser'
+parserOptions:
+  parser: '@typescript-eslint/parser'
+  ecmaVersion: 'latest'
+  ecmaFeatures:
+    jsx: true
+  sourceType: 'module'
+extends: ['standard', 'plugin:vue/vue3-recommended', 'prettier']
+plugins: ['import']
+rules:
+  vue/no-unused-vars: 'error' # https://eslint.vuejs.org/rules/ 查看具体规则
+  vue/no-unused-components: 'error'
+  import/order:
+    - 'error'
+    - 'groups':
+        - 'builtin'
+        - 'external'
+        - 'internal'
+        - 'unknown'
+        - 'parent'
+        - 'sibling'
+        - 'index'
+        - 'object'
+        - 'type'
+  vue/multi-word-component-names: 0

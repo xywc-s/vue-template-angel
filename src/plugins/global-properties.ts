@@ -3,7 +3,7 @@ import { ElMessage } from 'element-plus'
 import { encode } from 'js-base64'
 import { unref } from 'vue'
 import VueScrollTo from 'vue-scrollto'
-import { envjudge } from '@/utils'
+import { isWorkWeChat } from '@/utils'
 import { useUser } from '@/stores/user'
 import { useApp } from '@/stores/app'
 import i18n from '@/plugins/i18n'
@@ -20,8 +20,8 @@ export default {
     app.config.globalProperties.$previewFile = (url: string) => {
       const appStore = useApp()
       // 如果是企业微信手机端预览文件则直接打开文件
-      if (envjudge() === 'com-wx-mobile') {
-        return window.open(appStore.minioPath + url)
+      if (isWorkWeChat() && appStore.isMobile) {
+        window.open(appStore.minioPath + url)
       } else {
         if (/^\/middle\/.*/.test(url)) {
           url = appStore.minioPath + url

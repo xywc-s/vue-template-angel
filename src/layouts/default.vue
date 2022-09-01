@@ -41,7 +41,7 @@
   </el-container>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="AppLogin">
 import { useRoute } from 'vue-router'
 import { useApp } from '@/stores/app'
 import { useUser } from '@/stores/user'

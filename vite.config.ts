@@ -1,4 +1,5 @@
 import { defineConfig, loadEnv } from 'vite'
+import vueSetupExtend from 'vite-plugin-vue-setup-extend'
 import CreateHtml from './src/plugins/create-html'
 import vueI18n from './src/plugins/i18n-helper'
 import Layouts from './src/plugins/router-layouts'
@@ -15,7 +16,18 @@ export default defineConfig(({ command, mode }) => {
   const Html = CreateHtml({ env, command, mode })
 
   return {
-    plugins: [Vue, Layouts, Pages, Unocss, Components, StyleImport, vueI18n, Svg, Html],
+    plugins: [
+      Vue,
+      Layouts,
+      Pages,
+      Unocss,
+      Components,
+      StyleImport,
+      vueI18n,
+      Svg,
+      Html,
+      vueSetupExtend()
+    ],
     resolve: {
       alias: {
         '@': '/src'

@@ -1,5 +1,10 @@
 {
-  "include": ["src/**/*.ts", "src/**/*.vue", "src/types/**/*.d.ts"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.vue",
+    "src/types/**/*.d.ts",
+    "node_modules/element-plus/global.d.ts"
+  ],
   "exclude": ["node_modules", "dist", "tsc"],
   "compilerOptions": {
     "baseUrl": "./",
@@ -8,6 +13,7 @@
     "module": "ESNext",
     "strict": true,
     "isolatedModules": true,
+    "noUnusedLocals": false,
     "lib": ["ESNext", "DOM"],
     "useDefineForClassFields": true,
     "moduleResolution": "node",
