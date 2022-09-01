@@ -1,5 +1,5 @@
-import { Config, Interceptor } from '@/utils/request/index'
 import axios from 'axios'
+import { Config, Interceptor } from '@/utils/request/index'
 
 const json = Config.json
 const request = axios.create({
@@ -16,8 +16,6 @@ request.interceptors.response.use(
   Interceptor.response.default.error
 )
 export default class CIMS {
-  constructor() {}
-
   /**
    * 所有物料组
    */
@@ -29,6 +27,7 @@ export default class CIMS {
    */
   static AllMaterialTypes = () =>
     request.post('/dictionary/getDictionary', { nameCode: 'material-materialType' }, { ...json })
+
   /**
    * 所有物料单位
    */
