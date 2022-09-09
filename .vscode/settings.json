@@ -23,6 +23,7 @@
   "i18n-ally.pathMatcher": "{locale}.yaml",
   "i18n-ally.dirStructure": "auto",
   "i18n-ally.enabledParsers": ["yaml"],
+  "i18n-ally.enabledFrameworks": ["vue-sfc", "vue", "vscode", "custom"],
   "i18n-ally.translate.engines": ["google", "deepl"],
   "i18n-ally.translate.deepl.useFreeApiEntry": true,
   "i18n-ally.translate.fallbackToKey": true,
