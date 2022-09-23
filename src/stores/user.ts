@@ -42,9 +42,10 @@ export const useUser = defineStore('user', () => {
     return Boolean(import.meta.env.VITE_USER_TOKEN && import.meta.env.VITE_USER_CODE)
   }
   function hasPermission(permission: string | string[] | undefined) {
+    if (!permission) return true
     if (isString(permission)) return permissionList.value.findIndex((v) => permission === v) > -1
     if (isArray(permission)) return permissionList.value.some((v: string) => permission.includes(v))
-    return false
+    return true
   }
 
   return {
