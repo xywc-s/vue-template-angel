@@ -1,8 +1,7 @@
 <template>
   <el-container>
-    <el-header height="auto" class="!px-0">
+    <el-header v-if="!appStore.isChildApp" height="auto" class="!px-0">
       <el-menu
-        v-if="!appStore.isChildApp"
         :collapse="appStore.isMobile"
         mode="horizontal"
         router
