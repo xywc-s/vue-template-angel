@@ -82,7 +82,7 @@
               部门
             </span>
             <span class="value">
-              <span class="departmentName" v-for="item in departmentList" :key="item.id">
+              <span v-for="item in departmentList" :key="item.id" class="departmentName">
                 {{ item }}
               </span>
             </span>
@@ -121,10 +121,10 @@
 </template>
 
 <script setup>
+import { computed, onMounted, ref, useSlots, watch, watchEffect } from 'vue'
 import SecurityServer from '@/api/auth'
 import { useApp } from '@/stores/app'
-import queue from '@/utils/queue'
-import { computed, onMounted, ref, useSlots, watch, watchEffect } from 'vue'
+import Queue from '@/utils/queue'
 const props = defineProps({
   value: {
     type: String,
@@ -151,6 +151,7 @@ const loading = ref(false)
 const user = ref({})
 const departmentList = ref(null)
 const triggleMethod = ref('hover')
+const queue = new Queue()
 
 const valueField = computed(() => {
   return getValueField(props.value)
@@ -166,7 +167,7 @@ watch(
   }
 )
 
-//判断value的类型 id、email、code、phone
+// 判断value的类型 id、email、code、phone
 const getValueField = (value) => {
   if (value && value.length === 32) {
     return 'id'
@@ -183,7 +184,7 @@ const getUser = async () => {
   if (!!props.value && user.value[valueField.value] === props.value) return false
   user.value = {}
 
-  //加入异步请求队列
+  // 加入异步请求队列
   const res = await queue.push(SecurityServer.findByUnique, props.value)
 
   if (res?.success && res?.object) {
