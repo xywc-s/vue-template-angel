@@ -4,6 +4,7 @@ import {
   VantResolve,
   ElementPlusResolve
 } from 'vite-plugin-style-import'
-export default createStyleImportPlugin({
-  resolves: [VxeTableResolve(), ElementPlusResolve(), VantResolve()]
-})
+export default () =>
+  createStyleImportPlugin({
+    resolves: [VxeTableResolve(), ElementPlusResolve(), VantResolve()]
+  })

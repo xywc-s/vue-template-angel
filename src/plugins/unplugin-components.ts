@@ -17,13 +17,14 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 //   }
 // }
 
-export default Components({
-  dts: './src/types/components.d.ts',
-  types: [
-    {
-      from: 'vue-router',
-      names: ['RouterLink', 'RouterView']
-    }
-  ],
-  resolvers: [ElementPlusResolver()]
-})
+export default () =>
+  Components({
+    dts: './src/types/components.d.ts',
+    types: [
+      {
+        from: 'vue-router',
+        names: ['RouterLink', 'RouterView']
+      }
+    ],
+    resolvers: [ElementPlusResolver()]
+  })
