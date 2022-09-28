@@ -13,19 +13,18 @@ import Vue from './src/plugins/vue'
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd())
-  const Html = CreateHtml({ env, command, mode })
 
   return {
     plugins: [
-      Vue,
-      Layouts,
-      Pages,
-      Unocss,
-      Components,
-      StyleImport,
-      vueI18n,
-      Svg,
-      Html,
+      Vue(),
+      Layouts(),
+      Pages(),
+      Unocss(),
+      Components(),
+      StyleImport(),
+      vueI18n(),
+      Svg(),
+      CreateHtml({ env, command, mode }),
       vueSetupExtend()
     ],
     resolve: {
