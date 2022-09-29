@@ -20,7 +20,5 @@ app.use(VXETable)
 app.use(globalProperties)
 app.use(directives)
 app.mount('#app')
-
+window.app = app
 console.log('app:', app)
-
-export default app

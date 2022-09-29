@@ -4,7 +4,7 @@ import { useStorage } from '@vueuse/core'
 import { decode } from 'js-base64'
 import dayjs from 'dayjs'
 import { computed } from 'vue'
-import Auth from '@/api/auth'
+import { userCodeLoginForDev } from '@/api'
 import { useNotify } from '@/repositories'
 import { useApp } from './app'
 
@@ -29,7 +29,7 @@ export const useUser = defineStore('user', () => {
     userStorage.value = obj
   }
   async function devLogin() {
-    const { data } = await Auth.login()
+    const { data } = await userCodeLoginForDev()
     if (data.object) setUser(JSON.parse(data.object))
     else useNotify(data.message, 'error')
   }

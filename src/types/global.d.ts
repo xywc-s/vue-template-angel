@@ -1,6 +1,6 @@
 /* eslint no-unused-vars: 0 */
 import { VueInstance } from '@vueuse/core'
-import type { AppConfig } from 'vue'
+import type { App } from 'vue'
 interface parentApp extends VueInstance {
   $store: {
     state: any
@@ -12,6 +12,6 @@ interface parentApp extends VueInstance {
 
 declare global {
   interface Window {
-    app: parentApp
+    app: App
   }
 }

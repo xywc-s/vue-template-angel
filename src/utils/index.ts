@@ -1,4 +1,13 @@
-import { isEmpty, isNaN, isNil, isObject, isPlainObject, isString, omitBy } from 'lodash-es'
+import {
+  isArray,
+  isEmpty,
+  isNaN,
+  isNil,
+  isObject,
+  isPlainObject,
+  isString,
+  omitBy
+} from 'lodash-es'
 
 function S4() {
   return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1)
@@ -21,6 +30,7 @@ export function validParams(params: Record<string, any>) {
     if (isNil(value)) return true
     if (isNaN(value)) return true
     if (isObject(value) && isEmpty(value)) return true
+    if (isArray(value) && !value.length) return true
     if (isString(value) && !value) return true
     return false
   })

@@ -2,7 +2,7 @@ import { breakpointsTailwind, useBreakpoints, useDateFormat, useNow } from '@vue
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 import i18n from '@/plugins/i18n'
-import app from '@/main'
+import type { parentApp } from '@/types/global'
 import type { LoadingInstance } from 'element-plus/es/components/loading/src/loading'
 
 const breakpoints = useBreakpoints(breakpointsTailwind)
@@ -10,14 +10,19 @@ export const useApp = defineStore('app', () => {
   const minioPath = import.meta.env.VITE_MINIO_PATH
   const locale = ref(navigator.language)
   const isChildApp = ref(Boolean(parent !== self))
-  const loading = ref<LoadingInstance | null>(null)
+  const loading = ref<LoadingInstance | boolean | null>(null)
 
-  const rootInstance = computed(() => parent.app)
+  const rootInstance = computed(() => parent.app as parentApp)
+  const currentInstance = computed(() => window.app)
   const route = computed(() =>
-    isChildApp.value ? rootInstance.value.$route : app.config.globalProperties.$route
+    isChildApp.value
+      ? rootInstance.value.$route
+      : currentInstance.value.config.globalProperties.$route
   )
   const router = computed(() =>
-    isChildApp.value ? rootInstance.value.$router : app.config.globalProperties.$router
+    isChildApp.value
+      ? rootInstance.value.$router
+      : currentInstance.value.config.globalProperties.$router
   )
   const serverTime = computed(() =>
     isChildApp.value

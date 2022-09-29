@@ -1,0 +1,13 @@
+{
+  "fileExtensions": [
+    "js",
+    "ts"
+  ],
+  "tsConfig": "./tsconfig.json",
+  "includeNpm": true,
+  "graphVizOptions": {
+    "G": {
+      "rankdir": "LR"
+    }
+  }
+}
