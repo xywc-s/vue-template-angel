@@ -10,6 +10,9 @@ plugins: ['import']
 rules:
   vue/no-unused-vars: 'error' # https://eslint.vuejs.org/rules/ 查看具体规则
   vue/no-unused-components: 'error'
+  vue/multi-word-component-names: 0 # 组件名必须多个单词 0: 关闭, 等价于off
+  vue/require-default-prop: off # props 必须定义默认值
+  vue/require-prop-types: 0 # props必须定义类型
   import/order:
     - 'error'
     - 'groups':
@@ -22,4 +25,3 @@ rules:
         - 'index'
         - 'object'
         - 'type'
-  vue/multi-word-component-names: 0

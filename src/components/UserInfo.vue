@@ -20,30 +20,33 @@
     <template #default>
       <div v-loading="loading" class="userInfo h-min-150px">
         <div class="flex items-center">
-          <el-avatar class="avatar" shape="square" size="large" :src="user.avatar">
-            <i v-if="user.status !== '正常'" style="font-size: 40px" class="ep-remove-outline"></i>
-            <i v-else style="font-size: 40px" class="ep-user"></i>
+          <el-avatar class="w-60px h-60px mr-15px" shape="square" size="large" :src="user.avatar">
+            <i v-if="user.status !== '正常'" class="text-40px ep-remove-outline"></i>
+            <i v-else class="text-40px ep-user"></i>
           </el-avatar>
           <div v-if="user?.name">
             <div>
-              <span class="name">
+              <span class="text-16px text-[#303133] mb-10px">
                 {{ user.name }}
                 <i
-                  class="ep-user-solid userIcon"
-                  :class="{ man: user?.gender === '男', woman: user?.gender === '女' }"
+                  class="ep-user-solid"
+                  :class="{
+                    'text-[#409eff]': user?.gender === '男',
+                    'text-[#f56c6c]': user?.gender === '女'
+                  }"
                 />
               </span>
-              <span v-if="user.status !== '正常'" style="margin-left: 5px; color: #f56c6c">
+              <span v-if="user.status !== '正常'" class="ml-5px text-[#f56c6c]">
                 [{{ user.status }}]
               </span>
             </div>
             <div>
-              <span class="position">{{ user.position }}</span>
+              <span class="text-13px text-[#909399]">{{ user.position }}</span>
             </div>
           </div>
         </div>
-        <div class="detail">
-          <div class="flex row">
+        <div class="detail text-13px mt-20px children:mb-10px">
+          <div class="flex">
             <span class="title flex-shrink-0">
               <i class="ep-phone"></i>
               手机
@@ -54,7 +57,7 @@
               </el-link>
             </span>
           </div>
-          <div class="flex row">
+          <div class="flex">
             <span class="title flex-shrink-0">
               <i class="ep-message"></i>
               邮箱
@@ -65,7 +68,7 @@
               </el-link>
             </span>
           </div>
-          <div class="flex row">
+          <div class="flex">
             <span class="title flex-shrink-0">
               <i class="ep-user"></i>
               编号
@@ -76,7 +79,7 @@
               </el-link>
             </span>
           </div>
-          <div class="flex row">
+          <div class="flex">
             <span class="title flex-shrink-0">
               <i class="ep-office-building"></i>
               部门
@@ -88,22 +91,24 @@
             </span>
           </div>
           <template v-if="$hasPermission('SI')">
-            <div class="flex row">
-              <span class="title flex-shrink-0">
+            <div class="flex">
+              <div class="title flex-shrink-0">
                 <i class="ep-key" />
                 id
-              </span>
+              </div>
               <span class="value">
                 <el-link @click="$copyText(user.id) && $message.success('已复制:' + user.id)">
                   {{ user.id }}
                 </el-link>
               </span>
             </div>
-            <div class="flex row">
-              <span class="title flex-shrink-0">
-                <svg-icon name="wechat" color="#909399" />
-                企微
-              </span>
+            <div class="flex">
+              <div class="title flex-shrink-0">
+                <div class="flex items-center">
+                  <svg-icon name="wechat" color="#909399" />
+                  <span class="ml-5px">企微</span>
+                </div>
+              </div>
               <span class="value">
                 <el-link
                   @click="$copyText(user.wechatId) && $message.success('已复制:' + user.wechatId)"
@@ -241,49 +246,13 @@ onMounted(() => {
 })
 </script>
 <style lang="scss" scoped>
-.userInfo {
-  .avatar {
-    width: 60px;
-    height: 60px;
-    margin-right: 15px;
-  }
-  .name {
-    font-size: 16px;
-    color: #303133;
-    margin-bottom: 10px;
-  }
-  .position {
-    font-size: 13px;
-    color: #909399;
-  }
-  .userIcon {
-    &.man {
-      color: #409eff;
-    }
-    &.woman {
-      color: #f56c6c;
-    }
-  }
-  .detail {
-    font-size: 13px;
-    margin-top: 20px;
-    .row {
-      margin-bottom: 10px;
-      .title {
-        display: inline-block;
-        margin: 0 10px;
-        width: 50px;
-        color: #909399;
-      }
-      .value {
-        color: #606266;
-        .departmentName {
-          & + & {
-            margin-top: 5px;
-          }
-        }
-      }
-    }
-  }
+.title {
+  display: inline-block;
+  margin: 0 10px;
+  width: 50px;
+  color: #909399;
+}
+.value {
+  color: #606266;
 }
 </style>
