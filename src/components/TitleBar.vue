@@ -6,7 +6,7 @@
         class="title px-10px -ml-5px relative font-extrabold flex items-center"
         @click="$emit('clickTitle')"
       >
-        <svg-icon v-if="!!props.iconClass" class="icon" :icon-class="props.iconClass" />
+        <SvgIcon v-if="!!props.iconClass" class="icon" :name="props.iconClass"></SvgIcon>
         <i v-else-if="!!props.icon" :class="icon" class="icon"></i>
         <slot>
           <span class="text-18px text-[#303133]">{{ props.title }}</span>
