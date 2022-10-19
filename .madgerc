@@ -1,13 +1,19 @@
 {
   "fileExtensions": [
     "js",
-    "ts"
+    "ts",
+    "vue"
   ],
   "tsConfig": "./tsconfig.json",
   "includeNpm": true,
   "graphVizOptions": {
     "G": {
       "rankdir": "LR"
+    }
+  },
+  "detectiveOptions": {
+    "ts": {
+      "skipTypeImports": true
     }
   }
 }

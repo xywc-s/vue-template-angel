@@ -6,7 +6,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "staging": "vite build --mode staging"
+    "staging": "vite build --mode staging",
+    "gcd": "madge --circular --image graph.svg src/main.ts"
   },
   "dependencies": {
     "@vueuse/core": "^9.1.0",
