@@ -1,7 +1,10 @@
 import { ElLoading, ElMessageBox, ElNotification, notificationTypes } from 'element-plus'
 import { isObject, isString, merge } from 'lodash-es'
+import { encode } from 'js-base64'
 import i18n from '@/plugins/i18n'
+import { isWorkWeChat } from '@/utils'
 import { useApp } from '@/stores/app'
+
 import type {
   ElMessageBoxOptions,
   LoadingOptionsResolved,
@@ -74,4 +77,22 @@ export function useProgressColors() {
     { color: '#1989fa', percentage: 99.99 },
     { color: '#5cb87a', percentage: 100 }
   ]
+}
+
+export const previewFile = (url: string) => {
+  const appStore = useApp()
+  // 如果是企业微信手机端预览文件则直接打开文件
+  if (isWorkWeChat() && appStore.isMobile) {
+    window.open(appStore.minioPath + url)
+  } else {
+    if (/^\/middle\/.*/.test(url)) {
+      url = appStore.minioPath + url
+    }
+    const path =
+      import.meta.env.VITE_PREVIEW_URL +
+      '/onlinePreview?url=' +
+      encodeURIComponent(encode(url)) +
+      '&officePreviewType=pdf'
+    window.open(path)
+  }
 }

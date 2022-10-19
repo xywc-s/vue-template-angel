@@ -1,11 +1,8 @@
 import { useClipboard, useDateFormat } from '@vueuse/core'
 import { ElMessage } from 'element-plus'
-import { encode } from 'js-base64'
 import { unref } from 'vue'
 import VueScrollTo from 'vue-scrollto'
-import { isWorkWeChat } from '@/utils'
 import { useUser } from '@/stores/user'
-import { useApp } from '@/stores/app'
 import i18n from '@/plugins/i18n'
 import type { App } from 'vue'
 
@@ -16,23 +13,6 @@ export default {
     app.config.globalProperties.$dateFormater = (val: string, format = 'YYYY-MM-DD HH:mm:ss') => {
       if (!val) return val
       return unref(useDateFormat(val, format))
-    }
-    app.config.globalProperties.$previewFile = (url: string) => {
-      const appStore = useApp()
-      // 如果是企业微信手机端预览文件则直接打开文件
-      if (isWorkWeChat() && appStore.isMobile) {
-        window.open(appStore.minioPath + url)
-      } else {
-        if (/^\/middle\/.*/.test(url)) {
-          url = appStore.minioPath + url
-        }
-        const path =
-          import.meta.env.VITE_PREVIEW_URL +
-          '/onlinePreview?url=' +
-          encodeURIComponent(encode(url)) +
-          '&officePreviewType=pdf'
-        window.open(path)
-      }
     }
     app.config.globalProperties.$hasPermission = (permissions: string | string[]) => {
       return useUser().hasPermission(permissions)
