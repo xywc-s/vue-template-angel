@@ -39,7 +39,7 @@
   </el-container>
 </template>
 
-<script setup lang="ts" name="AppLogin">
+<script setup lang="ts" name="DeafultLayout">
 import { useRoute } from 'vue-router'
 import { onMounted, reactive, ref } from 'vue'
 import { useElementBounding, useResizeObserver } from '@vueuse/core'
