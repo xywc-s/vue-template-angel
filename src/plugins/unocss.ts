@@ -11,7 +11,7 @@ export default () =>
     presets: [
       presetUno(),
       presetIcons({
-        prefix: '',
+        prefix: 'uno-',
         extraProperties: {
           display: 'inline-block',
           'vertical-align': 'middle',

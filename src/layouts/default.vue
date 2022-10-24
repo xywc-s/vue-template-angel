@@ -19,22 +19,21 @@
         <template v-for="{ path, children } in $router.options.routes" :key="path">
           <template
             v-if="
-              !children[0].hidden &&
-              (children[0].meta.permission ? $hasPermission(children[0].meta.permission) : true)
+              !children![0].meta?.hidden && userStore.hasPermission(children![0].meta?.permission as Permission)
             "
           >
-            <el-sub-menu v-if="children[0].children" :index="path">
+            <el-sub-menu v-if="children![0].children" :index="path">
               <template #title>
-                <div>{{ children[0].meta.title }}</div>
+                <div>{{ children![0].meta?.title }}</div>
               </template>
-              <ChildRoute :routes="children[0].children" :base-path="path"></ChildRoute>
+              <ChildRoute :routes="children![0].children" :base-path="path"></ChildRoute>
             </el-sub-menu>
-            <el-menu-item v-else :index="path">{{ children[0].meta.title }}</el-menu-item>
+            <el-menu-item v-else :index="path">{{ children![0].meta?.title }}</el-menu-item>
           </template>
         </template>
       </el-menu>
     </el-header>
-    <el-main>
+    <el-main ref="mainEl" class="main-box">
       <router-view></router-view>
     </el-main>
   </el-container>
@@ -42,9 +41,32 @@
 
 <script setup lang="ts" name="AppLogin">
 import { useRoute } from 'vue-router'
+import { onMounted, reactive, ref } from 'vue'
+import { useElementBounding, useResizeObserver } from '@vueuse/core'
 import { useApp } from '@/stores/app'
 import { useUser } from '@/stores/user'
+import type { Permission } from '@/types/custom'
+
 const appStore = useApp()
 const userStore = useUser()
 const defaultActive = useRoute().path
+
+const mainEl = ref()
+const styles = reactive({
+  mainBoxHeight: '0'
+})
+const { top } = useElementBounding(mainEl, { windowScroll: false })
+function resetMainBoxHeight() {
+  styles.mainBoxHeight = document.documentElement.clientHeight - top.value + 'px'
+}
+onMounted(() => {
+  resetMainBoxHeight()
+  useResizeObserver(mainEl, () => resetMainBoxHeight())
+})
 </script>
+
+<style scoped>
+.main-box {
+  height: v-bind('styles.mainBoxHeight');
+}
+</style>

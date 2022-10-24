@@ -1,15 +1,18 @@
 <template>
-  <div class="flex items-center justify-between flex-wrap mb-12px">
+  <div
+    class="flex items-center justify-between flex-wrap mb-12px"
+    :class="{ 'title-sticky': !!sticky }"
+  >
     <div class="flex-shrink-0 flex">
       <div
-        v-if="!!props.title"
+        v-if="!!title"
         class="title px-10px -ml-5px relative font-extrabold flex items-center"
         @click="$emit('clickTitle')"
       >
-        <SvgIcon v-if="!!props.iconClass" class="icon" :name="props.iconClass"></SvgIcon>
-        <i v-else-if="!!props.icon" :class="icon" class="icon"></i>
+        <SvgIcon v-if="!!name" class="icon" :name="name" />
+        <i v-else-if="!!icon" class="icon" :class="icon"></i>
         <slot>
-          <span class="text-18px text-[#303133]">{{ props.title }}</span>
+          <span class="text-18px text-[#303133] ml-6px">{{ title }}</span>
         </slot>
       </div>
       <div class="space">
@@ -25,7 +28,12 @@
 <script setup lang="ts" name="TitleBar">
 import SvgIcon from '@/components/SvgIcon.vue'
 defineEmits(['clickTitle'])
-const props = defineProps(['title', 'icon', 'iconClass'])
+defineProps({
+  title: String,
+  icon: String,
+  name: String,
+  sticky: Boolean
+})
 </script>
 
 <style lang="scss" scoped>
@@ -55,5 +63,13 @@ const props = defineProps(['title', 'icon', 'iconClass'])
   > :last-child {
     margin-right: 0;
   }
+}
+
+.title-sticky {
+  position: sticky;
+  top: -20px;
+  z-index: 9;
+  background-color: white;
+  padding-top: 10px;
 }
 </style>

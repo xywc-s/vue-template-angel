@@ -1,9 +1,12 @@
-import { ElLoading, ElMessageBox, ElNotification, notificationTypes } from 'element-plus'
+import { ElLoading, ElMessageBox, ElNotification, notificationTypes, ElMessage } from 'element-plus'
 import { isObject, isString, merge } from 'lodash-es'
 import { encode } from 'js-base64'
+import { isRef } from 'vue'
+import { useClipboard } from '@vueuse/core'
 import i18n from '@/plugins/i18n'
 import { isWorkWeChat } from '@/utils'
 import { useApp } from '@/stores/app'
+import type { FetchOptions } from '@/types/custom'
 
 import type {
   ElMessageBoxOptions,
@@ -11,6 +14,8 @@ import type {
   MessageBoxData,
   NotificationParams
 } from 'element-plus'
+
+const { copy } = useClipboard()
 
 /**
  * 创建一个在响应失败时会自动取消的loading实例, 也可以通过返回的实例来手动取消loading
@@ -95,4 +100,40 @@ export const previewFile = (url: string) => {
       '&officePreviewType=pdf'
     window.open(path)
   }
+}
+
+/**
+ * 接口调用处理函数
+ */
+export function useFetch<T = any, P = any>(options: FetchOptions<T, P>) {
+  if (options.loading) {
+    if (isRef(options.loading)) options.loading.value = true
+    else options.loading(true)
+  }
+  options
+    .fn(options.params)
+    .then((res) => {
+      const { success, message } = res
+      if (success) {
+        message && ElMessage.success(message)
+        if (options.hooks.success) options.hooks.success(res)
+      } else {
+        message && ElMessage.error(message)
+      }
+    })
+    .catch(() => {})
+    .finally(() => {
+      if (options.loading) {
+        if (isRef(options.loading)) options.loading.value = false
+        else options.loading(false)
+      }
+    })
+}
+
+/**
+ * 复制内容
+ */
+export function copyText(text: string) {
+  copy(text)
+  ElMessage.success(i18n.global.t('Copy successful'))
 }

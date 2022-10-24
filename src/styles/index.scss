@@ -13,22 +13,6 @@ body {
   margin-top: 10px;
 }
 
-.mark-title {
-  font-size: 22px;
-  font-weight: 600;
-  padding-left: 14px;
-  position: relative;
-  box-sizing: border-box;
-  &::before {
-    position: absolute;
-    left: 0;
-    content: '';
-    width: 4px;
-    height: 100%;
-    background-color: #1890ff;
-  }
-}
-
 .required {
   position: relative;
   &::before {

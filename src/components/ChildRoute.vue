@@ -1,25 +1,28 @@
 <template>
-  <template v-for="{ path, meta, hidden, children } in routes" :key="basePath + '/' + path">
+  <template v-for="{ path, meta, children } in routes" :key="basePath + '/' + path">
     <template
-      v-if="!hidden && (meta.permission ? $hasPermission(meta.permission) : true)"
+      v-if="!meta?.hidden && userStore.hasPermission(meta?.permission as Permission)"
     ></template>
     <el-sub-menu v-if="children" :index="basePath + '/' + path">
       <template #title>
-        <div>{{ meta.title }}</div>
+        <div>{{ meta?.title }}</div>
       </template>
       <child-route :routes="children" :base-path="basePath + '/' + path"></child-route>
     </el-sub-menu>
-    <el-menu-item v-else :index="basePath + '/' + path">{{ meta.title }}</el-menu-item>
+    <el-menu-item v-else :index="basePath + '/' + path">{{ meta?.title }}</el-menu-item>
   </template>
 </template>
 
 <script setup lang="ts">
 import { toRef } from 'vue'
-import type { RouteLocation } from 'vue-router'
+import { useUser } from '@/stores/user'
+import type { RouteRecordRaw } from 'vue-router'
+import type { Permission } from '@/types/custom'
 const props = defineProps<{
-  routes: RouteLocation[]
+  routes: RouteRecordRaw[]
   basePath: string
 }>()
 const routes = toRef(props, 'routes')
 const basePath = toRef(props, 'basePath')
+const userStore = useUser()
 </script>

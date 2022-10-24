@@ -2,7 +2,7 @@
   <div></div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="Login">
 import { onBeforeMount, useAttrs } from 'vue'
 import { useRoute } from 'vue-router'
 import { decode } from 'js-base64'
@@ -70,13 +70,9 @@ onBeforeMount(async () => {
   }
 })
 </script>
-<script lang="ts">
-export default {
-  name: 'LoginPage'
-}
-</script>
+
 <route lang="yaml">
-hidden: true
 meta:
+  hidden: true
   title: 登录
 </route>

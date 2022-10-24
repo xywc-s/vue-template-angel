@@ -4,10 +4,10 @@
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup name="404"></script>
 
 <route lang="yaml">
-hidden: true
 meta:
+  hidden: true
   title: '404'
 </route>

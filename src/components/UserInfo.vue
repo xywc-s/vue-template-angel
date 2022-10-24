@@ -21,15 +21,15 @@
       <div v-loading="loading" class="userInfo h-min-150px">
         <div class="flex items-center">
           <el-avatar class="w-60px h-60px mr-15px" shape="square" size="large" :src="user.avatar">
-            <i v-if="user.status !== '正常'" class="text-40px ep-remove-outline"></i>
-            <i v-else class="text-40px ep-user"></i>
+            <i v-if="user.status !== '正常'" class="text-40px uno-ep-remove-outline"></i>
+            <i v-else class="text-40px uno-ep-user"></i>
           </el-avatar>
           <div v-if="user?.name">
             <div>
               <span class="text-16px text-[#303133] mb-10px">
                 {{ user.name }}
                 <i
-                  class="ep-user-solid"
+                  class="uno-ep-user-filled"
                   :class="{
                     'text-[#409eff]': user?.gender === '男',
                     'text-[#f56c6c]': user?.gender === '女'
@@ -48,40 +48,40 @@
         <div class="detail text-13px mt-20px children:mb-10px">
           <div class="flex">
             <span class="title flex-shrink-0">
-              <i class="ep-phone"></i>
+              <i class="uno-ep-phone"></i>
               手机
             </span>
             <span class="value">
-              <el-link @click="$copyText(user.phone) && $message.success('已复制:' + user.phone)">
+              <el-link @click="() => copyText(user.phone)">
                 {{ user.phone }}
               </el-link>
             </span>
           </div>
           <div class="flex">
             <span class="title flex-shrink-0">
-              <i class="ep-message"></i>
+              <i class="uno-ep-message"></i>
               邮箱
             </span>
             <span class="value">
-              <el-link @click="$copyText(user.email) && $message.success('已复制:' + user.email)">
+              <el-link @click="() => copyText(user.email)">
                 {{ user.email }}
               </el-link>
             </span>
           </div>
           <div class="flex">
             <span class="title flex-shrink-0">
-              <i class="ep-user"></i>
+              <i class="uno-ep-user"></i>
               编号
             </span>
             <span class="value">
-              <el-link @click="$copyText(user.code) && $message.success('已复制:' + user.code)">
+              <el-link @click="() => copyText(user.code)">
                 {{ user.code }}
               </el-link>
             </span>
           </div>
           <div class="flex">
             <span class="title flex-shrink-0">
-              <i class="ep-office-building"></i>
+              <i class="uno-ep-office-building"></i>
               部门
             </span>
             <span class="value">
@@ -90,14 +90,14 @@
               </span>
             </span>
           </div>
-          <template v-if="$hasPermission('SI')">
+          <template v-if="userStore.hasPermission('SI')">
             <div class="flex">
               <div class="title flex-shrink-0">
-                <i class="ep-key" />
+                <i class="uno-ep-key" />
                 id
               </div>
               <span class="value">
-                <el-link @click="$copyText(user.id) && $message.success('已复制:' + user.id)">
+                <el-link @click="() => copyText(user.id)">
                   {{ user.id }}
                 </el-link>
               </span>
@@ -110,11 +110,7 @@
                 </div>
               </div>
               <span class="value">
-                <el-link
-                  @click="$copyText(user.wechatId) && $message.success('已复制:' + user.wechatId)"
-                >
-                  {{ user.wechatId }}
-                </el-link>
+                <el-link @click="() => copyText(user.wechatId)">{{ user.wechatId }}</el-link>
               </span>
             </div>
           </template>
@@ -129,6 +125,8 @@
 import { computed, onMounted, ref, useSlots, watch, watchEffect } from 'vue'
 import SecurityServer from '@/api/auth'
 import { useApp } from '@/stores/app'
+import { useUser } from '@/stores/user'
+import { copyText } from '@/repositories'
 import Queue from '@/utils/queue'
 const props = defineProps({
   value: {
@@ -150,11 +148,12 @@ const props = defineProps({
 })
 const slots = useSlots()
 const appStore = useApp()
+const userStore = useUser()
 const rootCode = 691
 const visible = ref(false)
 const loading = ref(false)
 const user = ref({})
-const departmentList = ref(null)
+const departmentList = ref([])
 const triggleMethod = ref('hover')
 const queue = new Queue()
 
@@ -163,7 +162,7 @@ const valueField = computed(() => {
 })
 
 watchEffect(() => {
-  triggleMethod.value = appStore.device === 'mobile' ? 'click' : props.trigger
+  triggleMethod.value = appStore.isMobile ? 'click' : props.trigger
 })
 watch(
   () => props.value,
@@ -203,7 +202,7 @@ const getUser = async () => {
   }
 }
 const getUserDepartmentList = async () => {
-  departmentList.value = null
+  departmentList.value = []
   const list = (
     await Promise.all(
       user.value.departmentCodeList.map((code) =>
