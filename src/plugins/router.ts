@@ -4,6 +4,7 @@ import { setupLayouts } from 'virtual:generated-layouts'
 import generatedRoutes from '~pages'
 import { useUser } from '@/stores/user'
 import { useApp } from '@/stores/app'
+import type { Permission } from '@/types/custom'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -45,11 +46,10 @@ router.beforeEach(async (to, from, next) => {
   }
 
   if (to.meta.permission) {
-    // TODO: 没有权限到404
-    if (userStore.hasPermission(to.meta.permission as string | undefined)) {
+    if (userStore.hasPermission(to.meta.permission as Permission)) {
       next()
     } else {
-      next('404') // 404
+      next('404')
     }
   } else {
     next()
