@@ -4,13 +4,13 @@ meta:
 </route>
 
 <template>
-  <div class="max-w-1200px mx-auto">
+  <div class="max-w-1200px mx-auto loading">
     <TitleBar title="路由同步">
       <template #right>
         <vxe-button
-          v-loading="buttonLoading"
+          :loading="buttonLoading"
           status="primary"
-          icon="ep-refresh"
+          icon="uno-ep-refresh"
           @click="syncRoutes"
         >
           同步
@@ -54,7 +54,7 @@ meta:
                 :indeterminate="isAllUsefulIndeterminate"
                 @change="handleUsefulCheckAllChange"
               >
-                可用性
+                可用
               </el-checkbox>
             </span>
             <span class="inline-block w-100px">
@@ -63,7 +63,7 @@ meta:
                 :indeterminate="isAllVisibleIndeterminate"
                 @change="handleVisibleCheckAllChange"
               >
-                可见性
+                不可见
               </el-checkbox>
             </span>
           </div>
@@ -92,19 +92,20 @@ meta:
 </template>
 
 <script setup lang="ts" name="RouteSync">
-import { computed, reactive, ref } from 'vue'
-import { cloneDeep, set } from 'lodash-es'
+import { computed, nextTick, onMounted, reactive, ref } from 'vue'
+import { cloneDeep, has, set } from 'lodash-es'
 import { useToggle } from '@vueuse/core'
 import { getAppsRoutes, updateAppsRoutes } from '@/api/bff'
 import routes from '~pages'
+import { useLoading } from '@/repositories'
 import type { CustomRoute } from '@/types/custom'
 import type { RouteRecordRaw } from 'vue-router'
 
 const [buttonLoading, toggleButtonLoading] = useToggle(false)
 const apps = reactive<Record<string, any>>({})
 const appRoutesConfig = reactive<RouteRecordRaw>({
-  path: import.meta.env.VITE_APP_PATH,
   name: import.meta.env.VITE_APP_NAME,
+  path: import.meta.env.VITE_APP_PATH,
   meta: {
     title: '',
     type: 'inner',
@@ -140,7 +141,7 @@ const handleUsefulChange = (val: boolean) => {
   !val && !isAllUsefulIndeterminate.value && (allUsefulChecked.value = false)
 }
 
-// 可见性
+// 不可见
 const allVisibleChecked = ref(false)
 const isAllVisibleIndeterminate = computed(() => {
   const checkedNumber = selectableRoutes.value.filter((route) => route.hidden).length
@@ -168,18 +169,40 @@ const syncRoutes = () => {
     return route
   })
   apps[params.name as string] = params
+  console.log({ apps })
   updateAppsRoutes(apps)
-    .then((res) => {})
+    .then((res) => {
+      console.log({ res })
+    })
     .finally(() => toggleButtonLoading(false))
 }
 
 const getApps = () => {
+  useLoading({ target: '.loading' })
   getAppsRoutes().then((res) => {
     Object.keys(res.data).forEach((key) => (apps[key] = res.data[key]))
+    if (has(apps, appRoutesConfig.name as string)) {
+      setConfig(apps[appRoutesConfig.name as string])
+    }
   })
 }
 
-getApps()
+function setConfig(config: RouteRecordRaw) {
+  appRoutesConfig.name = config.name
+  appRoutesConfig.path = config.path
+  appRoutesConfig.meta = config.meta
+  config.children?.forEach((child) => {
+    const route = selectableRoutes.value.find((route) => route.name === child.name)
+    route!.checked = true
+    route!.hidden = Boolean((child as any).hidden)
+  })
+  nextTick(() => {
+    if (selectableRoutes.value.every((route) => route.checked === true))
+      allUsefulChecked.value = true
+    if (selectableRoutes.value.every((route) => route.hidden === true))
+      allVisibleChecked.value = true
+  })
+}
 
-console.log(selectableRoutes.value)
+onMounted(() => getApps())
 </script>

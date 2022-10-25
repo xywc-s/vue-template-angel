@@ -1,10 +1,9 @@
 import { useNotify } from '@/repositories'
 import { useApp } from '@/stores/app'
 import type { AxiosResponse } from 'axios'
-import type { AngelRes } from '@/types/request'
 
 export default {
-  success: (response: AxiosResponse<AngelRes>) => {
+  success: (response: AxiosResponse) => {
     const appStore = useApp()
     if (appStore.loading?.close) {
       appStore.loading.close()

@@ -24,25 +24,60 @@ export const useApp = defineStore('app', () => {
       ? rootInstance.value.$router
       : currentInstance.value.config.globalProperties.$router
   )
-  const serverTime = computed(() =>
+
+  /**
+   * 当前系统时间
+   */
+  const serverTime = computed<string>(() =>
     isChildApp.value
       ? rootInstance.value.$store.getters.serverTime
       : useDateFormat(useNow(), 'YYYY-MM-DD HH:mm:ss')
   )
+
+  /**
+   * 当前系统语言
+   */
   const language = computed(() =>
     isChildApp.value ? rootInstance.value.$store.getters.language : locale.value
   )
+
+  /**
+   * 当前是否在移动端
+   */
   const isMobile = computed(() => breakpoints.isSmaller('md'))
 
+  /**
+   * 更新主应用中当前路由的标签名
+   * @param path 路由fullpath
+   * @param value 标题内容
+   */
   function updateTag(path: string, value: string) {
     if (isChildApp.value) rootInstance.value.$updateTagTitle(path, value)
   }
+
+  /**
+   * 清理(主应用中)当前路由缓存, 主应用再次访问当前页面时数据会刷新(不会删标签)
+   */
+  function clearTagCache() {
+    if (isChildApp.value) {
+      rootInstance.value.$store.commit(
+        'tagsView/DEL_CACHED_CHILD_APP_VIEW',
+        rootInstance.value.$route.fullPath
+      )
+    }
+  }
+
   /**
    * TODO: 订阅language， 当改变时， 修改全局语言配置
    */
   function setLanguage(lang: string) {
     i18n.global.locale = lang
   }
+
+  /**
+   * 断言当前语言环境
+   * @param lang 断言的语言值
+   */
   function isLanguage(lang: string): boolean {
     if (language.value.length >= lang.length) {
       return language.value.toLowerCase().indexOf(lang.toLowerCase()) > -1
@@ -61,6 +96,7 @@ export const useApp = defineStore('app', () => {
     serverTime,
     isMobile,
     updateTag,
+    clearTagCache,
     setLanguage,
     isLanguage
   }

@@ -1,6 +1,7 @@
 import DefaultRequest from './request/default'
-import AngelResponse from './response/angel'
 import DefaultResponse from './response/default'
+import AngelResponse from './response/angel'
+import BFFResponse from './response/bff'
 
 export const request = {
   default: DefaultRequest
@@ -8,5 +9,6 @@ export const request = {
 
 export const response = {
   default: DefaultResponse,
-  angel: AngelResponse
+  angel: AngelResponse,
+  bff: BFFResponse
 }
