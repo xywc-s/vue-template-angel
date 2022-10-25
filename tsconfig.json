@@ -15,7 +15,7 @@
     "strict": true,
     "isolatedModules": true,
     "noUnusedLocals": false,
-    "lib": ["ESNext", "DOM"],
+    "lib": ["ESNext", "DOM", "WebWorker"],
     "useDefineForClassFields": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
@@ -32,6 +32,7 @@
     },
     "types": [
       "node",
+      "lodash-es",
       "@intlify/vite-plugin-vue-i18n/client",
       "vite/client",
       "vite-plugin-pages/client",
