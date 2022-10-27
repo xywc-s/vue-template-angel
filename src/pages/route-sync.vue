@@ -95,7 +95,7 @@ meta:
 import { computed, nextTick, onMounted, reactive, ref } from 'vue'
 import { cloneDeep, has, set } from 'lodash-es'
 import { useToggle } from '@vueuse/core'
-import { getAppsRoutes, updateAppsRoutes } from '@/api/bff'
+import { BFF } from '@/api'
 import routes from '~pages'
 import { useLoading } from '@/repositories'
 import type { CustomRoute } from '@/types/custom'
@@ -170,7 +170,7 @@ const syncRoutes = () => {
   })
   apps[params.name as string] = params
   console.log({ apps })
-  updateAppsRoutes(apps)
+  BFF.updateAppsRoutes(apps)
     .then((res) => {
       console.log({ res })
     })
@@ -179,7 +179,7 @@ const syncRoutes = () => {
 
 const getApps = () => {
   useLoading({ target: '.loading' })
-  getAppsRoutes().then((res) => {
+  BFF.getAppsRoutes().then((res) => {
     Object.keys(res.data).forEach((key) => (apps[key] = res.data[key]))
     if (has(apps, appRoutesConfig.name as string)) {
       setConfig(apps[appRoutesConfig.name as string])

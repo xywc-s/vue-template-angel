@@ -3,7 +3,7 @@ import request from './request'
 import type { User } from '@/models/user'
 import type { AngelRes, Pager } from '@/types/request'
 
-type UserListData = Partial<
+export type UserListData = Partial<
   Pager & {
     /**
      * 模糊匹配关键字
@@ -11,7 +11,7 @@ type UserListData = Partial<
     data: string
   }
 >
-export default class SecurityServer {
+export class Auth {
   /**
    * @desc: 根据唯一键（id、code、phone、userid）查用户
    */

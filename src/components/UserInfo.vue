@@ -123,7 +123,7 @@
 
 <script setup>
 import { computed, onMounted, ref, useSlots, watch, watchEffect } from 'vue'
-import SecurityServer from '@/api/auth'
+import { Auth } from '@/api'
 import { useApp } from '@/stores/app'
 import { useUser } from '@/stores/user'
 import { copyText } from '@/repositories'
@@ -189,7 +189,7 @@ const getUser = async () => {
   user.value = {}
 
   // 加入异步请求队列
-  const res = await queue.push(SecurityServer.findByUnique, props.value)
+  const res = await queue.push(Auth.findByUnique, props.value)
 
   if (res?.success && res?.object) {
     const data = res.object
@@ -205,9 +205,7 @@ const getUserDepartmentList = async () => {
   departmentList.value = []
   const list = (
     await Promise.all(
-      user.value.departmentCodeList.map((code) =>
-        queue.push(SecurityServer.findDepartmentAndAllParent, code)
-      )
+      user.value.departmentCodeList.map((code) => queue.push(Auth.findDepartmentAndAllParent, code))
     )
   ).map((o) =>
     o.rows

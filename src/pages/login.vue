@@ -9,7 +9,7 @@ import { decode } from 'js-base64'
 import { useApp } from '@/stores/app'
 import { useUser } from '@/stores/user'
 import { isWorkWeChat } from '@/utils'
-import Auth from '@/api/auth'
+import { Auth } from '@/api'
 
 const route = useRoute()
 const userStore = useUser()

@@ -1,7 +1,7 @@
 import { json } from '@/utils/request/config'
 import request from './request'
 
-export default class CIMS {
+export class CIMS {
   /**
    * 所有物料组
    */

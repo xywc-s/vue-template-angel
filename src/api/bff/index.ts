@@ -1,4 +1,13 @@
-import BFF from './request'
+import request from './request'
 
-export const getAppsRoutes = () => BFF.get('/nacos/findAll')
-export const updateAppsRoutes = (data) => BFF.post('/nacos/update', data)
+export class BFF {
+  /**
+   * 获取所有应用配置
+   */
+  static getAppsRoutes = () => request.get('/nacos/findAll')
+
+  /**
+   * 更新应用配置
+   */
+  static updateAppsRoutes = (data) => request.post('/nacos/update', data)
+}

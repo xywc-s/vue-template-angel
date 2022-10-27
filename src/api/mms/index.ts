@@ -1,7 +1,7 @@
 import { json } from '@/utils/request/config'
 import request from './request'
 
-export default class MMS {
+export class MMS {
   /**
    * 搜索物料
    * @param {*} data
