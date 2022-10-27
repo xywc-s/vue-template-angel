@@ -3,10 +3,11 @@ import { isArray, isString } from 'lodash-es'
 import { useStorage } from '@vueuse/core'
 import { decode } from 'js-base64'
 import dayjs from 'dayjs'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { userCodeLoginForDev } from '@/api'
 import { useNotify } from '@/repositories'
 import { useApp } from './app'
+import type { User } from '@/models/user'
 
 const userStorage = useStorage<Record<string, any>>('user', {}, sessionStorage)
 
@@ -24,6 +25,7 @@ export const useUser = defineStore('user', () => {
       userStorage.value?.permissionList ??
       []
   )
+  const userList = ref<User[]>([])
 
   function setUser(obj: Record<string, any>) {
     userStorage.value = obj
@@ -52,6 +54,7 @@ export const useUser = defineStore('user', () => {
     user,
     token,
     permissionList,
+    userList,
     setUser,
     devLogin,
     checkTokenIsValid,

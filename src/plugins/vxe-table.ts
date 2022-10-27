@@ -5,8 +5,7 @@ import 'xe-utils'
 
 VXETable.setup({
   i18n: (key, args) => i18n.global.t(key, args),
-  translate: (key, args) => i18n.global.t(key, args),
-  size: 'mini'
+  translate: (key, args) => i18n.global.t(key, args)
 })
 
 export default VXETable
