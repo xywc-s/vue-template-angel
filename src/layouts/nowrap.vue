@@ -3,9 +3,9 @@
     <el-header v-if="!appStore.isChildApp" height="auto" class="!px-0 z-10">
       <LayoutHeader></LayoutHeader>
     </el-header>
-    <el-main ref="mainEl" class="main-box">
+    <main ref="mainEl" class="main-box">
       <router-view></router-view>
-    </el-main>
+    </main>
   </el-container>
 </template>
 

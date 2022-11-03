@@ -82,6 +82,6 @@ onMounted(() => {
   padding: 10px 0;
 }
 .shadow {
-  box-shadow: 0 10px 5px -5px rgba($color: #000000, $alpha: 0.1);
+  box-shadow: 0 10px 10px -8px rgba($color: #000000, $alpha: 0.1);
 }
 </style>
