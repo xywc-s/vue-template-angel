@@ -9,7 +9,7 @@
   </el-container>
 </template>
 
-<script setup lang="ts" name="Layout">
+<script setup lang="ts" name="NowrapLayout">
 import { onMounted, reactive, ref } from 'vue'
 import { useElementBounding, useResizeObserver } from '@vueuse/core'
 import { useApp } from '@/stores/app'
@@ -31,7 +31,7 @@ onMounted(() => {
 })
 </script>
 
-<style>
+<style scoped>
 .main-box {
   height: v-bind('styles.mainBoxHeight');
 }

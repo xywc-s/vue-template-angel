@@ -31,7 +31,7 @@ onMounted(() => {
 })
 </script>
 
-<style>
+<style scoped>
 .main-box {
   height: v-bind('styles.mainBoxHeight');
 }
