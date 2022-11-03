@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="flex items-center justify-between flex-wrap mb-12px"
-    :class="{ 'title-sticky': !!sticky }"
-  >
+  <div class="flex items-center justify-between flex-wrap" :class="{ 'title-sticky': !!sticky }">
     <div class="flex-shrink-0 flex">
       <div
         v-if="!!title"
@@ -26,6 +23,7 @@
 </template>
 
 <script setup lang="ts" name="TitleBar">
+import { onMounted } from 'vue'
 import SvgIcon from '@/components/SvgIcon.vue'
 defineEmits(['clickTitle'])
 defineProps({
@@ -33,6 +31,17 @@ defineProps({
   icon: String,
   name: String,
   sticky: Boolean
+})
+
+onMounted(() => {
+  const el = document.querySelector('.title-sticky')
+  const observer = new IntersectionObserver(
+    ([e]) => e.target.classList.toggle('shadow', e.intersectionRatio < 1),
+    {
+      threshold: [1]
+    }
+  )
+  if (el) observer.observe(el)
 })
 </script>
 
@@ -67,9 +76,12 @@ defineProps({
 
 .title-sticky {
   position: sticky;
-  top: -20px;
+  top: -21px;
   z-index: 9;
   background-color: white;
-  padding-top: 10px;
+  padding: 10px 0;
+}
+.shadow {
+  box-shadow: 0 10px 5px -5px rgba($color: #000000, $alpha: 0.1);
 }
 </style>
