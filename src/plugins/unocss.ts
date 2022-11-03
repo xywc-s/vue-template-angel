@@ -23,8 +23,6 @@ export default () =>
       // your custom rules
     ],
     shortcuts: {
-      operator: 'flex flex-nowrap text-right pl-30px',
-      'flex-top-between': 'flex justify-between items-start',
-      'description-label': 'w-160px'
+      'description-label': 'w-80px md:w-160px'
     }
   })
