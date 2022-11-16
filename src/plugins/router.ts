@@ -49,7 +49,7 @@ router.beforeEach(async (to, from, next) => {
     if (userStore.hasPermission(to.meta.permission as Permission)) {
       next()
     } else {
-      next('404')
+      next('denied')
     }
   } else {
     next()

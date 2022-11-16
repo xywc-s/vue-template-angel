@@ -1,6 +1,7 @@
 <route lang="yaml">
 meta:
   title: 路由同步
+  permission: YW
 </route>
 
 <template>
@@ -115,7 +116,9 @@ const appRoutesConfig = reactive<RouteRecordRaw>({
 })
 const selectableRoutes = ref<CustomRoute[]>(
   routes
-    .filter((route) => !['login', 'index', 'all', 'route-sync'].includes(route.name as string))
+    .filter(
+      (route) => !['login', 'index', 'all', 'route-sync', 'denied'].includes(route.name as string)
+    )
     .map((route) => {
       set(route, 'checked', false)
       set(route, 'hidden', false)

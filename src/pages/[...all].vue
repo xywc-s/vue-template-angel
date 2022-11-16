@@ -1,3 +1,9 @@
+<route lang="yaml">
+meta:
+  hidden: true
+  title: '404'
+</route>
+
 <template>
   <div class="h-70vh flex items-center justify-center">
     <SvgIcon name="404" class="text-300px"></SvgIcon>
@@ -5,9 +11,3 @@
 </template>
 
 <script lang="ts" setup name="404"></script>
-
-<route lang="yaml">
-meta:
-  hidden: true
-  title: '404'
-</route>
