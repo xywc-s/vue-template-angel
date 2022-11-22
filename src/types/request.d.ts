@@ -1,8 +1,8 @@
-export interface AngelRes<D = unknown, T = unknown> {
+export interface AngelRes<D = unknown, O = unknown> {
   success: boolean
   message: string | null
   rows: D[]
-  object: T
+  object: O
   total: number
   code: number
   footer: any[]

@@ -4,7 +4,7 @@ import { setupLayouts } from 'virtual:generated-layouts'
 import generatedRoutes from '~pages'
 import { useUser } from '@/stores/user'
 import { useApp } from '@/stores/app'
-import type { Permission } from '@/types/custom'
+import type { PermissionCode } from '@/models'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -46,7 +46,7 @@ router.beforeEach(async (to, from, next) => {
   }
 
   if (to.meta.permission) {
-    if (userStore.hasPermission(to.meta.permission as Permission)) {
+    if (userStore.hasPermission(to.meta.permission as PermissionCode)) {
       next()
     } else {
       next('denied')

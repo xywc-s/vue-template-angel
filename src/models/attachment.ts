@@ -1,4 +1,4 @@
-import { generateEntityFromModel } from '@/models'
+import { generateEntityFromModel } from '@/models/fn'
 
 export const attachment = {
   createUserCode: {

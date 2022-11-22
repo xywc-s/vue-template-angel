@@ -1,8 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router'
 import type { Ref } from 'vue'
 
-export type Permission = string | string[] | undefined
-
 export type CustomRoute = RouteRecordRaw & {
   /**
    * 选中状态: 同步该路由

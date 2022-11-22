@@ -19,7 +19,7 @@
       <template v-for="{ path, children } in $router.options.routes" :key="path">
         <template
           v-if="
-              !children![0].meta?.hidden && userStore.hasPermission(children![0].meta?.permission as Permission)
+              !children![0].meta?.hidden && userStore.hasPermission(children![0].meta?.permission as PermissionCode)
             "
         >
           <el-sub-menu v-if="children![0].children" :index="path">
@@ -39,7 +39,7 @@
 import { useRoute } from 'vue-router'
 import { useApp } from '@/stores/app'
 import { useUser } from '@/stores/user'
-import type { Permission } from '@/types/custom'
+import type { PermissionCode } from '@/models'
 const appStore = useApp()
 const userStore = useUser()
 const defaultActive = useRoute().path

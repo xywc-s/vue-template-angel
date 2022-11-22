@@ -7,7 +7,7 @@ import { computed, ref } from 'vue'
 import { userCodeLoginForDev } from '@/api/dev'
 import { useNotify } from '@/repositories'
 import { useApp } from './app'
-import type { User } from '@/models/user'
+import type { PermissionCode, User } from '@/models'
 
 const userStorage = useStorage<Record<string, any>>('user', {}, sessionStorage)
 
@@ -19,7 +19,7 @@ export const useUser = defineStore('user', () => {
   const token = computed<string | undefined>(
     () => appStore.rootInstance?.$store?.getters?.token ?? userStorage.value?.access_token
   )
-  const permissionList = computed<[] | string[]>(
+  const permissionList = computed<string[]>(
     () =>
       appStore.rootInstance?.$store?.getters?.permissionList ??
       userStorage.value?.permissionList ??
@@ -43,7 +43,7 @@ export const useUser = defineStore('user', () => {
   function hasDevToken() {
     return Boolean(import.meta.env.VITE_USER_TOKEN && import.meta.env.VITE_USER_CODE)
   }
-  function hasPermission(permission: string | string[] | undefined) {
+  function hasPermission(permission: PermissionCode) {
     if (!permission) return true
     if (isString(permission)) return permissionList.value.findIndex((v) => permission === v) > -1
     if (isArray(permission)) return permissionList.value.some((v: string) => permission.includes(v))

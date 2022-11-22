@@ -2,7 +2,7 @@ import { ref } from 'vue'
 import { assign } from 'lodash-es'
 import { useUser } from '@/stores/user'
 import { Auth, UserListData } from '@/api'
-import type { User } from '@/models/user'
+import type { User } from '@/models'
 
 /**
  * 获取用户数据
