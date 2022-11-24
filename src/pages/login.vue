@@ -6,9 +6,9 @@
 import { onBeforeMount, useAttrs } from 'vue'
 import { useRoute } from 'vue-router'
 import { decode } from 'js-base64'
+import { isWorkWechat } from '@xywc-s/utils'
 import { useApp } from '@/stores/app'
 import { useUser } from '@/stores/user'
-import { isWorkWeChat } from '@/utils'
 import { Auth } from '@/api'
 
 const route = useRoute()
@@ -60,7 +60,7 @@ onBeforeMount(async () => {
      * vue-router hash模式匹配与上面相同, 所以hash(/login), query(空对象)
      * URL先匹配到?之后#之前的内容为query(abc=888),后匹配到#之后的为hash(/login)
      */
-    if (isWorkWeChat()) {
+    if (isWorkWechat()) {
       const url = `${location.origin}${location.pathname}#/login?rewrite=${attrs.rewrite}`
       location.replace(`${AppURL}?appid=${AppID}&url=${btoa(url)}`)
     } else {

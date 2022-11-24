@@ -1,4 +1,4 @@
-import { json } from '@/utils/request/config'
+import { json } from '@/api/config'
 import request from './request'
 
 export class CIMS {

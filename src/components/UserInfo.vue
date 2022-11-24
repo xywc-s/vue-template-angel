@@ -189,7 +189,7 @@ const getUser = async () => {
   user.value = {}
 
   // 加入异步请求队列
-  const res = await queue.push(Auth.findByUnique, props.value)
+  const res = await queue.push(Auth.User.findByUnique, props.value)
 
   if (res?.success && res?.object) {
     const data = res.object
@@ -205,7 +205,9 @@ const getUserDepartmentList = async () => {
   departmentList.value = []
   const list = (
     await Promise.all(
-      user.value.departmentCodeList.map((code) => queue.push(Auth.findDepartmentAndAllParent, code))
+      user.value.departmentCodeList.map((code) =>
+        queue.push(Auth.Department.findDepartmentAndAllParent, code)
+      )
     )
   ).map((o) =>
     o.rows

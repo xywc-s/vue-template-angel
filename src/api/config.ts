@@ -1,4 +1,4 @@
-export const CONTENT_TYPES = {
+export const ContentTypes = {
   FORM: 'application/x-www-form-urlencoded',
   JSON: 'application/json',
   UPLOAD: 'multipart/form-data',
@@ -11,12 +11,12 @@ export const common = {
 }
 export const form = {
   headers: {
-    'Content-Type': CONTENT_TYPES.FORM
+    'Content-Type': ContentTypes.FORM
   }
 }
 
 export const json = {
   headers: {
-    'Content-Type': CONTENT_TYPES.JSON
+    'Content-Type': ContentTypes.JSON
   }
 }

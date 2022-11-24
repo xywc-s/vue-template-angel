@@ -1,12 +1,12 @@
-import { useUser } from '@/stores/user'
-import type { AxiosRequestConfig } from 'axios'
 import qs from 'qs'
-import { CONTENT_TYPES } from '../../config'
+import { useUser } from '@/stores/user'
+import { ContentTypes } from '@/api/config'
+import type { AxiosRequestConfig } from 'axios'
 
 export default {
   success: (config: AxiosRequestConfig) => {
     const contentType = config.headers['Content-Type']
-    if (contentType.includes(CONTENT_TYPES.FORM)) {
+    if (contentType.includes(ContentTypes.FORM)) {
       config.data = qs.stringify(config.data)
     }
     config.headers = {

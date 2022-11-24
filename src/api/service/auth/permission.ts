@@ -1,7 +1,7 @@
-import { json } from '@/utils/request/config'
+import { json } from '@/api/config'
 import request from './request'
-import type { Permission, User } from '@/models'
-import type { AngelRes } from '@/types/request'
+import type { Permission, UserPermissionCheckResult } from '@/models'
+import type { AngelResponse } from '@/types/request'
 
 type RolePermission = Pick<Permission, 'permissionId' | 'permissionName' | 'permissionValue'>
 
@@ -10,14 +10,14 @@ type RolePermission = Pick<Permission, 'permissionId' | 'permissionName' | 'perm
  * @param {string} roleId 角色id
  */
 export const findRolePermissions = (roleId: string) =>
-  request.post<unknown, AngelRes<RolePermission>>('/role/findRolePermission', { roleId })
+  request.post<unknown, AngelResponse<RolePermission>>('/role/findRolePermission', { roleId })
 
 /**
  * 查询用户权限
  * @param userId 用户id
  */
 export const findUserPermissions = (userId: string) =>
-  request.post<unknown, AngelRes<Permission>>('/permission/getPermissionList', { userId })
+  request.post<unknown, AngelResponse<Permission>>('/permission/getPermissionList', { userId })
 
 /**
  * 更新用户权限
@@ -31,26 +31,8 @@ export const updateUserPermissions = (data: {
    * 逗号分隔的权限id
    */
   permissionIds: string
-}) => request.post<unknown, AngelRes>('/userPermission/addUserPermissions', data)
+}) => request.post<unknown, AngelResponse>('/userPermission/addUserPermissions', data)
 
-type PermissionChecked = {
-  id: string
-  code: string
-}
-export type UserPermissionCheckResult = {
-  /**
-   * 该用户没有的权限
-   */
-  exclude: PermissionChecked[]
-  /**
-   * 该用户已有的权限
-   */
-  include: PermissionChecked[]
-  /**
-   * 查询的用户
-   */
-  user: User
-}
 /**
  * 查询当前用户是否具备指定权限
  */
@@ -64,7 +46,7 @@ export const checkPermissions = (data: {
    */
   permissionCodes: string[]
 }) =>
-  request.post<unknown, AngelRes<UserPermissionCheckResult>>(
+  request.post<unknown, AngelResponse<UserPermissionCheckResult>>(
     '/userPermission/checkUserPermissions',
     data,
     json

@@ -1,4 +1,5 @@
 import { generateEntityFromModel } from '@/models/fn'
+import type { Pager } from '@/types/request'
 
 export const user = {
   code: {
@@ -57,3 +58,10 @@ export const user = {
 
 const entity = generateEntityFromModel(user)
 export type User = typeof entity
+export type FuzzySearchParams = {
+  /**
+   * 模糊匹配关键字
+   */
+  data: string
+}
+export type UserListParams = Partial<Pager & FuzzySearchParams>
