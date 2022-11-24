@@ -12,6 +12,7 @@ export type CustomRoute = RouteRecordRaw & {
   hidden?: boolean
 }
 
+export type FetchLoading = Ref<boolean> | ((b: boolean) => void)
 export type FetchOptions<T = any, P = any> = {
   /**
    * 一个返回Promise的接口方法
@@ -24,7 +25,7 @@ export type FetchOptions<T = any, P = any> = {
   /**
    * loading状态
    */
-  loading?: Ref<boolean> | ((b: boolean) => void)
+  loading?: FetchLoading
   /**
    * 钩子
    */

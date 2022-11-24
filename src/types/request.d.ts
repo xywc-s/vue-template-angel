@@ -1,4 +1,4 @@
-export interface AngelRes<D = unknown, O = unknown> {
+export interface AngelResponse<D = unknown, O = unknown> {
   success: boolean
   message: string | null
   rows: D[]
