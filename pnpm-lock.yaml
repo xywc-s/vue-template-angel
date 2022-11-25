@@ -12,7 +12,7 @@ specifiers:
   '@vitejs/plugin-vue-jsx': ^2.0.0
   '@vueuse/core': ^9.1.0
   '@vueuse/integrations': ^9.1.0
-  '@xywc-s/utils': ^0.1.2
+  '@xywc-s/utils': ^0.1.9
   axios: ^0.27.2
   dayjs: ^1.11.5
   element-plus: ^2.2.0
@@ -50,7 +50,7 @@ specifiers:
 dependencies:
   '@vueuse/core': 9.1.0_vue@3.2.37
   '@vueuse/integrations': 9.1.0_axios@0.27.2+vue@3.2.37
-  '@xywc-s/utils': 0.1.2
+  '@xywc-s/utils': 0.1.9
   axios: 0.27.2
   dayjs: 1.11.5
   element-plus: 2.2.0_vue@3.2.37
@@ -1200,8 +1200,8 @@ packages:
       - vue
     dev: false
 
-  /@xywc-s/utils/0.1.2:
-    resolution: {integrity: sha512-OSFgFdAWCJW8LYcnxaYioIows3c8FKwCDiz1ByVOkTxeE/yhm5X3HuCaRDmiFHKNltDLGAnxkB99447xwxUJMg==}
+  /@xywc-s/utils/0.1.9:
+    resolution: {integrity: sha512-ZyQjjEh0ceJ2b9omVQ4amI/j1SXeDIQBxZi/Iajhy4bbBbUEv52MEh3DoHMAucWoUv8hsTcxD6R/MkaiTHwXQA==}
     dependencies:
       lodash-es: 4.17.21
     dev: false
