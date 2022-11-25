@@ -1,11 +1,7 @@
-import { json } from '@/api/config'
-import request from './request'
-
+import * as Material from './material'
 export class MMS {
   /**
-   * 搜索物料
-   * @param {*} data
+   * 物料
    */
-  static searchByCondition = (data = {}) =>
-    request.post('/material/searchByCondition', data, { ...json })
+  static Material = Material
 }
