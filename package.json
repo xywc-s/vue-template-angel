@@ -1,7 +1,7 @@
 {
   "name": "@xywc-s/vue-template",
   "private": true,
-  "version": "1.0.0",
+  "version": "2.0.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -12,13 +12,12 @@
   "dependencies": {
     "@vueuse/core": "^9.1.0",
     "@vueuse/integrations": "^9.1.0",
-    "@xywc-s/utils": "0.0.4",
+    "@xywc-s/utils": "^0.1.2",
     "axios": "^0.27.2",
     "dayjs": "^1.11.5",
     "element-plus": "^2.2.0",
     "js-base64": "^3.7.2",
     "lodash-es": "4.17.21",
-    "mitt": "^3.0.0",
     "pinia": "^2.0.19",
     "qs": "^6.10.3",
     "vue": "^3.2.37",

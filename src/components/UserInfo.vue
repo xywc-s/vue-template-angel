@@ -123,11 +123,11 @@
 
 <script setup>
 import { computed, onMounted, ref, useSlots, watch, watchEffect } from 'vue'
+import { Queue } from '@xywc-s/utils'
 import { Auth } from '@/api'
 import { useApp } from '@/stores/app'
 import { useUser } from '@/stores/user'
 import { copyText } from '@/repositories'
-import Queue from '@/utils/queue'
 const props = defineProps({
   value: {
     type: String,
