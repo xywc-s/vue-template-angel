@@ -19,7 +19,7 @@
     // ...更多映射关系
     "@/svg": "/src/assets/svg"
   },
-  "i18n-ally.localesPaths": ["src/i18n"],
+  "i18n-ally.localesPaths": ["src/plugins/i18n/lang"],
   "i18n-ally.pathMatcher": "{locale}.yaml",
   "i18n-ally.dirStructure": "auto",
   "i18n-ally.enabledParsers": ["yaml"],

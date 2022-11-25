@@ -5,7 +5,7 @@ import path from 'path'
 import vueI18n from '@intlify/vite-plugin-vue-i18n'
 export default () =>
   vueI18n({
-    include: path.resolve(__dirname, '../i18n/*.yaml'),
+    include: path.resolve(__dirname, './lang/*.yaml'),
     defaultSFCLang: 'yaml',
     runtimeOnly: false
     // compositionOnly: false
