@@ -13,6 +13,7 @@ specifiers:
   '@vueuse/core': ^9.1.0
   '@vueuse/integrations': ^9.1.0
   '@xywc-s/utils': ^0.1.9
+  '@xywc-s/vxe-table-helper': ^0.1.2
   axios: ^0.27.2
   dayjs: ^1.11.5
   element-plus: ^2.2.0
@@ -51,6 +52,7 @@ dependencies:
   '@vueuse/core': 9.1.0_vue@3.2.37
   '@vueuse/integrations': 9.1.0_axios@0.27.2+vue@3.2.37
   '@xywc-s/utils': 0.1.9
+  '@xywc-s/vxe-table-helper': 0.1.2_e4c6azkrbdindzr4xrvfyceol4
   axios: 0.27.2
   dayjs: 1.11.5
   element-plus: 2.2.0_vue@3.2.37
@@ -1204,6 +1206,24 @@ packages:
     resolution: {integrity: sha512-ZyQjjEh0ceJ2b9omVQ4amI/j1SXeDIQBxZi/Iajhy4bbBbUEv52MEh3DoHMAucWoUv8hsTcxD6R/MkaiTHwXQA==}
     dependencies:
       lodash-es: 4.17.21
+    dev: false
+
+  /@xywc-s/vxe-table-helper/0.1.2_e4c6azkrbdindzr4xrvfyceol4:
+    resolution: {integrity: sha512-s5OfiPYnkYnstk6KipFf8uQ0M/z4QnCUWQmd8VFG8R9MH1DmMWNtAcHFdW/ZgjzDVBE0zOkoMo81bLKXugSshg==}
+    peerDependencies:
+      '@vueuse/core': ^9.1.0
+      '@xywc-s/utils': '*'
+      lodash-es: ^4.17.0
+      vue: ^3.2.0
+      vxe-table: ^4.0.0
+      xe-utils: ^3.0.0
+    dependencies:
+      '@vueuse/core': 9.1.0_vue@3.2.37
+      '@xywc-s/utils': 0.1.9
+      lodash-es: 4.17.21
+      vue: 3.2.37
+      vxe-table: 4.2.8_vue@3.2.37+xe-utils@3.5.4
+      xe-utils: 3.5.4
     dev: false
 
   /acorn-jsx/5.3.2_acorn@7.4.1:
