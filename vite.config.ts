@@ -44,6 +44,7 @@ export default defineConfig(({ command, mode }) => {
       // }
     },
     build: {
+      chunkSizeWarningLimit: 2000,
       rollupOptions: {
         output: {
           manualChunks: {
@@ -51,7 +52,7 @@ export default defineConfig(({ command, mode }) => {
             'vxe-table': ['vxe-table', 'xe-utils'],
             dayjs: ['dayjs'],
             axios: ['axios'],
-            utils: ['js-base64', 'qs', 'mitt']
+            utils: ['js-base64', 'qs']
           }
         }
       }
