@@ -13,7 +13,7 @@ specifiers:
   '@vueuse/core': ^9.1.0
   '@vueuse/integrations': ^9.1.0
   '@xywc-s/utils': ^0.1.9
-  '@xywc-s/vxe-table-helper': ^0.1.2
+  '@xywc-s/vxe-table-helper': ^0.1.4
   axios: ^0.27.2
   dayjs: ^1.11.5
   element-plus: ^2.2.0
@@ -52,7 +52,7 @@ dependencies:
   '@vueuse/core': 9.1.0_vue@3.2.37
   '@vueuse/integrations': 9.1.0_axios@0.27.2+vue@3.2.37
   '@xywc-s/utils': 0.1.9
-  '@xywc-s/vxe-table-helper': 0.1.2_e4c6azkrbdindzr4xrvfyceol4
+  '@xywc-s/vxe-table-helper': 0.1.4_e4c6azkrbdindzr4xrvfyceol4
   axios: 0.27.2
   dayjs: 1.11.5
   element-plus: 2.2.0_vue@3.2.37
@@ -1208,8 +1208,8 @@ packages:
       lodash-es: 4.17.21
     dev: false
 
-  /@xywc-s/vxe-table-helper/0.1.2_e4c6azkrbdindzr4xrvfyceol4:
-    resolution: {integrity: sha512-s5OfiPYnkYnstk6KipFf8uQ0M/z4QnCUWQmd8VFG8R9MH1DmMWNtAcHFdW/ZgjzDVBE0zOkoMo81bLKXugSshg==}
+  /@xywc-s/vxe-table-helper/0.1.4_e4c6azkrbdindzr4xrvfyceol4:
+    resolution: {integrity: sha512-hsH/pFvBWfEV97i2LkNq3A3S8TQNly/kjifg/hwAxII6FGWHU2Nv4oLOFhAGi95JrH+50xXtIwepJi7S4MsEHw==}
     peerDependencies:
       '@vueuse/core': ^9.1.0
       '@xywc-s/utils': '*'
