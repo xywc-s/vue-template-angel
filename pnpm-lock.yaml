@@ -13,7 +13,7 @@ specifiers:
   '@vueuse/core': ^9.1.0
   '@vueuse/integrations': ^9.1.0
   '@xywc-s/utils': ^0.1.9
-  '@xywc-s/vxe-table-helper': ^0.1.4
+  '@xywc-s/vxe-table-helper': ^0.1.5
   axios: ^0.27.2
   dayjs: ^1.11.5
   element-plus: ^2.2.0
@@ -45,14 +45,14 @@ specifiers:
   vue-i18n: ^9.2.2
   vue-router: ^4.1.3
   vue-scrollto: ^2.20.0
-  vxe-table: ^4.2.8
-  xe-utils: ^3.5.4
+  vxe-table: ^4.3.6
+  xe-utils: ^3.5.7
 
 dependencies:
   '@vueuse/core': 9.1.0_vue@3.2.37
   '@vueuse/integrations': 9.1.0_axios@0.27.2+vue@3.2.37
   '@xywc-s/utils': 0.1.9
-  '@xywc-s/vxe-table-helper': 0.1.4_e4c6azkrbdindzr4xrvfyceol4
+  '@xywc-s/vxe-table-helper': 0.1.5_wnr4b4q22ylkuisqb4y4mx5j6y
   axios: 0.27.2
   dayjs: 1.11.5
   element-plus: 2.2.0_vue@3.2.37
@@ -64,8 +64,8 @@ dependencies:
   vue-i18n: 9.2.2_vue@3.2.37
   vue-router: 4.1.3_vue@3.2.37
   vue-scrollto: 2.20.0
-  vxe-table: 4.2.8_vue@3.2.37+xe-utils@3.5.4
-  xe-utils: 3.5.4
+  vxe-table: 4.3.6_vue@3.2.37+xe-utils@3.5.7
+  xe-utils: 3.5.7
 
 devDependencies:
   '@iconify/json': 2.1.94
@@ -1208,8 +1208,8 @@ packages:
       lodash-es: 4.17.21
     dev: false
 
-  /@xywc-s/vxe-table-helper/0.1.4_e4c6azkrbdindzr4xrvfyceol4:
-    resolution: {integrity: sha512-hsH/pFvBWfEV97i2LkNq3A3S8TQNly/kjifg/hwAxII6FGWHU2Nv4oLOFhAGi95JrH+50xXtIwepJi7S4MsEHw==}
+  /@xywc-s/vxe-table-helper/0.1.5_wnr4b4q22ylkuisqb4y4mx5j6y:
+    resolution: {integrity: sha512-ZI+ykcdLeM35zzr6DUEaVvSg6DEmDV/CMiqsUQ6WA6wcuhryuUQctpRsQr6kE6e3DIV34ug0XxjQ5xpGVo7utA==}
     peerDependencies:
       '@vueuse/core': ^9.1.0
       '@xywc-s/utils': '*'
@@ -1222,8 +1222,8 @@ packages:
       '@xywc-s/utils': 0.1.9
       lodash-es: 4.17.21
       vue: 3.2.37
-      vxe-table: 4.2.8_vue@3.2.37+xe-utils@3.5.4
-      xe-utils: 3.5.4
+      vxe-table: 4.3.6_vue@3.2.37+xe-utils@3.5.7
+      xe-utils: 3.5.7
     dev: false
 
   /acorn-jsx/5.3.2_acorn@7.4.1:
@@ -1250,6 +1250,12 @@ packages:
 
   /acorn/8.8.0:
     resolution: {integrity: sha512-QOxyigPVrpZ2GXT+PFyZTl6TtOFc5egxHIP9IlQ+RbupQuX4RkT/Bee4/kQuC02Xkzg84JcT7oLYtDIQxp+v7w==}
+    engines: {node: '>=0.4.0'}
+    hasBin: true
+    dev: true
+
+  /acorn/8.8.1:
+    resolution: {integrity: sha512-7zFpHzhnqYKrkYdUjF1HI1bzd0VygEGX8lFk4k5zVMqHEoES+P+7TKI+EvLO9WVMJ8eekdO0aDEK044xTXwPPA==}
     engines: {node: '>=0.4.0'}
     hasBin: true
     dev: true
@@ -4530,7 +4536,7 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
-      acorn: 8.8.0
+      acorn: 8.8.1
       commander: 2.20.3
       source-map: 0.8.0-beta.0
       source-map-support: 0.5.21
@@ -5024,14 +5030,14 @@ packages:
       '@vue/server-renderer': 3.2.37_vue@3.2.37
       '@vue/shared': 3.2.37
 
-  /vxe-table/4.2.8_vue@3.2.37+xe-utils@3.5.4:
-    resolution: {integrity: sha512-t0IwE0XHZ+FKrE0x3daqm48OJprXEzDFfZWaqX64W/32n4LcCjywL9cMtL0WwplL3IHpDoe9JfKOp9d+jYwrUA==}
+  /vxe-table/4.3.6_vue@3.2.37+xe-utils@3.5.7:
+    resolution: {integrity: sha512-SZ+ocVoOFc1PSzvpz6q5n7YvWvPSXUV+raet0zaSbQy3g8Dj7jKNlFbcsSoWZm8Uys9ufAQxeqYO5rRwOB2m7A==}
     peerDependencies:
-      vue: ^3.2.2
+      vue: ^3.2.28
       xe-utils: ^3.5.0
     dependencies:
       vue: 3.2.37
-      xe-utils: 3.5.4
+      xe-utils: 3.5.7
     dev: false
 
   /webidl-conversions/4.0.2:
@@ -5103,8 +5109,8 @@ packages:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
     dev: true
 
-  /xe-utils/3.5.4:
-    resolution: {integrity: sha512-oH7VOgvHv34pn198dhKPVKnuEHV22Q06YpCTVnAS3JuutylmZj/rtJGvn0BxxWQ37w2LgCknoebLA4uIGXwFtw==}
+  /xe-utils/3.5.7:
+    resolution: {integrity: sha512-3H+fDBKBR2wLJgyA7k9C/w1Xljx6Maml5ukV0WDY06HjYyGs2FEz6XhcwRCLIDXX4pBP3Gu0nX9DbCeuuRA2Ew==}
     dev: false
 
   /xml-name-validator/4.0.0:
