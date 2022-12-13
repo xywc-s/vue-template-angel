@@ -31,6 +31,6 @@
   "i18n-ally.theme.annotation": "rgba(255, 255, 255, .8)",
   "i18n-ally.theme.annotationBorder": "none",
   "i18n-ally.keystyle": "nested",
-  "typescript.tsdk": "node_modules/typescript/lib"
   // 使用项目当前的ts版本, 开发统一
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
