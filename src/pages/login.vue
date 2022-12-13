@@ -1,3 +1,9 @@
+<route lang="yaml">
+meta:
+  hidden: true
+  title: 登录
+</route>
+
 <template>
   <div></div>
 </template>
@@ -70,9 +76,3 @@ onBeforeMount(async () => {
   }
 })
 </script>
-
-<route lang="yaml">
-meta:
-  hidden: true
-  title: 登录
-</route>
