@@ -1,14 +1,9 @@
 {
   "recommendations": [
-    "eamodio.gitlens",
-    "mhutchie.git-graph",
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
-    "gruntfuggly.todo-tree",
     "vue.volar",
     "antfu.unocss",
-    "lokalise.i18n-ally",
-    "lihuiwang.vue-alias-skip",
-    "mikestead.dotenv"
+    "lokalise.i18n-ally"
   ]
 }
