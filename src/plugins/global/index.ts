@@ -20,9 +20,6 @@ export default {
     app.use(VueScrollTo)
 
     setTable({
-      loadingConfig: {
-        text: 'Loading'
-      },
       pagerConfig: {
         pageSizeKey: 'rows'
       }
