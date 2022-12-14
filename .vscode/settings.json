@@ -1,21 +1,65 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
   "editor.formatOnSaveMode": "file",
   "editor.codeActionsOnSave": {
-    "source.fixAll": true // 保存后自动修复格式
+    "source.fixAll": true, // 保存后自动修复格式
+    "source.organizeImports": false
   },
+  "editor.suggest.snippetsPreventQuickSuggestions": false, // 不需要手动唤起快速建议(自动快速建议)
   "git.branchProtection": ["cloud"],
   "eslint.enable": true,
   "eslint.codeActionsOnSave.mode": "all",
   "eslint.validate": ["javascript", "typescript", "vue"],
   "eslint.packageManager": "pnpm",
+  // 使用项目当前的ts版本, 开发统一, 工作区设置需要手动切换
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "javascript.suggest.autoImports": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.suggest.autoImports": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.format.insertSpaceAfterKeywordsInControlFlowStatements": false,
+  "typescript.validate.enable": false,
+  "typescript.format.enable": false,
+  "typescript.disableAutomaticTypeAcquisition": true,
+  "css.validate": false,
+  "[jsonc]": {
+    "editor.quickSuggestions": {
+      "strings": true
+    },
+    "editor.suggest.insertMode": "replace",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
   // 扩展设置
   "volar.autoCompleteRefs": true,
   "alias-skip.rootpath": "package.json",
   "alias-skip.mappings": {
     "@": "/src", // 默认只有`@`映射，映射到`/src`，你可以添加更多映射，映射路径必须以`/`开头
-    // ...更多映射关系
     "@/svg": "/src/assets/svg"
+    // ...更多映射关系
   },
   "i18n-ally.localesPaths": ["src/plugins/i18n/lang"],
   "i18n-ally.pathMatcher": "{locale}.yaml",
@@ -30,7 +74,5 @@
   "i18n-ally.theme.annotationMissing": "rgba(153, 153, 153, .3)",
   "i18n-ally.theme.annotation": "rgba(255, 255, 255, .8)",
   "i18n-ally.theme.annotationBorder": "none",
-  "i18n-ally.keystyle": "nested",
-  // 使用项目当前的ts版本, 开发统一
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "i18n-ally.keystyle": "nested"
 }
