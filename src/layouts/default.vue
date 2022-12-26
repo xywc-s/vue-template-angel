@@ -3,7 +3,7 @@
     <el-header v-if="!appStore.isChildApp" height="auto" class="!px-0 z-10">
       <LayoutHeader></LayoutHeader>
     </el-header>
-    <el-main ref="mainEl" class="main-box">
+    <el-main ref="mainEl" :class="['main-box', { '!pt-0': appStore.isChildApp }]">
       <router-view></router-view>
     </el-main>
   </el-container>
