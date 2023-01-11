@@ -9,7 +9,7 @@ import { useNotify } from '@/repositories'
 import { useApp } from './app'
 import type { PermissionCode, User } from '@/models'
 
-const userStorage = useStorage<Record<string, any>>('user', {}, sessionStorage)
+const userStorage = useStorage<Record<string, any>>('user', {})
 
 export const useUser = defineStore('user', () => {
   const appStore = useApp()
