@@ -7,7 +7,7 @@ interface parentApp extends VueInstance {
     getters: Record<string, any>
     [k: string]: any
   }
-  $updateTagTitle: (path: string, title: string) => void
+  $updateTagTitle: (title: string, fullPath?: string) => void
 }
 
 declare global {

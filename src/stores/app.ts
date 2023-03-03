@@ -1,6 +1,7 @@
 import { breakpointsTailwind, useBreakpoints, useDateFormat, useNow } from '@vueuse/core'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
+import { RouteLocationNormalizedLoaded, Router } from 'vue-router'
 import i18n from '@/plugins/i18n'
 import type { parentApp } from '@/types/global'
 import type { LoadingInstance } from 'element-plus/es/components/loading/src/loading'
@@ -14,12 +15,12 @@ export const useApp = defineStore('app', () => {
 
   const rootInstance = computed(() => parent.app as parentApp)
   const currentInstance = computed(() => window.app)
-  const route = computed(() =>
+  const route = computed<RouteLocationNormalizedLoaded>(() =>
     isChildApp.value
       ? rootInstance.value.$route
       : currentInstance.value.config.globalProperties.$route
   )
-  const router = computed(() =>
+  const router = computed<Router>(() =>
     isChildApp.value
       ? rootInstance.value.$router
       : currentInstance.value.config.globalProperties.$router
@@ -37,7 +38,7 @@ export const useApp = defineStore('app', () => {
   /**
    * 当前系统语言
    */
-  const language = computed(() =>
+  const language = computed<string>(() =>
     isChildApp.value ? rootInstance.value.$store.getters.language : locale.value
   )
 
@@ -48,21 +49,23 @@ export const useApp = defineStore('app', () => {
 
   /**
    * 更新主应用中当前路由的标签名
-   * @param path 路由fullpath
-   * @param value 标题内容
+   * @param title 标题内容
+   * @param fullPath 路由fullpath, 不传则默认当前路由
    */
-  function updateTag(path: string, value: string) {
-    if (isChildApp.value) rootInstance.value.$updateTagTitle(path, value)
+  function updateTag(title: string, fullPath?: string) {
+    if (isChildApp.value)
+      rootInstance.value.$updateTagTitle(fullPath ?? route.value.fullPath, title)
   }
 
   /**
-   * 清理(主应用中)当前路由缓存, 主应用再次访问当前页面时数据会刷新(不会删标签)
+   * 清理(主应用中)路由缓存, 主应用再次访问页面时数据会刷新(不会删标签)
+   * @param fullPath 路由fullpath, 不传则默认当前路由
    */
-  function clearTagCache() {
+  function clearTagCache(fullPath?: string) {
     if (isChildApp.value) {
       rootInstance.value.$store.commit(
         'tagsView/DEL_CACHED_CHILD_APP_VIEW',
-        rootInstance.value.$route.fullPath
+        fullPath ?? route.value.fullPath
       )
     }
   }
