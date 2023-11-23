@@ -15,7 +15,7 @@ export default defineConfig(({ command, mode }) => {
 
   return {
     plugins: [
-      Pages(),
+      Pages(env),
       Vue(),
       Layouts(),
       Unocss(),

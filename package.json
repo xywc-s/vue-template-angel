@@ -2,6 +2,7 @@
   "name": "@xywc-s/vue-template",
   "private": true,
   "version": "2.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -15,6 +16,7 @@
     "@xywc-s/utils": "^0.1.10",
     "@xywc-s/vxe-table-helper": "^0.1.5",
     "axios": "^1.6.1",
+    "change-case": "^5.2.0",
     "dayjs": "^1.11.10",
     "element-plus": "^2.4.2",
     "js-base64": "^3.7.5",
@@ -24,7 +26,7 @@
     "vue-i18n": "^9.6.5",
     "vue-router": "~4.2.5",
     "vue-scrollto": "^2.20.0",
-    "vxe-table": "~4.4.7",
+    "vxe-table": "~4.5.13",
     "vxe-table-plugin-element": "^3.1.0",
     "xe-utils": "~3.5.14"
   },
@@ -34,6 +36,7 @@
     "@types/lodash-es": "^4.17.11",
     "@types/node": "^20.9.0",
     "@typescript-eslint/parser": "^6.10.0",
+    "@unocss/preset-icons": "^0.54.3",
     "@unocss/preset-uno": "^0.54.3",
     "@unocss/reset": "^0.54.3",
     "@vitejs/plugin-vue": "^4.4.1",
