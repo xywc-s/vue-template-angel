@@ -4,27 +4,37 @@
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
-// const VxeTableResolver = (componentName) => {
-//   // where `componentName` is always CapitalCase
-//   console.log('componentName:', componentName);
-//   if (componentName && componentName.indexOf('Vxe') > -1) {
-//     const name = componentName.slice(3)
-//     return {
-//       name,
-//       from: `vxe-table/es/${name.toLowerCase()}`,
-//       sideEffects: `vxe-table/es/${name.toLowerCase()}/style.css`
-//     }
-//   }
-// }
+function kebabCase(key) {
+  const result = key.replace(/([A-Z])/g, ' $1').trim()
+  return result.split(' ').join('-').toLowerCase()
+}
+
+const VxeTableResolver = (componentName) => {
+  // where `componentName` is always CapitalCase
+  if (componentName && componentName.indexOf('Vxe') > -1) {
+    const name = kebabCase(componentName.slice(3))
+    return {
+      name: componentName,
+      from: `vxe-table/es/${name}`,
+      sideEffects: `vxe-table/es/${name}/style.css`
+    }
+  }
+}
 
 export default () =>
   Components({
     dts: './src/types/components.d.ts',
     types: [
       {
-        from: 'vue-router',
+        from: 'vue-router/auto',
         names: ['RouterLink', 'RouterView']
       }
     ],
-    resolvers: [ElementPlusResolver()]
+    resolvers: [
+      ElementPlusResolver(),
+      {
+        type: 'component',
+        resolve: VxeTableResolver
+      }
+    ]
   })

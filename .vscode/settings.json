@@ -4,14 +4,13 @@
   "editor.formatOnSaveMode": "file",
   "editor.codeActionsOnSave": {
     "source.fixAll": true, // 保存后自动修复格式
-    "source.organizeImports": false
+    "source.organizeImports": false // 自动整理import
   },
-  "editor.suggest.snippetsPreventQuickSuggestions": false, // 不需要手动唤起快速建议(自动快速建议)
+  "editor.suggest.snippetsPreventQuickSuggestions": false, // 自动快速建议, 不需要手动唤起
   "git.branchProtection": ["cloud"],
   "eslint.enable": true,
   "eslint.codeActionsOnSave.mode": "all",
   "eslint.validate": ["javascript", "typescript", "vue"],
-  "eslint.packageManager": "pnpm",
   // 使用项目当前的ts版本, 开发统一, 工作区设置需要手动切换
   "typescript.tsdk": "node_modules/typescript/lib",
   "javascript.suggest.autoImports": true,
@@ -23,6 +22,7 @@
   "typescript.validate.enable": false,
   "typescript.format.enable": false,
   "typescript.disableAutomaticTypeAcquisition": true,
+  "typescript.preferences.autoImportFileExcludePatterns": ["vue-router", "xe-utils"],
   "css.validate": false,
   "[jsonc]": {
     "editor.quickSuggestions": {

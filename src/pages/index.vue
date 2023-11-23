@@ -1,4 +1,5 @@
 <route lang="yaml">
+name: index
 meta:
   title: 首页
 </route>

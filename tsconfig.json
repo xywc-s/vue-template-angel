@@ -1,11 +1,5 @@
 {
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "src/types/**/*.d.ts",
-    "node_modules/element-plus/global.d.ts"
-  ],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/types/**/*.d.ts"],
   "exclude": ["node_modules", "dist", "tsc"],
   "compilerOptions": {
     "baseUrl": "./",
@@ -33,14 +27,12 @@
     "types": [
       "node",
       "lodash-es",
-      "@intlify/vite-plugin-vue-i18n/client",
+      "element-plus/global",
+      "unplugin-vue-router/client",
+      "@intlify/unplugin-vue-i18n/messages",
+      "vite-plugin-vue-layouts/client",
       "vite/client",
-      "vite-plugin-pages/client",
       "vite-plugin-svg-icons/client"
     ]
-  },
-  "vueCompilerOptions": {
-    "experimentalDisableTemplateSupport": true,
-    "experimentalShamefullySupportOptionsApi": true
   }
 }

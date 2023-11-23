@@ -4,23 +4,10 @@ Edit: '{0} Edit {1}'
 Time: '{0} Time'
 Type: '{0} Type'
 Status: '{0} Status'
-Remark: '{0} Remark'
-Records: '{0} Records'
-Need Decision: 'Yes'
-Not Need Decision: 'No'
-Worth: '{0} Worth {1}'
 List: '{0} List'
-Task: '{0} Task'
-Tasks: '{0} Tasks'
-Distribute: '{0} Distribute {1}'
 Date: '{0} Date'
 Cancel: '{0} Cancel {1}'
 Permission Denied: >-
   You don't have permission to view the current data, please contact your
   administrator to assign permissions for you.
-Receive: '{0} Receive'
 Confirm: '{0} Confirm'
-Material: '{0} Material {1}'
-Product: '{0} Product {1}'
-Weight: '{0} Weight {1}'
-Inventory Overview: Inventory Overview {0}

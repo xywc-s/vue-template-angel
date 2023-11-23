@@ -8,7 +8,7 @@ meta:
   <div></div>
 </template>
 
-<script setup lang="ts" name="Login">
+<script setup lang="ts">
 import { onBeforeMount, useAttrs } from 'vue'
 import { useRoute } from 'vue-router'
 import { decode } from 'js-base64'
@@ -16,7 +16,9 @@ import { isWorkWechat } from '@xywc-s/utils'
 import { useApp } from '@/stores/app'
 import { useUser } from '@/stores/user'
 import { Auth } from '@/api'
-
+defineOptions({
+  name: 'Login'
+})
 const route = useRoute()
 const userStore = useUser()
 const appStore = useApp()

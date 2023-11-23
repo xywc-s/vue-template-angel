@@ -6,107 +6,166 @@ meta:
 
 <template>
   <div class="max-w-1200px mx-auto loading">
-    <TitleBar title="路由同步">
-      <template #right>
-        <vxe-button
-          :loading="buttonLoading"
-          status="primary"
-          icon="uno-ep-refresh"
-          @click="syncRoutes"
-        >
-          同步
-        </vxe-button>
+    <el-descriptions border :column="6">
+      <template #title>
+        <span class="text-4.5">路由同步</span>
       </template>
-    </TitleBar>
-    <vxe-form
-      :size="null"
-      :data="appRoutesConfig"
-      :span="24"
-      :title-width="100"
-      title-align="right"
-    >
-      <vxe-form-item title="应用名" field="name">
-        <span class="font-bold">{{ appRoutesConfig.name }}</span>
-      </vxe-form-item>
-      <vxe-form-item title="应用路径" field="path">
-        <span class="font-bold">{{ appRoutesConfig.path }}</span>
-      </vxe-form-item>
-      <vxe-form-gather>
-        应用配置
-        <vxe-form-item title="应用菜单名称" field="meta.title">
-          <el-input v-model="appRoutesConfig.meta!.title"></el-input>
-        </vxe-form-item>
-        <vxe-form-item title="应用类型" field="meta.type">
-          <el-radio-group v-model="appRoutesConfig.meta!.type">
-            <el-radio label="inner">中台内部应用</el-radio>
-            <el-radio label="outer">中台外部应用</el-radio>
-          </el-radio-group>
-        </vxe-form-item>
-        <vxe-form-item title="启用状态" field="meta.status">
-          <el-switch v-model="appRoutesConfig.meta!.status"></el-switch>
-        </vxe-form-item>
-      </vxe-form-gather>
-      <vxe-form-item title="应用路由" field="children">
-        <div class="flex items-center">
-          <div>
-            <span class="inline-block w-100px">
+      <template #extra>
+        <el-button :loading="buttonLoading" type="primary" @click="getApps">
+          <i class="uno-ep-download -ml-4px mr-4px"></i>
+          <span>拉取</span>
+        </el-button>
+        <el-button :loading="buttonLoading" type="success" @click="syncRoutes">
+          <i class="uno-ep-upload -ml-4px mr-4px"></i>
+          <span>推送</span>
+        </el-button>
+      </template>
+      <el-descriptions-item :span="2" label="应用名" label-class-name="w-120px">
+        {{ appRoutesConfig.name }}
+      </el-descriptions-item>
+      <el-descriptions-item :span="2" label="应用路径" label-class-name="w-120px">
+        {{ appRoutesConfig.path }}
+      </el-descriptions-item>
+      <el-descriptions-item :span="2" label="启用状态" label-class-name="w-120px">
+        <el-switch v-model="appRoutesConfig.meta!.status"></el-switch>
+      </el-descriptions-item>
+      <el-descriptions-item :span="2" label="应用菜单名称" label-class-name="w-120px">
+        <el-input v-model="appRoutesConfig.meta!.title"></el-input>
+      </el-descriptions-item>
+      <el-descriptions-item :span="2" label="根路由组件" label-class-name="w-120px">
+        <template #label>
+          <span>根路由组件</span>
+          <el-tooltip
+            raw-content
+            content="可不填, 默认为中台Layout组件<br>可选值 Layout, Plain"
+            placement="top"
+          >
+            <i class="uno-ep-question-filled"></i>
+          </el-tooltip>
+        </template>
+        <el-input v-model="appRoutesConfig.component"></el-input>
+      </el-descriptions-item>
+      <el-descriptions-item :span="2" label="应用类型" label-class-name="w-120px">
+        <el-radio-group v-model="appRoutesConfig.meta!.type">
+          <el-radio label="inner">中台内部应用</el-radio>
+          <el-radio label="outer">中台外部应用</el-radio>
+        </el-radio-group>
+      </el-descriptions-item>
+
+      <el-descriptions-item
+        :span="6"
+        label="路由配置"
+        label-class-name="w-120px"
+        class-name="!pa-0"
+      >
+        <template #label>
+          <span>路由配置</span>
+          <el-tooltip
+            raw-content
+            content="所有路由配置项均可直接在视图文件内配置<br>如果和子应用本身冲突,则可手动在本页面调整"
+            placement="top"
+          >
+            <i class="uno-ep-question-filled"></i>
+          </el-tooltip>
+        </template>
+        <ElTable :data="selectableRoutes" border>
+          <ElTableColumn label="路由(name/meta.title)">
+            <template #default="{ row }">
+              <div>{{ row.name }}</div>
+              <div>{{ row.meta?.title }}</div>
+            </template>
+          </ElTableColumn>
+          <ElTableColumn width="120px">
+            <template #header>
               <el-checkbox
                 :model-value="allUsefulChecked"
                 :indeterminate="isAllUsefulIndeterminate"
                 @change="handleUsefulCheckAllChange"
               >
-                可用
+                <span>可用</span>
+                <el-tooltip content="是否将路由同步到中台" placement="top">
+                  <i class="uno-ep-question-filled"></i>
+                </el-tooltip>
               </el-checkbox>
-            </span>
-            <span class="inline-block w-100px">
-              <el-checkbox
-                :model-value="allVisibleChecked"
-                :indeterminate="isAllVisibleIndeterminate"
-                @change="handleVisibleCheckAllChange"
+            </template>
+            <template #default="{ row }">
+              <el-checkbox v-model="row.checked" @change="handleUsefulChange"></el-checkbox>
+            </template>
+          </ElTableColumn>
+          <ElTableColumn>
+            <template #header>
+              <span>可见</span>
+              <el-tooltip content="在中台菜单中是否显示该路由" placement="top">
+                <i class="uno-ep-question-filled"></i>
+              </el-tooltip>
+            </template>
+            <template #default="{ row }">
+              <el-checkbox v-model="row.meta.visible" :disabled="!row.checked">PC</el-checkbox>
+              <el-checkbox v-model="row.meta.mobile" :disabled="!row.checked">移动端</el-checkbox>
+            </template>
+          </ElTableColumn>
+          <ElTableColumn>
+            <template #header>
+              <span>权限</span>
+              <el-tooltip content="路由权限, 用英文逗号分隔" placement="top">
+                <i class="uno-ep-question-filled"></i>
+              </el-tooltip>
+            </template>
+            <template #default="{ row }">
+              <div>
+                <el-input v-model="row.meta.permission"></el-input>
+              </div>
+            </template>
+          </ElTableColumn>
+          <ElTableColumn>
+            <template #header>
+              <span>图标</span>
+              <el-tooltip
+                raw-content
+                content="可配置svg图标和fonticon图标<br>svg: 图标需要放在中台的svg文件夹下<br>fonticon: 图标需要中台配置有对应的fonticon图标集"
+                placement="top"
               >
-                不可见
-              </el-checkbox>
-            </span>
-          </div>
-          <div>路由名</div>
-        </div>
-        <template v-for="route in selectableRoutes" :key="route.name">
-          <div class="flex items-center">
-            <div>
-              <el-checkbox
-                v-model="route.checked"
-                class="w-100px !mx-0"
-                @change="handleUsefulChange"
-              ></el-checkbox>
-              <el-checkbox
-                v-model="route.hidden"
-                class="w-100px"
-                @change="handleVisibleChange"
-              ></el-checkbox>
-            </div>
-            <div>{{ route.meta?.title }}</div>
-          </div>
-        </template>
-      </vxe-form-item>
-    </vxe-form>
+                <i class="uno-ep-question-filled"></i>
+              </el-tooltip>
+            </template>
+            <template #default="{ row }">
+              <div class="flex flex-col gap-2">
+                <el-input v-model="row.meta.svg">
+                  <template #prepend>SVG</template>
+                </el-input>
+                <el-input v-model="row.meta.icon">
+                  <template #prepend>Icon</template>
+                </el-input>
+              </div>
+            </template>
+          </ElTableColumn>
+        </ElTable>
+      </el-descriptions-item>
+    </el-descriptions>
   </div>
 </template>
 
-<script setup lang="ts" name="RouteSync">
-import { computed, nextTick, onMounted, reactive, ref } from 'vue'
-import { cloneDeep, has, set } from 'lodash-es'
+<script setup lang="ts">
 import { useToggle } from '@vueuse/core'
-import { BFF } from '@/api'
-import routes from '~pages'
+import { CheckboxValueType, ElTable, ElTableColumn } from 'element-plus'
+import { cloneDeep, has, set } from 'lodash-es'
+import { computed, nextTick, onMounted, reactive, ref } from 'vue'
+import { routes } from 'vue-router/auto/routes'
 import { useLoading } from '@/repositories'
+import { BFF } from '@/api'
+import { syncBlackList } from '@/plugins/router/config'
 import type { CustomRoute } from '@/types/custom'
-import type { RouteRecordRaw } from 'vue-router'
+console.log('🚀 ~ file: route-sync.vue:152 ~ routes:', routes)
 
+defineOptions({
+  name: 'RouteSync'
+})
 const [buttonLoading, toggleButtonLoading] = useToggle(false)
 const apps = reactive<Record<string, any>>({})
-const appRoutesConfig = reactive<RouteRecordRaw>({
+const appRoutesConfig = reactive<CustomRoute>({
   name: import.meta.env.VITE_APP_NAME,
   path: import.meta.env.VITE_APP_PATH,
+  component: null,
   meta: {
     title: '',
     type: 'inner',
@@ -116,12 +175,9 @@ const appRoutesConfig = reactive<RouteRecordRaw>({
 })
 const selectableRoutes = ref<CustomRoute[]>(
   routes
-    .filter(
-      (route) => !['login', 'index', 'all', 'route-sync', 'denied'].includes(route.name as string)
-    )
+    .filter((route) => !syncBlackList.includes(route.name as string))
     .map((route) => {
       set(route, 'checked', false)
-      set(route, 'hidden', false)
       return route as CustomRoute
     })
 )
@@ -133,42 +189,38 @@ const isAllUsefulIndeterminate = computed(() => {
   const checkedNumber = selectableRoutes.value.filter((route) => route.checked).length
   return checkedNumber > 0 && checkedNumber < selectableRoutes.value.length
 })
-const handleUsefulCheckAllChange = (val: boolean) => {
-  allUsefulChecked.value = val
+const handleUsefulCheckAllChange = (val: CheckboxValueType) => {
+  allUsefulChecked.value = val as boolean
   for (const route of selectableRoutes.value) {
-    route.checked = val
+    route.checked = val as boolean
   }
 }
-const handleUsefulChange = (val: boolean) => {
+const handleUsefulChange = (val: CheckboxValueType) => {
   val && !isAllUsefulIndeterminate.value && (allUsefulChecked.value = true)
   !val && !isAllUsefulIndeterminate.value && (allUsefulChecked.value = false)
-}
-
-// 不可见
-const allVisibleChecked = ref(false)
-const isAllVisibleIndeterminate = computed(() => {
-  const checkedNumber = selectableRoutes.value.filter((route) => route.hidden).length
-  return checkedNumber > 0 && checkedNumber < selectableRoutes.value.length
-})
-const handleVisibleCheckAllChange = (val: boolean) => {
-  allVisibleChecked.value = val
-  for (const route of selectableRoutes.value) {
-    route.hidden = val
-  }
-}
-const handleVisibleChange = (val: boolean) => {
-  val && !isAllVisibleIndeterminate.value && (allVisibleChecked.value = true)
-  !val && !isAllVisibleIndeterminate.value && (allVisibleChecked.value = false)
 }
 
 const syncRoutes = () => {
   toggleButtonLoading(true)
   const params = cloneDeep(appRoutesConfig)
   const cloneRoutes = cloneDeep(selectedRoutes.value)
+  if (!params.component) delete params.component
   params.children = cloneRoutes.map((route) => {
     route.path = route.path.replace('/', '')
     delete route.component
     delete route.checked
+    if (!route.meta?.visible) {
+      route.hidden = true
+      delete route.meta!.visible
+    }
+    if (!route.meta?.mobile) delete route.meta!.mobile
+    if (!route.meta?.svg) delete route.meta!.svg
+    if (!route.meta?.icon) delete route.meta!.icon
+    if (!route.meta?.permission) {
+      delete route.meta!.permission
+    } else {
+      route.meta.permission = (route.meta.permission as string).split(',')
+    }
     return route
   })
   apps[params.name as string] = params
@@ -190,20 +242,33 @@ const getApps = () => {
   })
 }
 
-function setConfig(config: RouteRecordRaw) {
+function setConfig(config: CustomRoute) {
   appRoutesConfig.name = config.name
   appRoutesConfig.path = config.path
   appRoutesConfig.meta = config.meta
-  config.children?.forEach((child) => {
-    const route = selectableRoutes.value.find((route) => route.name === child.name)
-    route!.checked = true
-    route!.hidden = Boolean((child as any).hidden)
+  appRoutesConfig.component = config.component
+  selectableRoutes.value.forEach((route) => {
+    const child = config.children?.find((child) => route.name === child.name) as CustomRoute
+    route.checked = !!child
+    route.meta!.visible = child ? !child.hidden : !route.meta!.hidden
+    child?.meta?.mobile && (route.meta!.mobile = child.meta.mobile)
+    !!child?.meta?.svg && (route.meta!.svg = child.meta.svg)
+    !!child?.meta?.icon && (route.meta!.icon = child.meta.icon)
+    if (child?.meta?.permission) {
+      if (typeof child.meta.permission !== 'string') {
+        route.meta!.permission = child.meta.permission.join(',')
+      } else {
+        route.meta!.permission = child.meta.permission
+      }
+    } else {
+      if (route.meta?.permission && typeof route.meta.permission !== 'string') {
+        route.meta.permission = route.meta.permission.join(',')
+      }
+    }
   })
   nextTick(() => {
     if (selectableRoutes.value.every((route) => route.checked === true))
       allUsefulChecked.value = true
-    if (selectableRoutes.value.every((route) => route.hidden === true))
-      allVisibleChecked.value = true
   })
 }
 

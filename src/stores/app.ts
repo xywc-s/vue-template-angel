@@ -8,22 +8,22 @@ import type { LoadingInstance } from 'element-plus/es/components/loading/src/loa
 
 const breakpoints = useBreakpoints(breakpointsTailwind)
 export const useApp = defineStore('app', () => {
+  /** 云存储文件路径 */
   const minioPath = import.meta.env.VITE_MINIO_PATH
+  /** 系统语言 */
   const locale = ref(navigator.language)
+  /** 当前环境, 应用是否正在作为子应用运行 */
   const isChildApp = ref(Boolean(parent !== self))
+  /** 全局loading状态 */
   const loading = ref<LoadingInstance | boolean | null>(null)
 
-  const rootInstance = computed(() => parent.app as parentApp)
-  const currentInstance = computed(() => window.app)
+  const mainApp = computed(() => parent.app as parentApp)
+  const app = computed(() => window.app)
   const route = computed<RouteLocationNormalizedLoaded>(() =>
-    isChildApp.value
-      ? rootInstance.value.$route
-      : currentInstance.value.config.globalProperties.$route
+    isChildApp.value ? mainApp.value.$route : app.value.config.globalProperties.$route
   )
   const router = computed<Router>(() =>
-    isChildApp.value
-      ? rootInstance.value.$router
-      : currentInstance.value.config.globalProperties.$router
+    isChildApp.value ? mainApp.value.$router : app.value.config.globalProperties.$router
   )
 
   /**
@@ -31,7 +31,7 @@ export const useApp = defineStore('app', () => {
    */
   const serverTime = computed<string>(() =>
     isChildApp.value
-      ? rootInstance.value.$store.getters.serverTime
+      ? mainApp.value.$store.getters.serverTime
       : useDateFormat(useNow(), 'YYYY-MM-DD HH:mm:ss')
   )
 
@@ -39,7 +39,7 @@ export const useApp = defineStore('app', () => {
    * 当前系统语言
    */
   const language = computed<string>(() =>
-    isChildApp.value ? rootInstance.value.$store.getters.language : locale.value
+    isChildApp.value ? mainApp.value.$store.getters.language : locale.value
   )
 
   /**
@@ -53,8 +53,7 @@ export const useApp = defineStore('app', () => {
    * @param fullPath 路由fullpath, 不传则默认当前路由
    */
   function updateTag(title: string, fullPath?: string) {
-    if (isChildApp.value)
-      rootInstance.value.$updateTagTitle(fullPath ?? route.value.fullPath, title)
+    if (isChildApp.value) mainApp.value.$updateTagTitle(fullPath ?? route.value.fullPath, title)
   }
 
   /**
@@ -63,7 +62,7 @@ export const useApp = defineStore('app', () => {
    */
   function clearTagCache(fullPath?: string) {
     if (isChildApp.value) {
-      rootInstance.value.$store.commit(
+      mainApp.value.$store.commit(
         'tagsView/DEL_CACHED_CHILD_APP_VIEW',
         fullPath ?? route.value.fullPath
       )
@@ -93,7 +92,7 @@ export const useApp = defineStore('app', () => {
     isChildApp,
     minioPath,
     loading,
-    rootInstance,
+    mainApp,
     route,
     router,
     serverTime,

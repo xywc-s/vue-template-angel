@@ -19,8 +19,9 @@
       <template v-for="{ path, children } in $router.options.routes" :key="path">
         <template
           v-if="
-              !children![0].meta?.hidden && userStore.hasPermission(children![0].meta?.permission as PermissionCode)
-            "
+            !children![0].meta?.hidden &&
+            userStore.hasPermission(children![0].meta?.permission as PermissionCode)
+          "
         >
           <el-sub-menu v-if="children![0].children" :index="path">
             <template #title>
@@ -35,11 +36,14 @@
   </section>
 </template>
 
-<script setup lang="ts" name="LayoutHeader">
-import { useRoute } from 'vue-router'
+<script setup lang="ts">
+import { useRoute } from 'vue-router/auto'
 import { useApp } from '@/stores/app'
 import { useUser } from '@/stores/user'
 import type { PermissionCode } from '@/models'
+defineOptions({
+  name: 'LayoutHeader'
+})
 const appStore = useApp()
 const userStore = useUser()
 const defaultActive = useRoute().path

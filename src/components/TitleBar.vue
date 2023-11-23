@@ -22,9 +22,12 @@
   </div>
 </template>
 
-<script setup lang="ts" name="TitleBar">
+<script setup lang="ts">
 import { onMounted } from 'vue'
 import SvgIcon from '@/components/SvgIcon.vue'
+defineOptions({
+  name: 'TitleBar'
+})
 defineEmits(['clickTitle'])
 defineProps({
   title: String,

@@ -1,27 +1,25 @@
 /**
- * @see https://github.com/hannoeru/vite-plugin-pages
+ * @see https://github.com/posva/unplugin-vue-router
  */
-import Pages from 'vite-plugin-pages'
-
+import path from 'path'
+import { cwd } from 'process'
+import { getFileBasedRouteName, getPascalCaseRouteName } from 'unplugin-vue-router'
+import VueRouter from 'unplugin-vue-router/vite'
 export default () =>
-  Pages({
+  VueRouter({
+    dts: path.resolve(cwd(), 'src/types/router.d.ts'),
     exclude: ['**/components/**/*.vue'],
-    importMode(filepath, options) {
-      // default resolver
-      // for (const page of options.dirs) {
-      //   if (page.baseRoute === '' && filepath.startsWith(`/${page.dir}/index`))
-      //     return 'sync'
-      // }
-      // return 'async'
-      // Load about page synchronously, all other pages are async.
-      return filepath.includes('login') ? 'sync' : 'async'
-    },
-    extendRoute(route, parent) {
-      // // Augment the route with meta that indicates that the route requires authentication.
-      // return {
-      //   ...route,
-      //   meta: { auth: true },
-      // }
-    },
-    onRoutesGenerated(routes) {}
+    routeBlockLang: 'yaml',
+    importMode: (filepath) => (filepath.includes('login') ? 'sync' : 'async'),
+    getRouteName: (routeNode) => {
+      console.log(
+        '🚀 ~ file: pages.ts:16 ~ getFileBasedRouteName:',
+        getFileBasedRouteName(routeNode)
+      )
+      console.log(
+        '🚀 ~ file: pages.ts:16 ~ getPascalCaseRouteName:',
+        getPascalCaseRouteName(routeNode)
+      )
+      return routeNode
+    }
   })

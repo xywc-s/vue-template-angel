@@ -1,4 +1,5 @@
 <route lang="yaml">
+name: all
 meta:
   hidden: true
   title: '404'
@@ -10,4 +11,8 @@ meta:
   </div>
 </template>
 
-<script lang="ts" setup name="404"></script>
+<script lang="ts" setup>
+defineOptions({
+  name: 'NotFound'
+})
+</script>

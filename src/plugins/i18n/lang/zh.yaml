@@ -20,41 +20,15 @@ Save: 保存
 Search: 搜索
 Submit: 提交
 View: 查看
-Stagnant Inventory: 呆滞库存管理
-OverView: 概览
-Inventory Chart: 库存报表
-Task List: 任务列表
 All: 全部
-Address: 地址
-Attachment: 附件
-Belong To: 归属
-Category: '{0}分类'
-Code: '{0}编码'
-Date: '{0}日期'
-DataBoard: 数据看板
-Description: 描述
-Decision List: 决策列表
 Email: '{0}邮箱'
-Expiry Date: 有效期
 File: 文件
 Group: 组
-Invalid: 失效
-Item: 项目
-Keywords: 关键字
-List: '{0}列表'
-Management Organization: 管理部门
-Mobilephone: 手机
-Name: '{0}名称'
-Object: 对象
 Operate: 操作项
 Order: 订单
 Remark: '{0}备注'
-Records: '{0}记录'
-Responsable List: 责任主体列表
-Sales Organization: 事业部
 Status: '{0}状态'
 Tel: 电话
-Telephone: 座机
 Time: '{0}时间'
 Type: '{0}类型'
 Title: 标题
@@ -64,62 +38,6 @@ Tip: 提示
 Are you sure to delete it?: 确认删除吗?
 Once deleted, the data cannot be recovered.: 一旦删除,数据将无法找回.
 Required: 必填
-Long Term: 长期
-Postponed for Five Years: 后推5年
-Postponed for Four Years: 后推4年
-Postponed for Three Years: 后推3年
-Postponed for Two Years: 后推2年
-Postponed for One Years: 后推1年
-Postponed for Six Months: 后推半年
-Material: '{0}物料{1}'
-Factory: 工厂
-Storage: 仓库
-BatchCode: 批次号
-Inventory: 库存
-Responsable: 责任主体
-Worth: '{0}价值{1}'
-Wait Distribute: 待分配
-Wait Confirm: 待确认
-In progress: 进行中
-Completed: 已完成
-Progress: 进度
-Generate Task: 可生成任务
-Task: '{0}任务'
-Responsable People: 责任人
 Create: 创建
-Responsable Index Config: 责任主体索引配置
-Decision: 决策
 Batch: 批量
 Config: 配置
-Need Decision: 需要决策
-Not Need Decision: 不需要决策
-You must select a correct responsable: 必须选择一个正确的责任主体
-An effective Responsable People must be chosen: 必须选择一个有效的责任人
-Expire: 过期
-Production: 生产
-Generate Tasks: 一键生成任务
-Total: 总
-Tasks: '{0}任务'
-Pending: 待处理
-Disposal: 处理方式
-Planed Complete: 计划完成
-Distribute: '{0}分配{1}'
-Receive: '{0}接收'
-Reject: 驳回
-Reason: 原因
-Task Detail Info: 任务详细信息
-Permission Denied: 您没有权限查看当前数据, 请联系管理员为您分配权限.
-Flow Contents: 流转意见
-Creator: 创建人
-Copy successful: 复制成功
-Selected Generate: 生成所选
-Weight: '{0}吨位{1}'
-Product: '{0}产品{1}'
-Statistics: 统计
-YearOnYear: 同比
-MonthOnMonth: 环比
-Structure: 结构图
-Inventory Overview: 库存概览{0}
-Inventory Comparision: 库存对比
-Product Category: 产品大类
-Application: 应用领域
