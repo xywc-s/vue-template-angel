@@ -3,11 +3,7 @@
  */
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-
-function kebabCase(key) {
-  const result = key.replace(/([A-Z])/g, ' $1').trim()
-  return result.split(' ').join('-').toLowerCase()
-}
+import { kebabCase } from 'lodash-es'
 
 const VxeTableResolver = (componentName) => {
   // where `componentName` is always CapitalCase
