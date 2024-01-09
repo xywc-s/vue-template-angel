@@ -9,7 +9,6 @@ const i18n = createI18n({
   silentFallbackWarn: true,
   formatFallbackMessages: false,
   messages,
-  allowComposition: true,
   globalInjection: true,
   /**
    * 翻译失败时的处理函数
