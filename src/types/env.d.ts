@@ -6,6 +6,7 @@ interface ImportMetaEnv {
 
   readonly VITE_APP_NAME: string
   readonly VITE_APP_PATH: string
+  readonly VITE_ROUTE_AUTO_PREFIX: boolean
 
   readonly VITE_MIDDLE_LOGIN_URL: string
   readonly VITE_WECHAT_LOGIN_URL: string
