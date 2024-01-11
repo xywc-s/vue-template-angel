@@ -19,8 +19,5 @@ import { useI18n } from 'vue-i18n'
 import { useNotify } from '@/repositories'
 
 const { t } = useI18n()
-
-onMounted(() => {
-  useNotify(t('Permission Denied'), 'error')
-})
+onMounted(() => useNotify(t('Permission Denied'), 'error'))
 </script>
