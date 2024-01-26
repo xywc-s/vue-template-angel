@@ -1,6 +1,7 @@
 import type { RouteRecordRaw, RouteMeta } from 'vue-router/auto'
 import type { Ref } from 'vue'
 
+// TODO 放在通用文件内
 export type CustomeRouteMeta = RouteMeta & {
   /** 是否显示菜单 */
   visible?: boolean

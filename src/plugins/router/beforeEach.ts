@@ -1,19 +1,18 @@
-import { useApp } from '@/stores/app'
-import { useUser } from '@/stores/user'
+import { useAppStore } from '@/stores/app'
+import { useUserStore } from '@/stores/user'
 import { accessWhiteList } from '@/plugins/router/config'
 import type { PermissionCode } from '@/models'
 import type { NavigationGuardWithThis } from 'vue-router/auto'
 
 const beforeEach: NavigationGuardWithThis<undefined> = async (to, from, next) => {
-  const appStore = useApp()
-  const userStore = useUser()
+  const appStore = useAppStore()
+  const userStore = useUserStore()
   // 不是作为中台子应用打开
   if (!appStore.isChildApp) {
-    console.log('应用路由:', to.fullPath)
-
-    if (accessWhiteList.includes(to.name)) return next()
+    console.log('应用路由:', to.fullPath) // LOG
+    if (to.name && accessWhiteList.includes(to.name as string)) return next()
     // 当前没登录 或 登录了但是token已过期
-    if (!userStore.token || !userStore.checkTokenValid()) {
+    if (!userStore.accessToken || !userStore.checkTokenValid()) {
       userStore.setUser({})
       if (userStore.hasDevToken()) {
         // 配置了开发token
@@ -27,7 +26,7 @@ const beforeEach: NavigationGuardWithThis<undefined> = async (to, from, next) =>
   }
 
   if (to.meta.permission) {
-    if (userStore.hasPermission(to.meta.permission as PermissionCode)) {
+    if (userStore.hasPermission(to.meta.permission as PermissionCode | PermissionCode[])) {
       next()
     } else {
       next('denied')

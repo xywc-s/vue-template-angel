@@ -1,3 +1,4 @@
+// TODO 放在通用文件内
 export interface AngelResponse<D = unknown, O = unknown> {
   success: boolean
   message: string | null

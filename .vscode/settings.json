@@ -55,6 +55,7 @@
 
   // 扩展设置
   "volar.autoCompleteRefs": true,
+  "vue.autoInsert.dotValue": true,
   "alias-skip.rootpath": "package.json",
   "alias-skip.mappings": {
     "@": "/src", // 默认只有`@`映射，映射到`/src`，你可以添加更多映射，映射路径必须以`/`开头

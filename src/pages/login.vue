@@ -9,42 +9,41 @@ meta:
 </template>
 
 <script setup lang="ts">
-import { onBeforeMount, useAttrs } from 'vue'
+import { onBeforeMount } from 'vue'
 import { useRoute } from 'vue-router'
-import { decode } from 'js-base64'
+import { decode, encode } from 'js-base64'
 import { isWorkWechat } from '@xywc-s/utils'
-import { useApp } from '@/stores/app'
-import { useUser } from '@/stores/user'
+import { useAppStore } from '@/stores/app'
+import { useUserStore } from '@/stores/user'
 import { Auth } from '@/api'
 defineOptions({
   name: 'Login'
 })
 const route = useRoute()
-const userStore = useUser()
-const appStore = useApp()
-const attrs = useAttrs()
+const userStore = useUserStore()
+const appStore = useAppStore()
 
 const MiddleURL = import.meta.env.VITE_MIDDLE_LOGIN_URL
-const AppURL = import.meta.env.VITE_WECHAT_LOGIN_URL
 const AppID = import.meta.env.VITE_WECHAT_APPID
 const currentUrl = new URL(location.href)
 const token = currentUrl.searchParams.get('token')
-const workWechatLoginCode = route.query.workWechatLoginCode
-const rewrite = currentUrl.searchParams.get('rewrite') || route.query.rewrite
+const code = currentUrl.searchParams.get('code') || (route.query.code as string)
+const rewrite = currentUrl.searchParams.get('state') || (route.query.rewrite as string)
+const urlPrefix = `${location.origin}${location.pathname}`
 
 const pass = (user: any) => {
   userStore.setUser(user)
   if (rewrite) {
-    appStore.router.replace(atob(rewrite as string))
+    location.replace(`${urlPrefix}#${decode(rewrite)}`)
   } else {
-    appStore.router.replace('/')
+    location.replace(`${urlPrefix}`)
   }
 }
 
 onBeforeMount(async () => {
-  if (workWechatLoginCode) {
+  if (code) {
     // 企业微信登录回调拿到url上的workWechatLoginCode
-    const user = await Auth.loginWithWeChatCode({ code: workWechatLoginCode as string })
+    const user = await Auth.loginWithWeChatCode({ code })
     if (user) pass(user)
   } else if (token) {
     // 中台扫码登录回调拿到url上的token
@@ -68,12 +67,14 @@ onBeforeMount(async () => {
      * vue-router hash模式匹配与上面相同, 所以hash(/login), query(空对象)
      * URL先匹配到?之后#之前的内容为query(abc=888),后匹配到#之后的为hash(/login)
      */
+    const state = encode(`${appStore.rewrite}`, true)
     if (isWorkWechat()) {
-      const url = `${location.origin}${location.pathname}#/login?rewrite=${attrs.rewrite}`
-      location.replace(`${AppURL}?appid=${AppID}&url=${btoa(url)}`)
+      const encodeURI = encodeURIComponent(location.href)
+      location.replace(
+        `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${AppID}&redirect_uri=${encodeURI}&response_type=code&scope=snsapi_base&state=${state}#wechat_redirect`
+      )
     } else {
-      const url = `${location.origin}${location.pathname}?rewrite=${attrs.rewrite}#/login`
-      location.replace(`${MiddleURL}?redirect=${url}`)
+      location.replace(`${MiddleURL}?redirect=${urlPrefix}?state=${state}#login`)
     }
   }
 })
