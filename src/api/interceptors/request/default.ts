@@ -1,11 +1,11 @@
-import { useUser } from '@/stores/user'
+import { useUserStore } from '@/stores/user'
 import type { AxiosRequestConfig } from 'axios'
 
 export default {
   success: (config: AxiosRequestConfig) => {
     config.headers = {
       ...config.headers,
-      Authorization: useUser().token
+      Authorization: useUserStore().token
     }
     return config
   },

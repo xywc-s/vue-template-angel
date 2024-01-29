@@ -125,8 +125,8 @@
 import { computed, onMounted, ref, useSlots, watch, watchEffect } from 'vue'
 import { Queue } from '@xywc-s/utils'
 import { Auth } from '@/api'
-import { useApp } from '@/stores/app'
-import { useUser } from '@/stores/user'
+import { useAppStore } from '@/stores/app'
+import { useUserStore } from '@/stores/user'
 import { copyText } from '@/repositories'
 const props = defineProps({
   value: {
@@ -147,8 +147,8 @@ const props = defineProps({
   }
 })
 const slots = useSlots()
-const appStore = useApp()
-const userStore = useUser()
+const appStore = useAppStore()
+const userStore = useUserStore()
 const rootCode = 691
 const visible = ref(false)
 const loading = ref(false)

@@ -1,9 +1,9 @@
 import { isWorkWechat } from '@xywc-s/utils'
 import { encode } from 'js-base64'
-import { useApp } from '@/stores/app'
+import { useAppStore } from '@/stores/app'
 
 export const previewFile = (url: string) => {
-  const appStore = useApp()
+  const appStore = useAppStore()
   // 如果是企业微信手机端预览文件则直接打开文件
   if (isWorkWechat() && appStore.isMobile) {
     window.open(appStore.minioPath + url)

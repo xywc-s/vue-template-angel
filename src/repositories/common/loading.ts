@@ -1,5 +1,5 @@
 import { ElLoading } from 'element-plus'
-import { useApp } from '@/stores/app'
+import { useAppStore } from '@/stores/app'
 import type { LoadingOptionsResolved } from 'element-plus'
 import type { LoadingInstance } from 'element-plus/es/components/loading/src/loading'
 
@@ -17,6 +17,6 @@ type LoadingOptions = Partial<
  */
 export function useLoading(options?: LoadingOptions): LoadingInstance {
   const loading = ElLoading.service(options)
-  useApp().loading = loading
+  useAppStore().loading = loading
   return loading
 }

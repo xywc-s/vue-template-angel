@@ -1,10 +1,10 @@
 import { useNotify } from '@/repositories'
-import { useApp } from '@/stores/app'
+import { useAppStore } from '@/stores/app'
 import type { AxiosResponse } from 'axios'
 
 export default {
   success: (response: AxiosResponse) => {
-    const appStore = useApp()
+    const appStore = useAppStore()
     if (appStore.loading?.close) {
       appStore.loading.close()
       appStore.loading = null
@@ -19,7 +19,7 @@ export default {
     return Promise.resolve(fullReturn ? response : response.data)
   },
   error: (error) => {
-    const appStore = useApp()
+    const appStore = useAppStore()
     if (appStore.loading?.close) {
       appStore.loading.close()
       appStore.loading = null

@@ -38,14 +38,14 @@
 
 <script setup lang="ts">
 import { useRoute } from 'vue-router/auto'
-import { useApp } from '@/stores/app'
-import { useUser } from '@/stores/user'
+import { useAppStore } from '@/stores/app'
+import { useUserStore } from '@/stores/user'
 import type { PermissionCode } from '@/models'
 defineOptions({
   name: 'LayoutHeader'
 })
-const appStore = useApp()
-const userStore = useUser()
+const appStore = useAppStore()
+const userStore = useUserStore()
 const defaultActive = useRoute().path
 </script>
 

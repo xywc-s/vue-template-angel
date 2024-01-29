@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import { toRef } from 'vue'
-import { useUser } from '@/stores/user'
+import { useUserStore } from '@/stores/user'
 import type { RouteRecordRaw } from 'vue-router'
 import type { PermissionCode } from '@/models'
 const props = defineProps<{
@@ -23,5 +23,5 @@ const props = defineProps<{
 }>()
 const routes = toRef(props, 'routes')
 const basePath = toRef(props, 'basePath')
-const userStore = useUser()
+const userStore = useUserStore()
 </script>

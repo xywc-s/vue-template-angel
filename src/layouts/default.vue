@@ -12,12 +12,12 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue'
 import { useElementBounding, useResizeObserver } from '@vueuse/core'
-import { useApp } from '@/stores/app'
+import { useAppStore } from '@/stores/app'
 import LayoutHeader from '@/layouts/components/Header.vue'
 defineOptions({
   name: 'Layout'
 })
-const appStore = useApp()
+const appStore = useAppStore()
 const mainEl = ref()
 
 const styles = reactive({
