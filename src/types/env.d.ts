@@ -9,14 +9,10 @@ interface ImportMetaEnv {
   readonly VITE_ROUTE_AUTO_PREFIX: boolean
 
   readonly VITE_MIDDLE_LOGIN_URL: string
-  readonly VITE_WECHAT_LOGIN_URL: string
   readonly VITE_WECHAT_APPID: string
 
-  readonly VITE_API_SECURITY: string
+  readonly VITE_API_MICRO: string
   readonly VITE_API_BFF: string
-  readonly VITE_API_INVENTORY: string
-  readonly VITE_API_CIMS: string
-  readonly VITE_API_MMS: string
   readonly VITE_API_MOCK: string
 
   readonly VITE_PREVIEW_URL: string

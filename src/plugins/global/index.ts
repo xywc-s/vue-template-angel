@@ -1,5 +1,4 @@
 import VueScrollTo from 'vue-scrollto'
-import { setTable } from '@xywc-s/vxe-table-helper'
 import VXETable from '@/plugins/vxe-table'
 import directives from '@/plugins/directives'
 import i18n from '@/plugins/i18n'
@@ -18,11 +17,5 @@ export default {
 
     // 添加$scrollTo到全局属性
     app.use(VueScrollTo)
-
-    setTable({
-      pagerConfig: {
-        pageSizeKey: 'rows'
-      }
-    })
   }
 }
