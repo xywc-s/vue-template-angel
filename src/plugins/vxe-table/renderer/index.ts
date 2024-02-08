@@ -1,4 +1,4 @@
-import { transform } from 'lodash-es'
+import { set, transform } from 'lodash-es'
 
 const rawRenderers = import.meta.glob(['./*.tsx', './*.ts'], {
   eager: true,
@@ -7,8 +7,11 @@ const rawRenderers = import.meta.glob(['./*.tsx', './*.ts'], {
 const renderers = transform(
   rawRenderers,
   (newRenderers, renderer, path) => {
-    const rendererName = path.match(/\w+\.tsx?$/g)[0].replace(/\.tsx?/, '')
-    newRenderers[rendererName] = renderer
+    const matchs = path.match(/\w+\.tsx?$/g)
+    if (matchs) {
+      const rendererName = matchs[0].replace(/\.tsx?/, '')
+      set(newRenderers, rendererName, renderer)
+    }
   },
   {}
 )

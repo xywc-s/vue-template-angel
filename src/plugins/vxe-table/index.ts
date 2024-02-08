@@ -1,17 +1,21 @@
-import { VXETable } from 'vxe-table'
+import { VXETable, VXETableConfigOptions } from 'vxe-table'
 import { isPlainObject } from 'lodash-es'
 import VXETablePluginElement from 'vxe-table-plugin-element'
 import i18n from '../i18n'
-// import renderers from './renderer'
 import * as components from './component'
 import 'xe-utils'
-import 'vxe-table/lib/style.css'
+import 'vxe-table/styles/cssvar.scss'
 import 'vxe-table-plugin-element/dist/style.css'
+import type { Plugin } from 'vue'
+// import renderers from './renderer'
+// import 'vxe-table/lib/style.css'
 
 // VXETable.renderer.mixin(renderers)
 
-VXETable.setup({
+VXETable.config({
+  /** 组件内置文本国际化 */
   i18n: (key, args) => i18n.global.t(key, args),
+  /** 全局自动翻译(使用组件时自定义的文本) */
   translate: (key, args) => i18n.global.t(key, args)
 })
 
@@ -23,15 +27,15 @@ VXETable.setup({
 VXETable.use(VXETablePluginElement)
 
 // console.log('renderer:', VXETable.version, VXETable.renderer)
+const useVxeTable: Plugin<VXETableConfigOptions[]> = {
+  install: (app, options) => {
+    if (isPlainObject(options)) {
+      VXETable.config(options)
+    }
 
-VXETable.install = (app, options) => {
-  if (isPlainObject(options)) {
-    VXETable.setup(options)
+    Object.values(components).forEach(function (component) {
+      return component.install(app)
+    })
   }
-
-  Object.values(components).forEach(function (component) {
-    return component.install(app)
-  })
 }
-
-export default VXETable
+export default useVxeTable

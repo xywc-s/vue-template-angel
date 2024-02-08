@@ -1,7 +1,6 @@
 import { useAppStore } from '@/stores/app'
 import { useUserStore } from '@/stores/user'
 import { accessWhiteList } from '@/plugins/router/config'
-import type { PermissionCode } from '@/models'
 import type { NavigationGuardWithThis } from 'vue-router/auto'
 
 const beforeEach: NavigationGuardWithThis<undefined> = async (to, from, next) => {
@@ -26,7 +25,7 @@ const beforeEach: NavigationGuardWithThis<undefined> = async (to, from, next) =>
   }
 
   if (to.meta.permission) {
-    if (userStore.hasPermission(to.meta.permission as PermissionCode | PermissionCode[])) {
+    if (userStore.hasPermission(to.meta.permission)) {
       next()
     } else {
       next('denied')

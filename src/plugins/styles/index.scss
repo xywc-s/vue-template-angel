@@ -1,0 +1,25 @@
+html {
+  line-height: normal;
+}
+body {
+  margin: 0;
+}
+
+.el-main {
+  overflow: initial;
+}
+
+.vxe-grid--pager-wrapper {
+  margin-top: 10px;
+}
+
+.required {
+  position: relative;
+  &::before {
+    content: '*';
+    position: absolute;
+    left: -10px;
+    top: -2px;
+    color: red;
+  }
+}
