@@ -1,3 +1,4 @@
+import { MiddleApp } from '@angelyeast/model'
 import { App, computed, ref } from 'vue'
 
 export const useAppInstance = () => {
@@ -8,8 +9,7 @@ export const useAppInstance = () => {
   const app = computed(() => window.app as App)
 
   /** 主应用实例 */
-  // eslint-disable-next-line no-undef
-  const mainApp = computed(() => parent.app as ParentApp)
+  const mainApp = computed(() => parent.app as MiddleApp)
 
   return {
     /** 当前环境, 应用是否正在作为子应用运行 */

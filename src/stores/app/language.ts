@@ -2,9 +2,8 @@ import { computed } from 'vue'
 import { useStorage } from '@vueuse/core'
 import i18n from '@/plugins/i18n'
 import { useAppInstance } from '@/stores/app/instance'
+import type { SystemLanguage } from '@angelyeast/types'
 
-/** 系统可指定的语言 */
-type Language = 'zh' | 'en'
 const languageStorage = useStorage('language', navigator.language)
 
 export const useLanguage = () => {
@@ -29,7 +28,7 @@ export const useLanguage = () => {
   }
 
   /** 修改全局语言 */
-  function setLanguage(lang: Language) {
+  function setLanguage(lang: SystemLanguage) {
     languageStorage.value = lang
     i18n.global.locale.value = lang
     // 组件库和其他需要多语言配置的相关设置

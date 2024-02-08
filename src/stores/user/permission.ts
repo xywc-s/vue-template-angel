@@ -2,7 +2,7 @@ import { computed } from 'vue'
 import { isArray, isString } from 'lodash-es'
 import { useAppInstance } from '@/stores/app/instance'
 import { useUser } from '@/stores/user/user'
-import type { PermissionCode } from '@/models'
+import type { PermissionCode } from '@angelyeast/model'
 
 // FIXME 更新权限码类型并检查此处
 export function usePermission() {

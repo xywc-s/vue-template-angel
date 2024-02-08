@@ -1,10 +1,10 @@
 import { computed } from 'vue'
 import { decode } from 'js-base64'
 import dayjs from 'dayjs'
+import { useService } from '@angelyeast/service'
+import { useNotify } from '@angelyeast/repository'
 import { useAppInstance } from '@/stores/app/instance'
 import { useUser } from '@/stores/user/user'
-import { userCodeLoginForDev } from '@/api/service/dev'
-import { useNotify } from '@/repositories'
 
 export function useToken() {
   const { mainApp } = useAppInstance()
@@ -17,7 +17,7 @@ export function useToken() {
   function checkTokenValid() {
     if (!accessToken.value) return false
     const exp = JSON.parse(decode(accessToken.value.split('.')[1])).exp
-    // FIXME 客户端时间进行判断不准确, 需要替换成服务器时间
+    // FIXME 客户端时间进行判断不准确, 需要替换成服务器时间或在服务端校验token有效期
     return exp ? dayjs.unix(exp).isAfter(dayjs()) : false
   }
 
@@ -28,10 +28,12 @@ export function useToken() {
 
   /** 使用开发token登录 */
   async function devLogin() {
-    // FIXME userCodeLoginForDev替换成通用包接口
-    const { data } = await userCodeLoginForDev()
-    if (data.object) setUser(JSON.parse(data.object))
-    else useNotify(data.message, 'error')
+    const { object, message } = await useService('Auth').loginForDev({
+      code: import.meta.env.VITE_USER_CODE,
+      token: import.meta.env.VITE_USER_TOKEN
+    })
+    if (object) setUser(JSON.parse(object))
+    else useNotify(message, 'error')
   }
 
   return {
