@@ -3,14 +3,15 @@ import CreateHtml from './src/plugins/create-html'
 import vueI18n from './src/plugins/i18n/vue-i18n'
 import Layouts from './src/plugins/router/layouts'
 import Pages from './src/plugins/router/pages'
-import StyleImport from './src/plugins/style-import'
-import Svg from './src/plugins/svg'
-import Unocss from './src/plugins/unocss'
-import Components from './src/plugins/unplugin-components'
+import Svg from './src/plugins/styles/svg'
+import Unocss from './src/plugins/styles/unocss'
+import StyleImport from './src/plugins/component/style-import'
+import Components from './src/plugins/component/unplugin-components'
 import Vue from './src/plugins/vue'
 
 // https://vitejs.dev/config/
-export default defineConfig(({ command, mode }) => {
+export default defineConfig((config) => {
+  const { mode } = config
   const env = loadEnv(mode, process.cwd())
 
   return {
@@ -23,7 +24,7 @@ export default defineConfig(({ command, mode }) => {
       StyleImport(),
       vueI18n(),
       Svg(),
-      CreateHtml({ env, command, mode })
+      CreateHtml({ env, ...config })
     ],
     resolve: {
       alias: {
@@ -32,7 +33,7 @@ export default defineConfig(({ command, mode }) => {
     },
     base: './',
     server: {
-      port: env.VITE_DEV_PORT
+      port: env.VITE_DEV_PORT as unknown as number
       // proxy: {
       //   '/api': {
       //     target: 'http://10.2.17.206:8143',
