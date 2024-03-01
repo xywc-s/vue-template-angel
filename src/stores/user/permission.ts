@@ -4,7 +4,6 @@ import { useAppInstance } from '@/stores/app/instance'
 import { useUser } from '@/stores/user/user'
 import type { PermissionCode } from '@angelyeast/model'
 
-// FIXME 更新权限码类型并检查此处
 export function usePermission() {
   const { mainApp } = useAppInstance()
   const { user } = useUser()

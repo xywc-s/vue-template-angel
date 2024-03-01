@@ -8,7 +8,6 @@ const beforeEach: NavigationGuardWithThis<undefined> = async (to, from, next) =>
   const userStore = useUserStore()
   // 不是作为中台子应用打开
   if (!appStore.isChildApp) {
-    console.log('应用路由:', to.fullPath) // LOG
     if (to.name && accessWhiteList.includes(to.name as string)) return next()
     // 当前没登录 或 登录了但是token已过期
     if (!userStore.accessToken || !userStore.checkTokenValid()) {
