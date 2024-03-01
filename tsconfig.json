@@ -27,12 +27,14 @@
     "types": [
       "node",
       "@angelyeast/model",
+      "@angelyeast/repository",
+      "@angelyeast/service",
       "@angelyeast/types",
       "lodash-es",
       "element-plus/global",
-      "unplugin-vue-router/client",
       "@intlify/unplugin-vue-i18n/messages",
       "vite-plugin-vue-layouts/client",
+      "unplugin-vue-router/client",
       "vite/client",
       "vite-plugin-svg-icons/client"
     ]

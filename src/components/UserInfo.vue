@@ -123,9 +123,8 @@
 
 <script lang="ts" setup>
 import { computed, onMounted, ref, useSlots, watch } from 'vue'
-import { Queue } from '@xywc-s/utils'
 import { useService } from '@angelyeast/service'
-import { copyText } from '@angelyeast/repository'
+import { copyText, Queue } from '@angelyeast/repository'
 import { useAppStore } from '@/stores/app'
 import { useUserStore } from '@/stores/user'
 import type { User, WechatJSON } from '@angelyeast/model'

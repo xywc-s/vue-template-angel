@@ -1,10 +1,10 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@angelyeast/model': ^1.6.1
-  '@angelyeast/repository': ^1.6.1
-  '@angelyeast/service': ^1.6.1
-  '@angelyeast/types': ^1.6.1
+  '@angelyeast/model': ^1.6.3
+  '@angelyeast/repository': ^1.6.3
+  '@angelyeast/service': ^1.6.3
+  '@angelyeast/types': ^1.6.3
   '@iconify/json': 2.1.94
   '@intlify/unplugin-vue-i18n': ~0.12.3
   '@types/lodash-es': ^4.17.12
@@ -42,7 +42,7 @@ specifiers:
   vite-plugin-html: ^3.2.2
   vite-plugin-style-import: ^2.0.0
   vite-plugin-svg-icons: ^2.0.1
-  vite-plugin-vue-layouts: ^0.8.0
+  vite-plugin-vue-layouts: ^0.11.0
   vue: ~3.3.13
   vue-i18n: ^9.9.1
   vue-router: ~4.2.5
@@ -52,10 +52,10 @@ specifiers:
   xe-utils: ~3.5.20
 
 dependencies:
-  '@angelyeast/model': 1.6.1_ifodjbqhv3jtwuglvhqtwqc2ym
-  '@angelyeast/repository': 1.6.1_a3pqauvqhdpttrzmw5itbaaati
-  '@angelyeast/service': 1.6.1_g4vaqmwvzfp76iwxv23piu7wja
-  '@angelyeast/types': 1.6.1_vue@3.3.13
+  '@angelyeast/model': 1.6.3_cnfmm2gab2xednvzpt7pxbdwmy
+  '@angelyeast/repository': 1.6.3_nu7wkkburux5et5qnzscftk7py
+  '@angelyeast/service': 1.6.3_ht4eptf6yvs566bqyt43l2brg4
+  '@angelyeast/types': 1.6.3_vue@3.3.13
   '@vueuse/core': 10.9.0_vue@3.3.13
   '@vueuse/integrations': 10.9.0_kjekjogjsqxutadppueel2mfvi
   axios: 1.6.7
@@ -102,7 +102,7 @@ devDependencies:
   vite-plugin-html: 3.2.2_vite@4.5.2
   vite-plugin-style-import: 2.0.0_vite@4.5.2
   vite-plugin-svg-icons: 2.0.1_vite@4.5.2
-  vite-plugin-vue-layouts: 0.8.0_xrybofcz5ucs4ccgb6pi4t3k4i
+  vite-plugin-vue-layouts: 0.11.0_xrybofcz5ucs4ccgb6pi4t3k4i
 
 packages:
 
@@ -119,30 +119,30 @@ packages:
       '@jridgewell/trace-mapping': 0.3.23
     dev: true
 
-  /@angelyeast/model/1.6.1_ifodjbqhv3jtwuglvhqtwqc2ym:
-    resolution: {integrity: sha512-bPvRlSId/5MoEBgOz9nlGSYIMYS2bLKthrqY9W2O4kAh0oyJfKGZFvAAbf7p5l/fk1WQmE/vulEiPb+V8c1c6Q==}
+  /@angelyeast/model/1.6.3_cnfmm2gab2xednvzpt7pxbdwmy:
+    resolution: {integrity: sha512-4wvvL9VC25kdP7lUbbrCogGjg+OOJbFhweiczIq8kjSCcQj43FHJW/UAXItyDK+EU+U309bQyieEz/tBwVQOzg==}
     engines: {node: '>=16 <=20', pnpm: ^7}
     peerDependencies:
-      '@angelyeast/types': 1.6.1
+      '@angelyeast/types': 1.6.3
       vue: '>=3.*'
     dependencies:
-      '@angelyeast/types': 1.6.1_vue@3.3.13
+      '@angelyeast/types': 1.6.3_vue@3.3.13
       vue: 3.3.13_typescript@5.3.3
     dev: false
 
-  /@angelyeast/repository/1.6.1_a3pqauvqhdpttrzmw5itbaaati:
-    resolution: {integrity: sha512-/K5DjPYRvDZCX3LXM5rOblBhMOKZndoIdKfunkABbXyBB2zui+dAvtib2lwGvfDl/Ucp2xVMaQCkTBuYmujsHg==}
+  /@angelyeast/repository/1.6.3_nu7wkkburux5et5qnzscftk7py:
+    resolution: {integrity: sha512-TlcstJ9Sq4eGEpnXld1e8ix2tgOd59sB1+/0yPCBmVKRY1Nf8KDw7rdAjEiW6RHyJxwGNWFJGch9FoIc1TcfnQ==}
     peerDependencies:
-      '@angelyeast/model': 1.6.1
-      '@angelyeast/types': 1.6.1
+      '@angelyeast/model': 1.6.3
+      '@angelyeast/types': 1.6.3
       '@vueuse/core': '>=9.13.0'
       element-plus: ^2.2.36
       lodash-es: '>=4.17.21'
       vue: '>=3.2.*'
       vxe-table: '>=4'
     dependencies:
-      '@angelyeast/model': 1.6.1_ifodjbqhv3jtwuglvhqtwqc2ym
-      '@angelyeast/types': 1.6.1_vue@3.3.13
+      '@angelyeast/model': 1.6.3_cnfmm2gab2xednvzpt7pxbdwmy
+      '@angelyeast/types': 1.6.3_vue@3.3.13
       '@vueuse/core': 10.9.0_vue@3.3.13
       element-plus: 2.5.6_vue@3.3.13
       lodash-es: 4.17.21
@@ -150,27 +150,27 @@ packages:
       vxe-table: 4.5.20_vue@3.3.13+xe-utils@3.5.20
     dev: false
 
-  /@angelyeast/service/1.6.1_g4vaqmwvzfp76iwxv23piu7wja:
-    resolution: {integrity: sha512-+ClaXclIurpzn86IsN5RT0qNTsymnqsQXKDW9V5BgTYZGD4dpxQ1ARQ1npgOzb4jWDaD1IdZ0oiw/ILxA+L6yA==}
+  /@angelyeast/service/1.6.3_ht4eptf6yvs566bqyt43l2brg4:
+    resolution: {integrity: sha512-liaQs4dkiJLoRCwMwFfkaXssLf0kc5RVofpAI/RGe2wv+plMrvkiOlR+WjhGLo1Ga2cQbdcKrZqzGZzuNCB0wA==}
     engines: {node: '>=16 <=20', pnpm: ^7}
     peerDependencies:
-      '@angelyeast/model': 1.6.1
-      '@angelyeast/repository': 1.6.1
-      '@angelyeast/types': 1.6.1
+      '@angelyeast/model': 1.6.3
+      '@angelyeast/repository': 1.6.3
+      '@angelyeast/types': 1.6.3
       axios: ^1.*
       lodash-es: ^4.17.21
       vue: '>=3.2.*'
     dependencies:
-      '@angelyeast/model': 1.6.1_ifodjbqhv3jtwuglvhqtwqc2ym
-      '@angelyeast/repository': 1.6.1_a3pqauvqhdpttrzmw5itbaaati
-      '@angelyeast/types': 1.6.1_vue@3.3.13
+      '@angelyeast/model': 1.6.3_cnfmm2gab2xednvzpt7pxbdwmy
+      '@angelyeast/repository': 1.6.3_nu7wkkburux5et5qnzscftk7py
+      '@angelyeast/types': 1.6.3_vue@3.3.13
       axios: 1.6.7
       lodash-es: 4.17.21
       vue: 3.3.13_typescript@5.3.3
     dev: false
 
-  /@angelyeast/types/1.6.1_vue@3.3.13:
-    resolution: {integrity: sha512-6mqFrBh2KWKHzte1LKIn1XiKyT6wB1bsuUKeQMRIAVtxTpK16TkH851lG0ZYfQLYLsOsWmOiRk8IYtx6Brs1+A==}
+  /@angelyeast/types/1.6.3_vue@3.3.13:
+    resolution: {integrity: sha512-BD4tQBR3MeeBEgei4LBrIVjLgYJgPscAtpIcjglw9CtLQVvTosNEmsS5V8oQJuzbEzpBZYByThuMmj5SDGoliw==}
     peerDependencies:
       vue: '>=3.2.*'
     dependencies:
@@ -5276,14 +5276,13 @@ packages:
       - supports-color
     dev: true
 
-  /vite-plugin-vue-layouts/0.8.0_xrybofcz5ucs4ccgb6pi4t3k4i:
-    resolution: {integrity: sha512-UZW2nSV2LraTSe7gsAL46hfdi7a0X1RvkGGoJVtA2O8beu7anzpXFwQLou8+kHy31CzVycT4gIPySBsHhtBN5g==}
+  /vite-plugin-vue-layouts/0.11.0_xrybofcz5ucs4ccgb6pi4t3k4i:
+    resolution: {integrity: sha512-uh6NW7lt+aOXujK4eHfiNbeo55K9OTuB7fnv+5RVc4OBn/cZull6ThXdYH03JzKanUfgt6QZ37NbbtJ0og59qw==}
     peerDependencies:
-      vite: ^2.5.0 || ^3.0.0-0 || ^4.0.0
-      vue: ^2.6.12 || ^3.2.4
-      vue-router: ^3.5.1 || ^4.0.11
+      vite: ^4.0.0 || ^5.0.0
+      vue: ^3.2.4
+      vue-router: ^4.0.11
     dependencies:
-      '@vue/compiler-sfc': 3.4.21
       debug: 4.3.4
       fast-glob: 3.3.2
       vite: 4.5.2_b7rt3ly4lnafvz75c7x44u2ts4

@@ -228,8 +228,7 @@ const syncRoutes = () => {
   })
   apps[params.name as string] = params
   console.log({ apps })
-  useFetch(useService('BFF').updateAppsRoutes, {
-    params: apps,
+  useFetch(() => useService('BFF').updateAppsRoutes(apps), {
     loading: toggleButtonLoading
   })
 }

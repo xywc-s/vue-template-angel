@@ -11,10 +11,10 @@
     "gcd": "madge --circular --image graph.svg src/main.ts"
   },
   "dependencies": {
-    "@angelyeast/model": "^1.6.1",
-    "@angelyeast/repository": "^1.6.1",
-    "@angelyeast/service": "^1.6.1",
-    "@angelyeast/types": "^1.6.1",
+    "@angelyeast/model": "^1.6.3",
+    "@angelyeast/repository": "^1.6.3",
+    "@angelyeast/service": "^1.6.3",
+    "@angelyeast/types": "^1.6.3",
     "@vueuse/core": "^10.9.0",
     "@vueuse/integrations": "^10.9.0",
     "axios": "^1.6.7",
@@ -61,7 +61,7 @@
     "vite-plugin-html": "^3.2.2",
     "vite-plugin-style-import": "^2.0.0",
     "vite-plugin-svg-icons": "^2.0.1",
-    "vite-plugin-vue-layouts": "^0.8.0"
+    "vite-plugin-vue-layouts": "^0.11.0"
   },
   "importSort": {
     ".js, .jsx": {

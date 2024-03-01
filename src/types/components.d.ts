@@ -11,7 +11,6 @@ declare module 'vue' {
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
-    ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
     ElContainer: typeof import('element-plus/es')['ElContainer']
     ElDescriptions: typeof import('element-plus/es')['ElDescriptions']
     ElDescriptionsItem: typeof import('element-plus/es')['ElDescriptionsItem']
@@ -32,11 +31,6 @@ declare module 'vue' {
     SvgIcon: typeof import('./../components/SvgIcon.vue')['default']
     TitleBar: typeof import('./../components/TitleBar.vue')['default']
     UserInfo: typeof import('./../components/UserInfo.vue')['default']
-    VxeButton: typeof import('vxe-table/es/button')['VxeButton']
-    VxeForm: typeof import('vxe-table/es/form')['VxeForm']
-    VxeFormGather: typeof import('vxe-table/es/form-gather')['VxeFormGather']
-    VxeFormItem: typeof import('vxe-table/es/form-item')['VxeFormItem']
-    VxeGrid: typeof import('vxe-table/es/grid')['VxeGrid']
   }
   export interface ComponentCustomProperties {
     vLoading: typeof import('element-plus/es')['ElLoadingDirective']

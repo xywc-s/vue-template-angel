@@ -6,5 +6,5 @@ export default () =>
   Layouts({
     // defaultLayout: 'default',
     // layoutsDirs: 'src/layouts',
-    // exclude: []
+    exclude: ['components/**']
   })
