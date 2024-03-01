@@ -48,10 +48,14 @@ export default defineConfig((config) => {
         output: {
           manualChunks: {
             // 第三方库单独打包
-            vxeTable: ['vxe-table'],
+            models: ['@angelyeast/model'],
+            repositories: ['@angelyeast/repository'],
+            services: ['@angelyeast/service'],
+            vxeTable: ['vxe-table', 'vxe-table-plugin-element', 'xe-utils'],
             elementPlus: ['element-plus'],
-            // 不支持 tree-shaking 的运行时依赖包或库
-            xeUtils: ['xe-utils'],
+            vueUtils: ['vue-scrollto'],
+            utils: ['change-case'],
+            // 不支持tree-shaking 的运行时依赖包或库, 单独打包永远不会更新hash重置缓存
             dayjs: ['dayjs'],
             axios: ['axios'],
             jsBase64: ['js-base64']
