@@ -16,7 +16,7 @@ meta:
 <script setup>
 import { onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useNotify } from '@/repositories'
+import { useNotify } from '@angelyeast/repository'
 
 const { t } = useI18n()
 onMounted(() => useNotify(t('Permission Denied'), 'error'))

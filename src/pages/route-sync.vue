@@ -147,25 +147,28 @@ meta:
 
 <script setup lang="ts">
 import { useToggle } from '@vueuse/core'
-import { CheckboxValueType, ElTable, ElTableColumn } from 'element-plus'
+import { CheckboxValueType, ElLoadingService, ElTable, ElTableColumn } from 'element-plus'
 import { cloneDeep, has, set } from 'lodash-es'
 import { computed, nextTick, onMounted, reactive, ref } from 'vue'
 import { routes } from 'vue-router/auto/routes'
-import { useLoading } from '@/repositories'
-import { BFF } from '@/api'
+import { useService } from '@angelyeast/service'
+import { useFetch } from '@angelyeast/repository'
 import { syncBlackList } from '@/plugins/router/config'
-import type { CustomRoute } from '@/types/custom'
+import type { RouteRecordRaw } from 'vue-router/auto'
+type CustomRoute = Omit<RouteRecordRaw, 'component'> & {
+  component?: string
+}
 console.log('🚀 ~ file: route-sync.vue:152 ~ routes:', routes)
 
 defineOptions({
   name: 'RouteSync'
 })
 const [buttonLoading, toggleButtonLoading] = useToggle(false)
-const apps = reactive<Record<string, any>>({})
+const apps = reactive<Record<string, CustomRoute>>({})
 const appRoutesConfig = reactive<CustomRoute>({
   name: import.meta.env.VITE_APP_NAME,
   path: import.meta.env.VITE_APP_PATH,
-  component: null,
+  component: 'Layout',
   meta: {
     title: '',
     type: 'inner',
@@ -173,12 +176,12 @@ const appRoutesConfig = reactive<CustomRoute>({
   },
   children: []
 })
-const selectableRoutes = ref<CustomRoute[]>(
+const selectableRoutes = ref<RouteRecordRaw[]>(
   routes
     .filter((route) => !syncBlackList.includes(route.name as string))
     .map((route) => {
       set(route, 'checked', false)
-      return route as CustomRoute
+      return route
     })
 )
 const selectedRoutes = computed(() => selectableRoutes.value.filter((route) => route.checked))
@@ -225,19 +228,21 @@ const syncRoutes = () => {
   })
   apps[params.name as string] = params
   console.log({ apps })
-  BFF.updateAppsRoutes(apps)
-    .then((res) => {
-      console.log({ res })
-    })
-    .finally(() => toggleButtonLoading(false))
+  useFetch(useService('BFF').updateAppsRoutes, {
+    params: apps,
+    loading: toggleButtonLoading
+  })
 }
 
 const getApps = () => {
-  useLoading({ target: '.loading' })
-  BFF.getAppsRoutes().then((res) => {
-    Object.keys(res.data).forEach((key) => (apps[key] = res.data[key]))
-    if (has(apps, appRoutesConfig.name as string)) {
-      setConfig(apps[appRoutesConfig.name as string])
+  const loading = ElLoadingService({ target: '.loading' })
+  useFetch(() => useService('BFF').getAppsRoutes<CustomRoute>(), {
+    loading,
+    onSuccess: (res) => {
+      Object.keys(res.data).forEach((key) => (apps[key] = res.data[key]))
+      if (has(apps, appRoutesConfig.name as string)) {
+        setConfig(apps[appRoutesConfig.name as string])
+      }
     }
   })
 }
@@ -248,7 +253,7 @@ function setConfig(config: CustomRoute) {
   appRoutesConfig.meta = config.meta
   appRoutesConfig.component = config.component
   selectableRoutes.value.forEach((route) => {
-    const child = config.children?.find((child) => route.name === child.name) as CustomRoute
+    const child = config.children?.find((child) => route.name === child.name)
     route.checked = !!child
     route.meta!.visible = child ? !child.hidden : !route.meta!.hidden
     child?.meta?.mobile && (route.meta!.mobile = child.meta.mobile)

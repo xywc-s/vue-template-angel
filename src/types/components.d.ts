@@ -36,6 +36,7 @@ declare module 'vue' {
     VxeForm: typeof import('vxe-table/es/form')['VxeForm']
     VxeFormGather: typeof import('vxe-table/es/form-gather')['VxeFormGather']
     VxeFormItem: typeof import('vxe-table/es/form-item')['VxeFormItem']
+    VxeGrid: typeof import('vxe-table/es/grid')['VxeGrid']
   }
   export interface ComponentCustomProperties {
     vLoading: typeof import('element-plus/es')['ElLoadingDirective']

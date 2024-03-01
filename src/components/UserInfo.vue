@@ -20,8 +20,8 @@
     <template #default>
       <div v-loading="loading" class="userInfo h-min-150px">
         <div class="flex items-center">
-          <el-avatar class="w-60px h-60px mr-15px" shape="square" size="large" :src="user.avatar">
-            <i v-if="user.status !== '正常'" class="text-40px uno-ep-remove-outline"></i>
+          <el-avatar class="w-60px h-60px mr-15px" shape="square" size="large" :src="user?.avatar">
+            <i v-if="user?.status !== '正常'" class="text-40px uno-ep-remove-outline"></i>
             <i v-else class="text-40px uno-ep-user"></i>
           </el-avatar>
           <div v-if="user?.name">
@@ -52,8 +52,8 @@
               手机
             </span>
             <span class="value">
-              <el-link @click="() => copyText(user.phone)">
-                {{ user.phone }}
+              <el-link @click="() => copyText(user!.phone)">
+                {{ user?.phone }}
               </el-link>
             </span>
           </div>
@@ -63,8 +63,8 @@
               邮箱
             </span>
             <span class="value">
-              <el-link @click="() => copyText(user.email)">
-                {{ user.email }}
+              <el-link @click="() => copyText(user!.email)">
+                {{ user?.email }}
               </el-link>
             </span>
           </div>
@@ -74,8 +74,8 @@
               编号
             </span>
             <span class="value">
-              <el-link @click="() => copyText(user.code)">
-                {{ user.code }}
+              <el-link @click="() => copyText(user!.code)">
+                {{ user?.code }}
               </el-link>
             </span>
           </div>
@@ -85,7 +85,7 @@
               部门
             </span>
             <span class="value">
-              <span v-for="item in departmentList" :key="item.id" class="departmentName">
+              <span v-for="(item, id) in departmentList" :key="id" class="departmentName">
                 {{ item }}
               </span>
             </span>
@@ -97,8 +97,8 @@
                 id
               </div>
               <span class="value">
-                <el-link @click="() => copyText(user.id)">
-                  {{ user.id }}
+                <el-link @click="() => copyText(user!.id)">
+                  {{ user?.id }}
                 </el-link>
               </span>
             </div>
@@ -110,7 +110,7 @@
                 </div>
               </div>
               <span class="value">
-                <el-link @click="() => copyText(user.wechatId)">{{ user.wechatId }}</el-link>
+                <el-link @click="() => copyText(user!.wechatId)">{{ user?.wechatId }}</el-link>
               </span>
             </div>
           </template>
@@ -121,58 +121,47 @@
   </el-popover>
 </template>
 
-<script setup>
-import { computed, onMounted, ref, useSlots, watch, watchEffect } from 'vue'
+<script lang="ts" setup>
+import { computed, onMounted, ref, useSlots, watch } from 'vue'
 import { Queue } from '@xywc-s/utils'
-import { Auth } from '@/api'
+import { useService } from '@angelyeast/service'
+import { copyText } from '@angelyeast/repository'
 import { useAppStore } from '@/stores/app'
 import { useUserStore } from '@/stores/user'
-import { copyText } from '@/repositories'
-const props = defineProps({
-  value: {
-    type: String,
-    default: ''
-  },
-  trigger: {
-    type: String,
-    default: 'hover'
-  },
-  showWechatButton: {
-    type: Boolean,
-    default: true
-  },
-  custom: {
-    type: Boolean,
-    default: false
-  }
+import type { User, WechatJSON } from '@angelyeast/model'
+import type { TooltipTriggerType } from 'element-plus'
+
+interface Props {
+  value: string
+  trigger?: TooltipTriggerType
+  custom?: boolean
+}
+const props = withDefaults(defineProps<Props>(), {
+  value: '',
+  trigger: 'hover',
+  custom: false
 })
+
 const slots = useSlots()
 const appStore = useAppStore()
 const userStore = useUserStore()
 const rootCode = 691
 const visible = ref(false)
 const loading = ref(false)
-const user = ref({})
-const departmentList = ref([])
-const triggleMethod = ref('hover')
+const user = ref<
+  User & {
+    wechatId: string
+    avatar: string
+    departmentCodeList: number[]
+  }
+>()
+const departmentList = ref<string[]>([])
 const queue = new Queue()
 
-const valueField = computed(() => {
-  return getValueField(props.value)
-})
-
-watchEffect(() => {
-  triggleMethod.value = appStore.isMobile ? 'click' : props.trigger
-})
-watch(
-  () => props.value,
-  () => {
-    getUser()
-  }
-)
-
+const triggleMethod = computed(() => (appStore.isMobile ? 'click' : props.trigger))
 // 判断value的类型 id、email、code、phone
-const getValueField = (value) => {
+const valueField = computed(() => {
+  const value = props.value
   if (value && value.length === 32) {
     return 'id'
   } else if (value.length === 8) {
@@ -183,48 +172,55 @@ const getValueField = (value) => {
     console.error('unknown value type:', value)
     return ''
   }
-}
+})
+
+watch(
+  () => props.value,
+  () => {
+    getUser()
+  }
+)
+
 const getUser = async () => {
-  if (!!props.value && user.value[valueField.value] === props.value) return false
-  user.value = {}
+  if (!valueField.value) return false
+  if (user.value && user.value[valueField.value] === props.value) return false
 
   // 加入异步请求队列
-  const res = await queue.push(Auth.User.findByUnique, props.value)
+  const res = await queue.push(useService('Auth').User.findByUnique, props.value)
 
   if (res?.success && res?.object) {
-    const data = res.object
-    data.weChatJson = JSON.parse(data.weChatJson.replace(/\\"/g, '"'))
-    data.position = data.weChatJson.position
-    data.avatar = data.weChatJson.thumb_avatar.replace(/^http:/g, 'https:')
-    data.wechatId = data.weChatJson.userid
-    data.departmentCodeList = data.weChatJson.department
-    user.value = data
+    const wechatJson: WechatJSON = JSON.parse(res.object.weChatJson.replace(/\\"/g, '"'))
+    wechatJson.avatar = wechatJson.thumb_avatar.replace(/^http:/g, 'https:')
+    const { position, avatar, userid: wechatId, department: departmentCodeList } = wechatJson
+    user.value = { ...res.object, position, avatar, wechatId, departmentCodeList }
   }
 }
 const getUserDepartmentList = async () => {
   departmentList.value = []
+  if (!user.value) return false
   const list = (
     await Promise.all(
       user.value.departmentCodeList.map((code) =>
-        queue.push(Auth.Department.findDepartmentAndAllParent, code)
+        queue.push(useService('Auth').Department.findDepartmentAndAllParent, code)
       )
     )
   ).map((o) =>
     o.rows
-      .map((row) => {
-        row.code = parseInt(row.code)
+      .map((row: any) => {
+        row._code = parseInt(row.code)
         return row
       })
-      .filter((row) => row.code > rootCode)
-      .sort((a, b) => b.levelNumber - a.levelNumber)
-      .map((row) => row.name)
+      .filter((row) => row._code > rootCode)
+      .sort((a: any, b: any) => b.levelNumber - a.levelNumber)
+      .map((row: any) => row.name)
       .join(` / `)
   )
   departmentList.value = list
 }
 const onShow = async () => {
+  if (!valueField.value) return false
   loading.value = true
-  if (user.value[valueField.value] !== props.value || !user.value?.id) {
+  if (!user.value || user.value[valueField.value] !== props.value || !user.value.id) {
     await getUser()
     await getUserDepartmentList()
   } else if (!departmentList.value?.length) {

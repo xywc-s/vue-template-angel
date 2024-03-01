@@ -3,8 +3,8 @@
   "editor.formatOnSave": true,
   "editor.formatOnSaveMode": "file",
   "editor.codeActionsOnSave": {
-    "source.fixAll": true, // 保存后自动修复格式
-    "source.organizeImports": false // 自动整理import
+    "source.fixAll": "explicit",
+    "source.organizeImports": "never"
   },
   "editor.suggest.snippetsPreventQuickSuggestions": false, // 自动快速建议, 不需要手动唤起
   "git.branchProtection": ["cloud"],

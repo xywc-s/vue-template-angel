@@ -5,7 +5,7 @@
     <div class="px-20px flex-shrink-0">
       <UserInfo :value="userStore.user.id" custom>
         <template #default="{ user }">
-          <el-avatar :size="36" :src="user?.weChatJson?.avatar"></el-avatar>
+          <el-avatar :size="36" :src="user?.avatar"></el-avatar>
         </template>
       </UserInfo>
     </div>
@@ -19,8 +19,7 @@
       <template v-for="{ path, children } in $router.options.routes" :key="path">
         <template
           v-if="
-            !children![0].meta?.hidden &&
-            userStore.hasPermission(children![0].meta?.permission as PermissionCode)
+            !children![0].meta?.hidden && userStore.hasPermission(children![0].meta?.permission)
           "
         >
           <el-sub-menu v-if="children![0].children" :index="path">
@@ -40,7 +39,7 @@
 import { useRoute } from 'vue-router/auto'
 import { useAppStore } from '@/stores/app'
 import { useUserStore } from '@/stores/user'
-import type { PermissionCode } from '@/models'
+
 defineOptions({
   name: 'LayoutHeader'
 })

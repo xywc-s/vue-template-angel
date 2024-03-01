@@ -14,10 +14,11 @@ import { onBeforeMount } from 'vue'
 import { useRoute } from 'vue-router'
 import { decode, encode } from 'js-base64'
 import { isWorkWechat } from '@xywc-s/utils'
+import { useService } from '@angelyeast/service'
+import { useNotify } from '@angelyeast/repository'
 import { useAppStore } from '@/stores/app'
 import { useUserStore } from '@/stores/user'
-import { Auth } from '@/api'
-import { useNotify } from '@/repositories'
+import type { JWT } from '@angelyeast/model'
 defineOptions({
   name: 'AppHome'
 })
@@ -50,39 +51,16 @@ const pass = () => {
   location.replace(`${urlPrefix}#/all`)
 }
 
-/** 企业微信Oauth鉴权 */
-const workWechatAuth = (appid: string, redirectUrl: string, state: string) => {
-  location.replace(
-    `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${redirectUrl}&response_type=code&scope=snsapi_base&state=${state}#wechat_redirect`
-  )
-}
-
-/** 中台鉴权 */
-const middleAuth = (
-  /** 中台鉴权地址 */
-  authUrl: string,
-  /** 完成鉴权后的回调地址 */
-  redirectUrl: string,
-  /** 需要在回调时带回来的状态数据 */
-  state: string
-) => {
-  location.replace(`${authUrl}?redirect=${redirectUrl}?state=${state}`)
-}
-
 onBeforeMount(async () => {
   if (userStore.checkTokenValid()) {
     pass()
   } else if (code) {
     // 企业微信登录回调拿到url上的鉴权code
-    try {
-      const user = await Auth.loginWithWeChatCode({ code })
-      if (user) {
-        userStore.setUser(user)
-        pass()
-      }
-    } catch (error: any) {
-      useNotify(error?.message)
-    }
+    const { object, message, success } = await useService('Auth').loginWithWeChatCode({ code })
+    if (!success) return useNotify(message, 'error')
+    const user: JWT = JSON.parse(object)
+    userStore.setUser(user)
+    pass()
   } else if (token) {
     // 中台扫码登录回调拿到url上的token
     const user = JSON.parse(decode(token.split('.')[1]))
@@ -93,9 +71,9 @@ onBeforeMount(async () => {
     const state = appStore.rewrite ? encode(`${appStore.rewrite}`, true) : ''
     if (isWorkWechat()) {
       const encodeURI = encodeURIComponent(location.href)
-      workWechatAuth(AppID, encodeURI, state)
+      useService('OPEN').workWechatAuth(AppID, encodeURI, state)
     } else {
-      middleAuth(MiddleURL, urlPrefix, state)
+      useService('OPEN').middleAuth(MiddleURL, urlPrefix, state)
     }
   }
 })

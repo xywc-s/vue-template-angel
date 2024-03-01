@@ -47,7 +47,10 @@ export default defineConfig((config) => {
       rollupOptions: {
         output: {
           manualChunks: {
-            // 不支持 tree-shaking 的运行时依赖包或库, 直接打包到单独的chunk
+            // 第三方库单独打包
+            vxeTable: ['vxe-table'],
+            elementPlus: ['element-plus'],
+            // 不支持 tree-shaking 的运行时依赖包或库
             xeUtils: ['xe-utils'],
             dayjs: ['dayjs'],
             axios: ['axios'],

@@ -6,7 +6,7 @@ import { cwd } from 'process'
 import { getPascalCaseRouteName } from 'unplugin-vue-router'
 import VueRouter from 'unplugin-vue-router/vite'
 import { kebabCase, pascalCase } from 'change-case'
-import { syncBlackList } from './config'
+import { syncBlackList, routesLoadSync } from './config'
 const syncBlackListPascalCase = syncBlackList.map((path) => pascalCase(path))
 // eslint-disable-next-line no-undef
 export default (env: ImportMetaEnv) =>
@@ -14,7 +14,7 @@ export default (env: ImportMetaEnv) =>
     dts: path.resolve(cwd(), 'src/types/router.d.ts'),
     exclude: ['**/components/**/*.vue'],
     routeBlockLang: 'yaml',
-    importMode: (filepath) => (filepath.includes('login') ? 'sync' : 'async'),
+    importMode: (filepath) => (routesLoadSync.includes(filepath) ? 'sync' : 'async'),
     getRouteName: (routeNode) => {
       // 检查配置是否需要自动重命名路由名称
       if (!env.VITE_ROUTE_AUTO_PREFIX) return routeNode.name

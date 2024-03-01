@@ -1,14 +1,14 @@
-import { VXETable, VXETableConfigOptions } from 'vxe-table'
+import VXETable, { VXETableConfigOptions } from 'vxe-table'
 import { isPlainObject } from 'lodash-es'
 import VXETablePluginElement from 'vxe-table-plugin-element'
 import i18n from '../i18n'
-import * as components from './component'
+// import * as components from './component'
+// import renderers from './renderer'
 import 'xe-utils'
-import 'vxe-table/styles/cssvar.scss'
+import 'vxe-table/lib/style.css'
+// import 'vxe-table/styles/cssvar.scss'
 import 'vxe-table-plugin-element/dist/style.css'
 import type { Plugin } from 'vue'
-// import renderers from './renderer'
-// import 'vxe-table/lib/style.css'
 
 // VXETable.renderer.mixin(renderers)
 
@@ -32,10 +32,11 @@ const useVxeTable: Plugin<VXETableConfigOptions[]> = {
     if (isPlainObject(options)) {
       VXETable.config(options)
     }
+    app.use(VXETable)
 
-    Object.values(components).forEach(function (component) {
-      return component.install(app)
-    })
+    // Object.values(components).forEach(function (component) {
+    //   return component.install(app)
+    // })
   }
 }
 export default useVxeTable

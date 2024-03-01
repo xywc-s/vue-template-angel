@@ -26,6 +26,8 @@
     },
     "types": [
       "node",
+      "@angelyeast/model",
+      "@angelyeast/types",
       "lodash-es",
       "element-plus/global",
       "unplugin-vue-router/client",
