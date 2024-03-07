@@ -74,5 +74,9 @@
       "style": "eslint",
       "options": {}
     }
+  },
+  "engines": {
+    "node": ">=16 <=20",
+    "pnpm": "^7"
   }
 }
