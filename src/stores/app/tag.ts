@@ -1,5 +1,13 @@
 import { useAppInstance } from '@/stores/app/instance'
 import { useInstanceRouter } from '@/stores/app/router'
+type ClearTagOptions = {
+  /** 路由fullpath, 不传则默认当前路由 */
+  fullPath?: string
+  /** 是否清除路由缓存, 默认true */
+  clearCache?: boolean
+  /** 是否清除路由标签, 默认false */
+  clearTag?: boolean
+}
 
 /** 主应用标签 */
 export const useTag = () => {
@@ -16,15 +24,20 @@ export const useTag = () => {
   }
 
   /**
-   * 清理(主应用中)路由缓存, 主应用再次访问页面时数据会刷新(不会删标签)
-   * @param fullPath 路由fullpath, 不传则默认当前路由
+   * 清理(主应用中)路由的缓存和标签, 主应用再次访问页面时数据会刷新, 缓存和标签均可选择性的清理
    */
-  function clearTagCache(fullPath?: string) {
+  function clearTagCache(options: ClearTagOptions = {}) {
+    const { fullPath, clearCache = true, clearTag } = options
     if (isChildApp.value) {
-      mainApp.value.$store.commit(
-        'tagsView/DEL_CACHED_CHILD_APP_VIEW',
-        fullPath ?? route.value.fullPath
-      )
+      if (clearCache) {
+        mainApp.value.$store.commit(
+          'tagsView/DEL_CACHED_CHILD_APP_VIEW',
+          fullPath ?? route.value.fullPath
+        )
+      }
+      if (clearTag) {
+        mainApp.value.$store.dispatch('tagsView/delView', fullPath ? { fullPath } : route)
+      }
     }
   }
 
