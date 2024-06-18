@@ -16,19 +16,15 @@
       :default-active="defaultActive"
       class="items-center md:flex-grow"
     >
-      <template v-for="{ path, children } in $router.options.routes" :key="path">
-        <template
-          v-if="
-            !children![0].meta?.hidden && userStore.hasPermission(children![0].meta?.permission)
-          "
-        >
-          <el-sub-menu v-if="children![0].children" :index="path">
+      <template v-for="{ path, meta, children } in routes" :key="path">
+        <template v-if="!meta?.hidden && userStore.hasPermission(meta?.permission)">
+          <el-sub-menu v-if="children" :index="path">
             <template #title>
-              <div>{{ children![0].meta?.title }}</div>
+              <div>{{ meta?.title }}</div>
             </template>
-            <ChildRoute :routes="children![0].children" :base-path="path"></ChildRoute>
+            <ChildRoute :routes="children" :base-path="path"></ChildRoute>
           </el-sub-menu>
-          <el-menu-item v-else :index="path">{{ children![0].meta?.title }}</el-menu-item>
+          <el-menu-item v-else :index="path">{{ meta?.title }}</el-menu-item>
         </template>
       </template>
     </el-menu>
@@ -39,7 +35,7 @@
 import { useRoute } from 'vue-router/auto'
 import { useAppStore } from '@/stores/app'
 import { useUserStore } from '@/stores/user'
-
+import { routes } from 'vue-router/auto/routes'
 defineOptions({
   name: 'LayoutHeader'
 })
