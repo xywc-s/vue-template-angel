@@ -135,6 +135,11 @@ interface Props {
   trigger?: TooltipTriggerType
   custom?: boolean
 }
+interface extendsFields {
+  wechatId: string
+  avatar: string
+  departmentCodeList: number[]
+}
 const props = withDefaults(defineProps<Props>(), {
   value: '',
   trigger: 'hover',
@@ -147,13 +152,7 @@ const userStore = useUserStore()
 const rootCode = 691
 const visible = ref(false)
 const loading = ref(false)
-const user = ref<
-  User & {
-    wechatId: string
-    avatar: string
-    departmentCodeList: number[]
-  }
->()
+const user = ref<User & extendsFields>()
 const departmentList = ref<string[]>([])
 const queue = new Queue()
 
@@ -176,7 +175,7 @@ const valueField = computed(() => {
 watch(
   () => props.value,
   () => {
-    getUser()
+    if (!slots?.default || props.custom) getUser()
   }
 )
 
