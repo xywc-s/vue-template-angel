@@ -42,7 +42,10 @@ declare module 'vue-router/auto/routes' {
     'index': RouteRecordInfo<'index', '/', Record<never, never>, Record<never, never>>,
     'all': RouteRecordInfo<'all', '/:all(.*)', { all: ParamValue<true> }, { all: ParamValue<false> }>,
     'denied': RouteRecordInfo<'denied', '/denied', Record<never, never>, Record<never, never>>,
+    'template-docs-list': RouteRecordInfo<'template-docs-list', '/docs/list', Record<never, never>, Record<never, never>>,
     'route-sync': RouteRecordInfo<'route-sync', '/route-sync', Record<never, never>, Record<never, never>>,
+    'template-user': RouteRecordInfo<'template-user', '/user', Record<never, never>, Record<never, never>>,
+    'template-user-list': RouteRecordInfo<'template-user-list', '/user/list', Record<never, never>, Record<never, never>>,
   }
 }
 
