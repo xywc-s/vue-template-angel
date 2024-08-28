@@ -1,11 +1,11 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@angelyeast/micro-frontend': ^2.2.1
-  '@angelyeast/model': ^2.2.1
-  '@angelyeast/repository': ^2.2.1
-  '@angelyeast/service': ^2.2.1
-  '@angelyeast/types': ^2.2.1
+  '@angelyeast/micro-frontend': ^2.2.4
+  '@angelyeast/model': ^2.2.4
+  '@angelyeast/repository': ^2.2.4
+  '@angelyeast/service': ^2.2.4
+  '@angelyeast/types': ^2.2.4
   '@iconify/json': 2.1.94
   '@intlify/unplugin-vue-i18n': ~0.12.3
   '@types/lodash-es': ^4.17.12
@@ -53,11 +53,11 @@ specifiers:
   xe-utils: ~3.5.20
 
 dependencies:
-  '@angelyeast/micro-frontend': 2.2.1_qo4rkrydi7sjwmf3omgo32zeaa
-  '@angelyeast/model': 2.2.1_rhozljxgpojwdhmgwcjf3pyjom
-  '@angelyeast/repository': 2.2.1_kqmimmipethfy5eydzpki7zsnm
-  '@angelyeast/service': 2.2.1_a277l3qfeqbq5gqw53oowuc2ka
-  '@angelyeast/types': 2.2.1_vue@3.3.13
+  '@angelyeast/micro-frontend': 2.2.4_uscnek2ztiq55aaagxaiyqftaq
+  '@angelyeast/model': 2.2.4_ck2wm6dx5slgumjg66netl6iie
+  '@angelyeast/repository': 2.2.4_u2nc6pz26yjtvowde2ko4hao3e
+  '@angelyeast/service': 2.2.4_bu4iwotrzik4qggsgs5xr6anau
+  '@angelyeast/types': 2.2.4_vue@3.3.13
   '@vueuse/core': 10.11.1_vue@3.3.13
   '@vueuse/integrations': 10.11.1_2oepz5dv4awn2h3vnojsa7gcru
   axios: 1.7.5
@@ -116,13 +116,13 @@ packages:
       '@jridgewell/trace-mapping': 0.3.25
     dev: true
 
-  /@angelyeast/micro-frontend/2.2.1_qo4rkrydi7sjwmf3omgo32zeaa:
-    resolution: {integrity: sha512-Q4xUUio0h903bGcWD6ae+23SpFcyjJ+nvhyQJgsIfgN+PTdTTEkKL6m7cJUMDEQfJ8wQU8E7M/+17N4WdMCN6g==}
+  /@angelyeast/micro-frontend/2.2.4_uscnek2ztiq55aaagxaiyqftaq:
+    resolution: {integrity: sha512-46Yyr2CughD5JqODZsQBQiYIDAk6yMASB24NmcpUL8FnuUtyza3t1Dsja6RXgHqncMUGi3QwoQg5p6Q67sBFiw==}
     peerDependencies:
-      '@angelyeast/model': 2.2.1
-      '@angelyeast/repository': 2.2.1
-      '@angelyeast/service': 2.2.1
-      '@angelyeast/types': 2.2.1
+      '@angelyeast/model': 2.2.4
+      '@angelyeast/repository': 2.2.4
+      '@angelyeast/service': 2.2.4
+      '@angelyeast/types': 2.2.4
       '@vueuse/core': '>=9.13.0'
       dayjs: '>=1'
       js-base64: '>=3'
@@ -130,10 +130,10 @@ packages:
       vue: '>=3.2.*'
       vue-router: '>=4'
     dependencies:
-      '@angelyeast/model': 2.2.1_rhozljxgpojwdhmgwcjf3pyjom
-      '@angelyeast/repository': 2.2.1_kqmimmipethfy5eydzpki7zsnm
-      '@angelyeast/service': 2.2.1_a277l3qfeqbq5gqw53oowuc2ka
-      '@angelyeast/types': 2.2.1_vue@3.3.13
+      '@angelyeast/model': 2.2.4_ck2wm6dx5slgumjg66netl6iie
+      '@angelyeast/repository': 2.2.4_u2nc6pz26yjtvowde2ko4hao3e
+      '@angelyeast/service': 2.2.4_bu4iwotrzik4qggsgs5xr6anau
+      '@angelyeast/types': 2.2.4_vue@3.3.13
       '@vueuse/core': 10.11.1_vue@3.3.13
       dayjs: 1.11.13
       js-base64: 3.7.7
@@ -143,22 +143,22 @@ packages:
       vue-router: 4.2.5_vue@3.3.13
     dev: false
 
-  /@angelyeast/model/2.2.1_rhozljxgpojwdhmgwcjf3pyjom:
-    resolution: {integrity: sha512-u2eOWlYUX/cC2MGMUSw08aOSikiMBs11uYN9SdoHIdOby+KOkHmhdMUgAf6AyAujRtFUVzHCIZYP0g1mk5yLUA==}
+  /@angelyeast/model/2.2.4_ck2wm6dx5slgumjg66netl6iie:
+    resolution: {integrity: sha512-hTqqbPfjCm9gBoj3M1XDcUqBTThK8+z5i5xCWn6fp2QYM70hiV/2uHZPGFR1925THJNccHqIIhxH/a46yfS/1w==}
     engines: {node: '>=16 <=20', pnpm: ^7}
     peerDependencies:
-      '@angelyeast/types': 2.2.1
+      '@angelyeast/types': 2.2.4
       vue: '>=3.*'
     dependencies:
-      '@angelyeast/types': 2.2.1_vue@3.3.13
+      '@angelyeast/types': 2.2.4_vue@3.3.13
       vue: 3.3.13_typescript@5.5.4
     dev: false
 
-  /@angelyeast/repository/2.2.1_kqmimmipethfy5eydzpki7zsnm:
-    resolution: {integrity: sha512-EydupFtGRNSkMsnkJ2bDfu7vWXuqn/ImSppwJbrmSQJaXv8zdH1h4Yj9Iatrg504BT1GI7mrPc5w44cpQ8oUgg==}
+  /@angelyeast/repository/2.2.4_u2nc6pz26yjtvowde2ko4hao3e:
+    resolution: {integrity: sha512-nbQcsFUGID7FDS5jkaUoD3EpTsBRntTUnVfwgUBG/lb0i95EjxePLU3cLiSDQSCDEKybDQ63zptduFPY8JWp7A==}
     peerDependencies:
-      '@angelyeast/model': 2.2.1
-      '@angelyeast/types': 2.2.1
+      '@angelyeast/model': 2.2.4
+      '@angelyeast/types': 2.2.4
       '@vueuse/core': '>=9.13.0'
       element-plus: '>=2.2'
       js-base64: '>=3'
@@ -166,8 +166,8 @@ packages:
       vue: '>=3.2.*'
       vxe-table: '>=4'
     dependencies:
-      '@angelyeast/model': 2.2.1_rhozljxgpojwdhmgwcjf3pyjom
-      '@angelyeast/types': 2.2.1_vue@3.3.13
+      '@angelyeast/model': 2.2.4_ck2wm6dx5slgumjg66netl6iie
+      '@angelyeast/types': 2.2.4_vue@3.3.13
       '@vueuse/core': 10.11.1_vue@3.3.13
       element-plus: 2.5.6_vue@3.3.13
       js-base64: 3.7.7
@@ -176,27 +176,27 @@ packages:
       vxe-table: 4.5.22_vue@3.3.13
     dev: false
 
-  /@angelyeast/service/2.2.1_a277l3qfeqbq5gqw53oowuc2ka:
-    resolution: {integrity: sha512-3ysdcdNNq/vxY/wpm18P41U1O75wZhJoboCwIr/hR7v4NzxgVAjsi6S/KY1iePxa7A5RP1TuwjgXugLqaStd9g==}
+  /@angelyeast/service/2.2.4_bu4iwotrzik4qggsgs5xr6anau:
+    resolution: {integrity: sha512-OkATN309vS1p7JkLoprpE8BKJQyr9qVoHnlAI1VZbRUBAm+nrT1CkTATwqjgZ8CehQ9B2Nf7yxiljBDWt61WAA==}
     engines: {node: '>=16 <=20', pnpm: ^7}
     peerDependencies:
-      '@angelyeast/model': 2.2.1
-      '@angelyeast/repository': 2.2.1
-      '@angelyeast/types': 2.2.1
+      '@angelyeast/model': 2.2.4
+      '@angelyeast/repository': 2.2.4
+      '@angelyeast/types': 2.2.4
       axios: ^1.*
       lodash-es: ^4.17.21
       vue: '>=3.2.*'
     dependencies:
-      '@angelyeast/model': 2.2.1_rhozljxgpojwdhmgwcjf3pyjom
-      '@angelyeast/repository': 2.2.1_kqmimmipethfy5eydzpki7zsnm
-      '@angelyeast/types': 2.2.1_vue@3.3.13
+      '@angelyeast/model': 2.2.4_ck2wm6dx5slgumjg66netl6iie
+      '@angelyeast/repository': 2.2.4_u2nc6pz26yjtvowde2ko4hao3e
+      '@angelyeast/types': 2.2.4_vue@3.3.13
       axios: 1.7.5
       lodash-es: 4.17.21
       vue: 3.3.13_typescript@5.5.4
     dev: false
 
-  /@angelyeast/types/2.2.1_vue@3.3.13:
-    resolution: {integrity: sha512-k/bFxPTcPLLBWXnnMTcpJDwYHzeX1xJkzApCCZTBgX6UoVfkhkRWhrawzWqC29OQxZsTtI1WmWuonrJA6DTMBQ==}
+  /@angelyeast/types/2.2.4_vue@3.3.13:
+    resolution: {integrity: sha512-ISZbDtVXIRtLnLH87RwdKUpgBdOgpZTpj220q+BOjYib0v6omQPA+Ja+VtR16/cgYCG0ySC0b72m/YDsEmymQg==}
     peerDependencies:
       vue: '>=3.2.*'
     dependencies:

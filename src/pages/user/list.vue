@@ -4,7 +4,7 @@ meta:
 </route>
 
 <template>
-  <TitleBar class="mb-10px" title="用户列表"></TitleBar>
+  <TitleBar class="mb-10px mt-20px" title="用户列表"></TitleBar>
   <VxeGrid v-bind="tableOptions"></VxeGrid>
 </template>
 
@@ -17,7 +17,19 @@ defineOptions({
 })
 
 const { findUserList } = useService('Auth').User
-const { Table, tableOptions } = useTable({ columns: [] })
+const { Table, tableOptions } = useTable({
+  columns: [
+    {
+      field: 'code',
+      title: '工号',
+      width: 140
+    },
+    {
+      field: 'name',
+      title: '名字'
+    }
+  ]
+})
 Table.setQuery(findUserList)
 
 onMounted(() => {

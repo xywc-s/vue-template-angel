@@ -5,7 +5,7 @@ meta:
 </route>
 
 <template>
-  <div class="max-w-1200px mx-auto loading">
+  <div class="max-w-1200px mx-auto loading mt-20px">
     <el-descriptions border :column="6">
       <template #title>
         <span class="text-4.5">路由同步</span>

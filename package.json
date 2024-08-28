@@ -11,11 +11,11 @@
     "gcd": "madge --circular --image graph.svg src/main.ts"
   },
   "dependencies": {
-    "@angelyeast/model": "^2.2.1",
-    "@angelyeast/repository": "^2.2.1",
-    "@angelyeast/service": "^2.2.1",
-    "@angelyeast/types": "^2.2.1",
-    "@angelyeast/micro-frontend": "^2.2.1",
+    "@angelyeast/model": "^2.2.4",
+    "@angelyeast/repository": "^2.2.4",
+    "@angelyeast/service": "^2.2.4",
+    "@angelyeast/types": "^2.2.4",
+    "@angelyeast/micro-frontend": "^2.2.4",
     "@vueuse/core": "^10.9.0",
     "@vueuse/integrations": "^10.9.0",
     "axios": "^1.6.7",
