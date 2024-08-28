@@ -8,8 +8,7 @@
 import { ElConfigProvider } from 'element-plus'
 import { en, zhCn } from 'element-plus/es/locales'
 import { computed } from 'vue'
-import { useAppStore } from '@/stores/app'
+import { useLanguage } from '@angelyeast/micro-frontend'
 
-const appStore = useAppStore()
-const locale = computed(() => (appStore.isLanguage('en') ? en : zhCn))
+const locale = computed(() => (useLanguage().isLanguage('en') ? en : zhCn))
 </script>

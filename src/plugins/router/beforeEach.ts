@@ -1,36 +1,29 @@
+import { useDev, usePermission, useToken, useUser } from '@angelyeast/micro-frontend'
 import { useAppStore } from '@/stores/app'
-import { useUserStore } from '@/stores/user'
-import { accessWhiteList } from '@/plugins/router/config'
 import type { NavigationGuardWithThis } from 'vue-router/auto'
 
-const beforeEach: NavigationGuardWithThis<undefined> = async (to, from, next) => {
-  const appStore = useAppStore()
-  const userStore = useUserStore()
-  // 不是作为中台子应用打开
-  if (!appStore.isChildApp) {
-    if (to.name && accessWhiteList.includes(to.name as string)) return next()
-    // 当前没登录 或 登录了但是token已过期
-    if (!userStore.accessToken || !userStore.checkTokenValid()) {
-      userStore.setUser({})
-      if (userStore.hasDevToken()) {
-        // 配置了开发token
-        await userStore.devLogin()
-      } else {
-        // 没配置开发token跳转鉴权路由
-        appStore.rewrite = to.fullPath
-        return next('/')
-      }
+const beforeEach: NavigationGuardWithThis<any> = async (to, from, next) => {
+  if (to.meta.whiteList) return next()
+
+  const isLogin = await useToken().checkLoginState()
+  if (!isLogin) {
+    useUser().setUser()
+    const { hasDevToken, devLogin } = useDev({
+      code: import.meta.env.VITE_USER_CODE,
+      token: import.meta.env.VITE_USER_TOKEN
+    })
+    if (!hasDevToken()) {
+      // 没有配置开发token, 记录访问路由, 并跳转鉴权地址
+      useAppStore().rewrite = to.fullPath
+      return next('/')
     }
+    // 使用开发配置登录
+    await devLogin()
   }
 
-  if (to.meta.permission) {
-    if (userStore.hasPermission(to.meta.permission)) {
-      next()
-    } else {
-      next('denied')
-    }
-  } else {
-    next()
-  }
+  // 权限路由按条件访问
+  if (!to.meta.permission) return next()
+  if (usePermission().hasPermission(to.meta.permission)) return next()
+  return next('denied')
 }
 export default beforeEach

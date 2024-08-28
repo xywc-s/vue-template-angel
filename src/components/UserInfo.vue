@@ -90,7 +90,7 @@
               </span>
             </span>
           </div>
-          <template v-if="userStore.hasPermission('SI')">
+          <template v-if="hasPermission('SI')">
             <div class="flex">
               <div class="title flex-shrink-0">
                 <i class="uno-ep-key" />
@@ -125,8 +125,7 @@
 import { computed, onMounted, ref, useSlots, watch } from 'vue'
 import { useService } from '@angelyeast/service'
 import { copyText, Queue } from '@angelyeast/repository'
-import { useAppStore } from '@/stores/app'
-import { useUserStore } from '@/stores/user'
+import { useBreakpoint, usePermission } from '@angelyeast/micro-frontend'
 import type { User, WechatJSON } from '@angelyeast/model'
 import type { TooltipTriggerType } from 'element-plus'
 
@@ -147,8 +146,8 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const slots = useSlots()
-const appStore = useAppStore()
-const userStore = useUserStore()
+const { hasPermission } = usePermission()
+const { isMobile } = useBreakpoint()
 const rootCode = 691
 const visible = ref(false)
 const loading = ref(false)
@@ -156,7 +155,7 @@ const user = ref<User & extendsFields>()
 const departmentList = ref<string[]>([])
 const queue = new Queue()
 
-const triggleMethod = computed(() => (appStore.isMobile ? 'click' : props.trigger))
+const triggleMethod = computed(() => (isMobile.value ? 'click' : props.trigger))
 // 判断value的类型 id、email、code、phone
 const valueField = computed(() => {
   const value = props.value

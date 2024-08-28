@@ -1,6 +1,6 @@
 <template>
   <template v-for="{ path, meta, children } in routes" :key="basePath + '/' + path">
-    <template v-if="!meta?.hidden && userStore.hasPermission(meta?.permission)">
+    <template v-if="!meta?.hidden && hasPermission(meta?.permission)">
       <el-sub-menu v-if="children" :index="basePath + '/' + path">
         <template #title>
           <div>{{ meta?.title }}</div>
@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import { toRef } from 'vue'
-import { useUserStore } from '@/stores/user'
+import { usePermission } from '@angelyeast/micro-frontend'
 import type { RouteRecordRaw } from 'vue-router'
 const props = defineProps<{
   routes: RouteRecordRaw[]
@@ -22,5 +22,5 @@ const props = defineProps<{
 }>()
 const routes = toRef(props, 'routes')
 const basePath = toRef(props, 'basePath')
-const userStore = useUserStore()
+const { hasPermission } = usePermission()
 </script>
