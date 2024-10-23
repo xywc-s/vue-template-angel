@@ -13,6 +13,7 @@
     "useDefineForClassFields": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
+    "noImplicitAny": false,
     "noEmit": true,
     "allowJs": true,
     "esModuleInterop": true,
