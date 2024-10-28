@@ -1,9 +1,10 @@
-<route lang="yaml">
-  name: index
-  meta:
-    hidden: true
-    title: 首页
-  </route>
+<route>
+name: index
+meta:
+  hidden: true
+  title: 首页
+  whiteList:  true
+</route>
   
   <template>
     <div v-loading="true" class="h-full w-full"></div>

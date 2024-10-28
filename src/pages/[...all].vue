@@ -1,8 +1,9 @@
-<route lang="yaml">
+<route>
 name: all
 meta:
   hidden: true
   title: '404'
+  whiteList: true
 </route>
 
 <template>

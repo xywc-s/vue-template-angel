@@ -4,8 +4,6 @@
 /** 路由同步黑名单: 不需要同步的路由 */
 export const syncBlackList = ['index', 'all', 'route-sync', 'denied']
 
-/** 路由访问白名单: 无需鉴权即可直接访问的路由 */
-export const accessWhiteList = ['all', 'denied']
 
 // -------------------------------------------------------------
 /** @description 以下部分全部写path(插件仅支持path), 不要写name */
