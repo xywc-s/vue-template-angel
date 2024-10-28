@@ -22,8 +22,7 @@ const beforeEach: NavigationGuardWithThis<any> = async (to, from, next) => {
   }
 
   // 权限路由按条件访问
-  if (!to.meta.permission) return next()
-  if (usePermission().hasPermission(to.meta.permission)) return next()
-  return next('denied')
+  if (!usePermission().hasPermission(to?.meta?.permission)) return next('denied')
+  return next()
 }
 export default beforeEach
