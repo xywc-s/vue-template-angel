@@ -1,6 +1,7 @@
-<route lang="yaml">
+<route>
 meta:
   hidden: true
+  whiteList:  true
 </route>
 
 <template>

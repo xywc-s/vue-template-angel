@@ -1,4 +1,4 @@
-<route lang="yaml">
+<route>
 meta:
   title: 路由同步
   permission: YW
