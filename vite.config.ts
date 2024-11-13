@@ -42,15 +42,22 @@ export default defineConfig((config) => {
       //   }
       // }
     },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler'
+        }
+      }
+    },
     build: {
       chunkSizeWarningLimit: 2000,
       rollupOptions: {
         output: {
           manualChunks: {
             // 第三方库单独打包
-            'vxe-table': ['vxe-table', 'vxe-table-plugin-element', 'xe-utils'],
+            'vxe-table': ['vxe-table', 'vxe-table-plugin-element'],
             'element-plus': ['element-plus'],
-            utils: ['vue-scrollto', 'change-case', 'lodash-es'],
+            utils: ['change-case', 'lodash-es'],
             // angelyeast: ['@angelyeast/model', '@angelyeast/service', '@angelyeast/repository'],
             // 不支持tree-shaking 的运行时依赖包或库, 单独打包提高hash缓存使用率
             dayjs: ['dayjs'],
