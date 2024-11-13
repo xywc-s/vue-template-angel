@@ -1,11 +1,16 @@
 import { setupLayouts } from 'virtual:generated-layouts'
-import { createRouter, createWebHashHistory } from 'vue-router/auto'
+import { createRouter, createWebHashHistory } from 'vue-router'
+import { routes, handleHotUpdate } from 'vue-router/auto-routes'
 import beforeEach from './beforeEach'
 
 const router = createRouter({
   history: createWebHashHistory(),
-  extendRoutes: (routes) => setupLayouts(routes)
+  routes: setupLayouts(routes)
 })
+
+if (import.meta.hot) {
+  handleHotUpdate(router)
+}
 
 router.beforeEach(beforeEach)
 
