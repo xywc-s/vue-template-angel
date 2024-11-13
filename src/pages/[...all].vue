@@ -1,4 +1,4 @@
-<route>
+<route lang="yaml">
 name: all
 meta:
   hidden: true

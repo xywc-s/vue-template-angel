@@ -1,9 +1,9 @@
-<route>
+<route lang="yaml">
 name: index
 meta:
   hidden: true
   title: 首页
-  whiteList:  true
+  whiteList: true
 </route>
 
 <template>
