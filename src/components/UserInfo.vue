@@ -124,13 +124,13 @@
 <script lang="ts" setup>
 import { computed, onMounted, ref, useSlots, watch } from 'vue'
 import { useService } from '@angelyeast/service'
-import { copyText, Queue } from '@angelyeast/repository'
-import { useBreakpoint, usePermission } from '@angelyeast/micro-frontend'
+import { copyText, Queue, useDevice } from '@angelyeast/repository'
+import { usePermission } from '@angelyeast/micro-frontend'
 import type { User, WechatJSON } from '@angelyeast/model'
 import type { TooltipTriggerType } from 'element-plus'
 
 interface Props {
-  value: string
+  value?: string
   trigger?: TooltipTriggerType
   custom?: boolean
 }
@@ -147,7 +147,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const slots = useSlots()
 const { hasPermission } = usePermission()
-const { isMobile } = useBreakpoint()
+const { mobile } = useDevice()
 const rootCode = 691
 const visible = ref(false)
 const loading = ref(false)
@@ -155,7 +155,7 @@ const user = ref<User & extendsFields>()
 const departmentList = ref<string[]>([])
 const queue = new Queue()
 
-const triggleMethod = computed(() => (isMobile.value ? 'click' : props.trigger))
+const triggleMethod = computed(() => (mobile.value ? 'click' : props.trigger))
 // 判断value的类型 id、email、code、phone
 const valueField = computed(() => {
   const value = props.value

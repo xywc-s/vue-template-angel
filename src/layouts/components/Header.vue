@@ -8,7 +8,7 @@
       </UserInfo>
     </div>
     <el-menu
-      :collapse="isMobile"
+      :collapse="mobile"
       mode="horizontal"
       router
       :default-active="defaultActive"
@@ -30,13 +30,14 @@
 </template>
 
 <script setup lang="ts">
-import { useRoute } from 'vue-router/auto'
-import { routes } from 'vue-router/auto/routes'
-import { useBreakpoint, usePermission, useUser } from '@angelyeast/micro-frontend'
+import { useRoute } from 'vue-router'
+import { routes } from 'vue-router/auto-routes'
+import { usePermission, useUser } from '@angelyeast/micro-frontend'
+import { useDevice } from '@angelyeast/repository'
 defineOptions({
   name: 'LayoutHeader'
 })
-const { isMobile } = useBreakpoint()
+const { mobile } = useDevice()
 const { user } = useUser()
 const { hasPermission } = usePermission()
 const defaultActive = useRoute().path
