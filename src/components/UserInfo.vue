@@ -104,10 +104,7 @@
             </div>
             <div class="flex">
               <div class="title flex-shrink-0">
-                <div class="flex items-center">
-                  <svg-icon name="wechat" color="#909399" />
-                  <span class="ml-5px">企微</span>
-                </div>
+                <i class="uno-mdi-wechat" />
               </div>
               <span class="value">
                 <el-link @click="() => copyText(user!.wechatId)">{{ user?.wechatId }}</el-link>
@@ -203,13 +200,9 @@ const getUserDepartmentList = async () => {
     )
   ).map((o) =>
     o.rows
-      .map((row: any) => {
-        row._code = parseInt(row.code)
-        return row
-      })
-      .filter((row) => row._code > rootCode)
-      .sort((a: any, b: any) => b.levelNumber - a.levelNumber)
-      .map((row: any) => row.name)
+      .filter((row) => parseInt(row.code) > rootCode)
+      .sort((a, b) => b.levelNumber - a.levelNumber)
+      .map((row) => row.name)
       .join(` / `)
   )
   departmentList.value = list

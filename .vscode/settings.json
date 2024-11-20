@@ -86,5 +86,8 @@
   "i18n-ally.theme.annotationMissing": "rgba(153, 153, 153, .3)",
   "i18n-ally.theme.annotation": "rgba(255, 255, 255, .8)",
   "i18n-ally.theme.annotationBorder": "none",
-  "i18n-ally.keystyle": "nested"
+  "i18n-ally.keystyle": "nested",
+
+  // iconify图标集
+  "iconify.prefixes": ["uno-"]
 }
