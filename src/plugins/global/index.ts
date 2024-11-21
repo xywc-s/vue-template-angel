@@ -1,11 +1,10 @@
+import { setServiceConfig } from '@angelyeast/service'
+import { setFileServer, setTable } from '@angelyeast/repository'
 import VXETable from '@/plugins/vxe-table'
 import directives from '@/plugins/directives'
 import i18n from '@/plugins/i18n'
 import router from '@/plugins/router'
 import store from '@/stores'
-
-import { setServiceConfig } from '@angelyeast/service'
-import { setFileServer, setTable } from '@angelyeast/repository'
 
 import type { App } from 'vue'
 

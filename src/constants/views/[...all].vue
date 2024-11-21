@@ -1,5 +1,5 @@
 <route lang="yaml">
-name: all
+name: NotFound
 meta:
   hidden: true
   title: '404'

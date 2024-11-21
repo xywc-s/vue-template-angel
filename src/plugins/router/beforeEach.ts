@@ -1,8 +1,8 @@
 import { useDev, usePermission, useToken, useUser } from '@angelyeast/micro-frontend'
 import { useAppStore } from '@/stores/app'
-import type { NavigationGuardWithThis } from 'vue-router/auto'
+import type { NavigationGuardWithThis } from 'vue-router'
 
-const beforeEach: NavigationGuardWithThis<any> = async (to, from, next) => {
+const beforeEach: NavigationGuardWithThis<unknown> = async (to, from, next) => {
   if (to.meta.whiteList) return next()
 
   const isLogin = await useToken().checkLoginState()

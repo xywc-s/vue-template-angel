@@ -1,4 +1,4 @@
-<route>
+<route lang="yaml">
 meta:
   title: 路由同步
   permission: YW
@@ -150,11 +150,11 @@ import { useToggle } from '@vueuse/core'
 import { CheckboxValueType, ElLoadingService, ElTable, ElTableColumn } from 'element-plus'
 import { cloneDeep, has, set } from 'lodash-es'
 import { computed, nextTick, onMounted, reactive, ref } from 'vue'
-import { routes } from 'vue-router/auto/routes'
+import { routes } from 'vue-router/auto-routes'
 import { useService } from '@angelyeast/service'
 import { useFetch } from '@angelyeast/repository'
 import { syncBlackList } from '@/plugins/router/config'
-import type { RouteRecordRaw } from 'vue-router/auto'
+import type { RouteRecordRaw } from 'vue-router'
 type CustomRoute = Omit<RouteRecordRaw, 'component'> & {
   component?: string
 }

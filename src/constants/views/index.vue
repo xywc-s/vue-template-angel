@@ -47,7 +47,7 @@ const pass = () => {
     message: rewrite,
     type: 'error'
   })
-  location.replace(`${urlPrefix}#/all`)
+  location.replace(`${urlPrefix}#/404`)
 }
 
 onBeforeMount(async () => {
