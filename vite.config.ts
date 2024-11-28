@@ -28,7 +28,10 @@ export default defineConfig((config) => {
     ],
     resolve: {
       alias: {
-        '@': '/src'
+        '@': '/src',
+        '@@': '/src/pages',
+        '@#': '/src/components',
+        '@$': '/src/assets'
       }
     },
     base: './',

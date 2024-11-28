@@ -1,11 +1,11 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@angelyeast/micro-frontend': ^3.1.3
-  '@angelyeast/model': ^3.1.3
-  '@angelyeast/repository': ^3.1.3
-  '@angelyeast/service': ^3.1.3
-  '@angelyeast/types': ^3.1.3
+  '@angelyeast/micro-frontend': ^3.2.1
+  '@angelyeast/model': ^3.2.1
+  '@angelyeast/repository': ^3.2.1
+  '@angelyeast/service': ^3.2.1
+  '@angelyeast/types': ^3.2.1
   '@eslint/js': ^9.14.0
   '@iconify/json': 2.2.270
   '@intlify/unplugin-vue-i18n': ~5.3.1
@@ -54,11 +54,11 @@ specifiers:
   vxe-table: ~4.8.10
 
 dependencies:
-  '@angelyeast/micro-frontend': 3.1.3_vue@3.5.12
-  '@angelyeast/model': 3.1.3_vue@3.5.12
-  '@angelyeast/repository': 3.1.3_vue@3.5.12
-  '@angelyeast/service': 3.1.3_vue@3.5.12
-  '@angelyeast/types': 3.1.3_vue@3.5.12
+  '@angelyeast/micro-frontend': 3.2.1_vue@3.5.12
+  '@angelyeast/model': 3.2.1_vue@3.5.12
+  '@angelyeast/repository': 3.2.1_vue@3.5.12
+  '@angelyeast/service': 3.2.1_vue@3.5.12
+  '@angelyeast/types': 3.2.1_vue@3.5.12
   '@vueuse/components': 11.2.0_vue@3.5.12
   '@vueuse/core': 11.2.0_vue@3.5.12
   '@vueuse/integrations': 11.2.0_d3gattaouoa2gmlakzrqv5pjhq
@@ -118,13 +118,13 @@ packages:
       '@jridgewell/trace-mapping': 0.3.25
     dev: true
 
-  /@angelyeast/micro-frontend/3.1.3_vue@3.5.12:
-    resolution: {integrity: sha512-guyFKkmKs06M+FGj6FZE+zTbtWcljM+3w8w56htcoaVPZ0CeFNJSdDsL6JmUF92a56meThDNzwG3ToApjXI3sw==}
+  /@angelyeast/micro-frontend/3.2.1_vue@3.5.12:
+    resolution: {integrity: sha512-hLOg0oDQrHhI/VG/ePTAsuP6oTH1lJ/qvhbKBdFAG/a0D1znVkLaeyxZHTubETN0A/vHMnWJaQUdPCFygSENVQ==}
     dependencies:
-      '@angelyeast/model': 3.1.3_vue@3.5.12
-      '@angelyeast/repository': 3.1.3_vue@3.5.12
-      '@angelyeast/service': 3.1.3_vue@3.5.12
-      '@angelyeast/types': 3.1.3_vue@3.5.12
+      '@angelyeast/model': 3.2.1_vue@3.5.12
+      '@angelyeast/repository': 3.2.1_vue@3.5.12
+      '@angelyeast/service': 3.2.1_vue@3.5.12
+      '@angelyeast/types': 3.2.1_vue@3.5.12
       dayjs: 1.11.13
       js-base64: 3.7.7
       lodash-es: 4.17.21
@@ -136,23 +136,23 @@ packages:
       - vue
     dev: false
 
-  /@angelyeast/model/3.1.3_vue@3.5.12:
-    resolution: {integrity: sha512-0iuODWVqrP9huEVr5EsuQVawMtzIFQIkz+EfKaAEH7SzEbEekpXgsmrguqZ3MGNUcLlxYh+VhLMrGzhHQnqe5w==}
+  /@angelyeast/model/3.2.1_vue@3.5.12:
+    resolution: {integrity: sha512-EFaZNyWKAMmdpTsTV0+NSJj1GccQ+EdvV0lLPjtJPqI9NwMmzl6lDi/p0e8rYkcfNQ5RdoFX918+OwZct/BJxw==}
     engines: {node: '>=16 <=20', pnpm: ^7}
     peerDependencies:
       vue: '>=3.*'
     dependencies:
-      '@angelyeast/types': 3.1.3_vue@3.5.12
+      '@angelyeast/types': 3.2.1_vue@3.5.12
       vue: 3.5.12_typescript@5.6.3
     dev: false
 
-  /@angelyeast/repository/3.1.3_vue@3.5.12:
-    resolution: {integrity: sha512-vBJRGIetDd+V43UR0L/I4qCdFM//q2xsXpsgk3qeU4nD0o/iC+/qRsbMUpkIkHmJvKsrdVD6/3FwE6V6oFgxwg==}
+  /@angelyeast/repository/3.2.1_vue@3.5.12:
+    resolution: {integrity: sha512-PMZI+K5cwc3ICFTb9cxFO26TSGRYNUMj1r39jho1v7tCtNeOgboETrlDGnmJKNdnNmp6XceSabf31Zbg7TKDqg==}
     peerDependencies:
       vue: ^3.2.*
     dependencies:
-      '@angelyeast/model': 3.1.3_vue@3.5.12
-      '@angelyeast/types': 3.1.3_vue@3.5.12
+      '@angelyeast/model': 3.2.1_vue@3.5.12
+      '@angelyeast/types': 3.2.1_vue@3.5.12
       '@types/lodash-es': 4.17.12
       '@vueuse/core': 11.2.0_vue@3.5.12
       element-plus: 2.8.7_vue@3.5.12
@@ -165,21 +165,21 @@ packages:
       - '@vue/composition-api'
     dev: false
 
-  /@angelyeast/service/3.1.3_vue@3.5.12:
-    resolution: {integrity: sha512-h62RxVGLIs6nAtMfRmDmHOdg4SrX56p/aaGD0jlf4T+wbm81+iCTZMreSLD692M2T0cSFhaq51EJUxZTgxBKYg==}
+  /@angelyeast/service/3.2.1_vue@3.5.12:
+    resolution: {integrity: sha512-GMODDMiBiVvbbpOpxR9KiC/7K+/2KJYW5xmPevoadnnUlvDwbpksSVwgsQMhqOiR2h+H0og4lkJoFZeIdiPkkQ==}
     engines: {node: '>=16 <=20', pnpm: ^7}
     dependencies:
-      '@angelyeast/model': 3.1.3_vue@3.5.12
-      '@angelyeast/types': 3.1.3_vue@3.5.12
-      axios: 1.7.7
+      '@angelyeast/model': 3.2.1_vue@3.5.12
+      '@angelyeast/types': 3.2.1_vue@3.5.12
+      axios: 1.7.8
       lodash-es: 4.17.21
     transitivePeerDependencies:
       - debug
       - vue
     dev: false
 
-  /@angelyeast/types/3.1.3_vue@3.5.12:
-    resolution: {integrity: sha512-ECVPnahEgPygplj38va/kn7WzUqruE0+JVGMJsrAUE8UeLfKc8UE9MVoHkBrNP4SisVcvXpXwBx82oi66MdTpg==}
+  /@angelyeast/types/3.2.1_vue@3.5.12:
+    resolution: {integrity: sha512-l4vP9n0icknkh5ky3VBnlF9pqacTzwxku9+pHYBNRVnSiQmSkBIkq+iMU61CLnP9Z0Z6kV1iQ5v98ZN55jkNNA==}
     peerDependencies:
       vue: '>=3.2.*'
     dependencies:
@@ -2227,6 +2227,16 @@ packages:
 
   /axios/1.7.7:
     resolution: {integrity: sha512-S4kL7XrjgBmvdGut0sN3yJxqYzrDOnivkBiN0OFs6hLiUam3UPvswUo0kqGyhqUZGEOytHyumEdXsAkgCOUf3Q==}
+    dependencies:
+      follow-redirects: 1.15.9
+      form-data: 4.0.1
+      proxy-from-env: 1.1.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
+  /axios/1.7.8:
+    resolution: {integrity: sha512-Uu0wb7KNqK2t5K+YQyVCLM76prD5sRFjKHbJYCP1J7JFGEQ6nN7HWn9+04LAeiJ3ji54lgS/gZCH1oxyrf1SPw==}
     dependencies:
       follow-redirects: 1.15.9
       form-data: 4.0.1

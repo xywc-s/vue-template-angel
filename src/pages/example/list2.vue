@@ -1,9 +1,9 @@
 <route lang="yaml">
-name: user-list
+name: user-list-2
 meta:
   title: 用户列表
   sync: true
-  permission: GJ
+  icon: uno-ep-aim
 </route>
 
 <template>
@@ -13,9 +13,9 @@ meta:
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { useUserListTable } from '@/pages/example'
+import { useUserListTable } from '@@/example'
 defineOptions({
-  name: 'UserList'
+  name: 'UserList2'
 })
 
 const $table = ref()
