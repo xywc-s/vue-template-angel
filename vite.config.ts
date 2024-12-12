@@ -8,6 +8,7 @@ import Unocss from './src/plugins/styles/unocss'
 import StyleImport from './src/plugins/component/style-import'
 import Components from './src/plugins/component/unplugin-components'
 import Vue from './src/plugins/vue'
+import Federation from './src/plugins/federation'
 
 // https://vitejs.dev/config/
 export default defineConfig((config) => {
@@ -23,8 +24,8 @@ export default defineConfig((config) => {
       Components(),
       StyleImport(),
       vueI18n(),
-      Svg(),
-      CreateHtml({ env, ...config })
+      CreateHtml({ env, ...config }),
+      Federation(env)
     ],
     resolve: {
       alias: {
@@ -37,13 +38,6 @@ export default defineConfig((config) => {
     base: './',
     server: {
       port: env.VITE_DEV_PORT as unknown as number
-      // proxy: {
-      //   '/api': {
-      //     target: 'http://10.2.17.206:8143',
-      //     changeOrigin: true,
-      //     rewrite: (path) => path.replace(/^\/api/, '')
-      //   }
-      // }
     },
     css: {
       preprocessorOptions: {
@@ -58,7 +52,7 @@ export default defineConfig((config) => {
         output: {
           manualChunks: {
             // 第三方库单独打包
-            'vxe-table': ['vxe-table', 'vxe-table-plugin-element'],
+            'vxe-table': ['vxe-table', 'vxe-pc-ui', '@vxe-ui/plugin-render-element'],
             'element-plus': ['element-plus'],
             utils: ['change-case', 'lodash-es'],
             // angelyeast: ['@angelyeast/model', '@angelyeast/service', '@angelyeast/repository'],

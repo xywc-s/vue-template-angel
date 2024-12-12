@@ -5,7 +5,7 @@ meta:
 </route>
 
 <template>
-  <section class="h-full flex flex-col items-center justify-around">
+  <section class="h-70vh flex flex-col items-center justify-around">
     <SvgIcon
       name="permission-denied"
       class="inline-block !w-2/3 !h-auto aspect-square max-w-350px"

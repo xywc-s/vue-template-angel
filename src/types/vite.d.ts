@@ -13,6 +13,7 @@ interface ImportMetaEnv {
 
   readonly VITE_MIDDLE_LOGIN_URL: string
   readonly VITE_WECHAT_APPID: string
+  readonly VITE_REMOTE_UI: string
 
   readonly VITE_API_MICRO: string
   readonly VITE_API_BFF: string

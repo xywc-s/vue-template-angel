@@ -2,10 +2,10 @@ import { setServiceConfig } from '@angelyeast/service'
 import { setFileServer, setTable } from '@angelyeast/repository'
 import VXETable from '@/plugins/vxe-table'
 import directives from '@/plugins/directives'
+import MiddleUI from '@/plugins/component/middle-ui'
 import i18n from '@/plugins/i18n'
 import router from '@/plugins/router'
 import store from '@/stores'
-
 import type { App } from 'vue'
 
 export default {
@@ -15,6 +15,7 @@ export default {
     app.use(router)
     app.use(VXETable)
     app.use(directives)
+    app.use(MiddleUI)
 
     // 后端服务配置
     setServiceConfig({ baseURL: import.meta.env.VITE_API_MICRO })
