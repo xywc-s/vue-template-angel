@@ -18,9 +18,8 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     ".env": ".env*, default.conf, dockerfile",
-    "tsconfig.json": "tsconfig.*.json, env.d.ts",
-    "vite.config.*": "jsconfig*, vitest.config.*, cypress.config.*, playwright.config.*",
-    "package.json": "package-lock.json, .npmrc , pnpm*, .yarnrc*, yarn*, .eslint*, eslint*, .prettier*, prettier*, .editorconfig, .gitignore, .madgerc"
+    "vite.config.*": "tsconfig*, jsconfig*, vitest.config.*, cypress.config.*, playwright.config.*, .eslint*, eslint*, .prettier*, prettier*, .madgerc",
+    "package.json": "package-lock.json, .npmrc , pnpm*, .yarnrc*, yarn*, .editorconfig, .gitignore, *.md"
   },
 
   // 使用项目当前的ts版本, 开发统一, 工作区设置需要手动切换

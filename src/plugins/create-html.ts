@@ -2,7 +2,6 @@ import { createHtmlPlugin } from 'vite-plugin-html'
 import type { ConfigEnv } from 'vite'
 
 interface Config extends ConfigEnv {
-  // eslint-disable-next-line no-undef
   env: ImportMetaEnv
 }
 
