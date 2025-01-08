@@ -38,6 +38,7 @@ export default ts.config(
       '@typescript-eslint': ts.plugin
     },
     rules: {
+      '@typescript-eslint/no-unused-expressions': 'off',
       '@typescript-eslint/no-unused-vars': 'warn',
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-empty-object-type': [
@@ -70,11 +71,14 @@ export default ts.config(
       'vue/no-unused-vars': 'error',
       'vue/no-unused-components': 'error',
       // 组件名必须多个单词
-      'vue/multi-word-component-names': 0,
+      'vue/multi-word-component-names': 'off',
       // props 必须定义默认值
-      'vue/require-default-prop': 0,
+      'vue/require-default-prop': 'off',
       // props必须定义类型
-      'vue/require-prop-types': 0
+      'vue/require-prop-types': 'off',
+      'vue/no-v-html': 'off',
+      // emits函数必须有return
+      'vue/return-in-emits-validator': 'off'
     }
   },
 
@@ -83,6 +87,7 @@ export default ts.config(
   // 自定义（优先级最高）
   {
     rules: {
+      'n/no-callback-literal': 'off',
       // ts有校验, 不需要此规则
       // 'no-dupe-class-members': 0,
       // 禁用eslint默认的禁止重复声明, 因为会误报ts的函数重载
