@@ -2,12 +2,12 @@ import { defineConfig, loadEnv } from 'vite'
 import CreateHtml from './src/plugins/create-html'
 import vueI18n from './src/plugins/i18n/vue-i18n'
 import Layouts from './src/plugins/router/layouts'
+import Svg from './src/plugins/styles/svg'
 import Pages from './src/plugins/router/pages'
 import Unocss from './src/plugins/styles/unocss'
 import StyleImport from './src/plugins/component/style-import'
 import Components from './src/plugins/component/unplugin-components'
 import Vue from './src/plugins/vue'
-import Federation from './src/plugins/federation'
 
 // https://vitejs.dev/config/
 export default defineConfig((config) => {
@@ -23,8 +23,8 @@ export default defineConfig((config) => {
       Components(),
       StyleImport(),
       vueI18n(),
-      CreateHtml({ env, ...config }),
-      Federation(env)
+      Svg(),
+      CreateHtml({ env, ...config })
     ],
     resolve: {
       alias: {

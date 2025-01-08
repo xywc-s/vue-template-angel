@@ -26,7 +26,7 @@ function autoRenameRoutes(route: EditableTreeNode, env: ImportMetaEnv) {
   // 检查配置是否需要自动重命名路由名称
   if (!env.VITE_ROUTE_AUTO_PREFIX) return 0
   // 路由名称是否已经是以项目名称开头
-  if (routeName.startsWith(env.VITE_APP_NAME)) return 0
+  if (routeName.startsWith(pascalCase(env.VITE_APP_NAME))) return 0
   if (!route.meta.sync) route.name = kebabCase(routeName)
   // 需要同步到中台进行代理的路由
   else route.name = kebabCase(env.VITE_APP_NAME + routeName)

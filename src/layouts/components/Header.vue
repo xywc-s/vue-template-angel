@@ -34,11 +34,9 @@ import { useRoute } from 'vue-router'
 import { routes } from 'vue-router/auto-routes'
 import { usePermission, useUser } from '@angelyeast/micro-frontend'
 import { useDevice } from '@angelyeast/repository'
-import { defineAsyncComponent } from 'vue'
 defineOptions({
   name: 'LayoutHeader'
 })
-const UserInfo = defineAsyncComponent(() => import('middle-ui/UserInfo'))
 
 const { mobile } = useDevice()
 const { user } = useUser()
