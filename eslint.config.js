@@ -86,9 +86,6 @@ export default ts.config(
 
   // 自定义（优先级最高）
   {
-    globals: {
-      definePage: 'readonly'
-    },
     rules: {
       'n/no-callback-literal': 'off',
       // ts有校验, 不需要此规则
@@ -111,6 +108,11 @@ export default ts.config(
           ]
         }
       ]
+    },
+    languageOptions: {
+      globals: {
+        definePage: 'readonly'
+      }
     }
   }
 )
