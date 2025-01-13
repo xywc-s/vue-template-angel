@@ -8,6 +8,7 @@ import Unocss from './src/plugins/styles/unocss'
 import StyleImport from './src/plugins/component/style-import'
 import Components from './src/plugins/component/unplugin-components'
 import Vue from './src/plugins/vue'
+import AutoImport from './src/plugins/auto-import'
 
 // https://vitejs.dev/config/
 export default defineConfig((config) => {
@@ -24,7 +25,8 @@ export default defineConfig((config) => {
       StyleImport(),
       vueI18n(),
       Svg(),
-      CreateHtml({ env, ...config })
+      CreateHtml({ env, ...config }),
+      AutoImport()
     ],
     resolve: {
       alias: {

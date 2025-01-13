@@ -88,10 +88,9 @@ export default ts.config(
   {
     rules: {
       'n/no-callback-literal': 'off',
-      // ts有校验, 不需要此规则
-      // 'no-dupe-class-members': 0,
-      // 禁用eslint默认的禁止重复声明, 因为会误报ts的函数重载
-      // 'no-redeclare': 0,
+      'no-undef': 'off', // ts有校验, 不需要此规则
+      'no-dupe-class-members': 0, // ts有校验, 不需要此规则
+      'no-redeclare': 0, // 禁用eslint默认的禁止重复声明, 因为会误报ts的函数重载
       'import/order': [
         'error',
         {
