@@ -3,7 +3,9 @@
   "editor.formatOnSave": true,
   "editor.formatOnSaveMode": "file",
   "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit",
+    "source.fixAll.eslint": "always",
+    "source.fixAll.ts": "always",
+    "source.removeUnusedImports": "always",
     "source.organizeImports": "never"
   },
   "editor.suggest.snippetsPreventQuickSuggestions": false, // 自动快速建议, 不需要手动唤起
