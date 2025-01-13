@@ -17,8 +17,8 @@
   // 文件嵌套整理
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
-    ".env": ".env*, default.conf, dockerfile",
-    "vite.config.*": "tsconfig*, jsconfig*, vitest.config.*, cypress.config.*, playwright.config.*, .eslint*, eslint*, .prettier*, prettier*, .madgerc",
+    ".env": ".env*, ",
+    "vite.config.*": "tsconfig*, jsconfig*, vitest.config.*, cypress.config.*, playwright.config.*, .eslint*, eslint*, .prettier*, prettier*, .madgerc, default.conf, dockerfile, .dockerignore",
     "package.json": "package-lock.json, .npmrc , pnpm*, .yarnrc*, yarn*, .editorconfig, .gitignore, *.md"
   },
 
