@@ -1,8 +1,3 @@
-<route lang="yaml">
-name: 'home-test'
-meta:
-  title: 测试首页
-</route>
 <template>
   <div class="home">
     <header>
@@ -17,12 +12,18 @@ meta:
   </div>
 </template>
 
-<script setup></script>
+<script setup lang="ts">
+definePage({
+  name: 'home-test',
+  meta: {
+    title: '测试首页'
+  }
+})
+</script>
 
 <style scoped>
 .home {
   text-align: center;
-  padding: 20px;
 }
 
 header {

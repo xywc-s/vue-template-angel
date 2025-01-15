@@ -1,19 +1,20 @@
-<route lang="yaml">
-name: NotFound
-meta:
-  hidden: true
-  title: '404'
-  whiteList: true
-</route>
-
 <template>
   <div class="h-70vh flex items-center justify-center">
-    <SvgIcon name="404" class="text-300px"></SvgIcon>
+    <i class="text-300px uno-custom-404"></i>
   </div>
 </template>
 
 <script lang="ts" setup>
 defineOptions({
   name: 'NotFound'
+})
+
+definePage({
+  name: 'NotFound',
+  meta: {
+    title: '404',
+    hidden: true,
+    whiteList: true
+  }
 })
 </script>

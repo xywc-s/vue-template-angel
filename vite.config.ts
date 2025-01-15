@@ -1,10 +1,9 @@
 import { defineConfig, loadEnv } from 'vite'
+import Unocss from 'unocss/vite'
 import CreateHtml from './src/plugins/create-html'
 import vueI18n from './src/plugins/i18n/vue-i18n'
 import Layouts from './src/plugins/router/layouts'
-import Svg from './src/plugins/styles/svg'
 import Pages from './src/plugins/router/pages'
-import Unocss from './src/plugins/styles/unocss'
 import StyleImport from './src/plugins/component/style-import'
 import Components from './src/plugins/component/unplugin-components'
 import Vue from './src/plugins/vue'
@@ -24,16 +23,15 @@ export default defineConfig((config) => {
       Components(),
       StyleImport(),
       vueI18n(),
-      Svg(),
       CreateHtml({ env, ...config }),
       AutoImport()
     ],
     resolve: {
       alias: {
-        '@': '/src',
         '@@': '/src/pages',
         '@#': '/src/components',
-        '@$': '/src/assets'
+        '@$': '/src/assets',
+        '@': '/src'
       }
     },
     base: './',

@@ -1,16 +1,6 @@
-<route lang="yaml">
-meta:
-  hidden: true
-  whiteList: true
-</route>
-
 <template>
   <section class="h-70vh flex flex-col items-center justify-around">
-    <SvgIcon
-      name="permission-denied"
-      class="inline-block !w-2/3 !h-auto aspect-square max-w-350px"
-    ></SvgIcon>
-    <div></div>
+    <i class="!w-2/3 !h-auto aspect-square max-w-350px uno-custom-permission-denied"></i>
   </section>
 </template>
 
@@ -18,6 +8,13 @@ meta:
 import { onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useNotify } from '@angelyeast/repository'
+
+definePage({
+  meta: {
+    hidden: true,
+    whiteList: true
+  }
+})
 
 const { t } = useI18n()
 onMounted(() => useNotify(t('Permission Denied'), 'error'))

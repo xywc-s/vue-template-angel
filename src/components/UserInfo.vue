@@ -119,7 +119,6 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref, useSlots, watch } from 'vue'
 import { useService } from '@angelyeast/service'
 import { copyText, Queue, useDevice } from '@angelyeast/repository'
 import { usePermission } from '@angelyeast/micro-frontend'

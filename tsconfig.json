@@ -21,10 +21,10 @@
     "sourceMap": true,
     "skipLibCheck": true,
     "paths": {
-      "@/*": ["src/*"],
       "@@/*": ["src/pages/*"],
       "@#/*": ["src/components/*"],
-      "@$/*": ["src/assets/*"]
+      "@$/*": ["src/assets/*"],
+      "@/*": ["src/*"]
     },
     "types": [
       "node",
@@ -38,7 +38,7 @@
       "vite-plugin-vue-layouts/client",
       "unplugin-vue-router/client",
       "vite/client",
-      "vite-plugin-svg-icons/client"
+      "unplugin-icons/types/vue"
     ]
   }
 }

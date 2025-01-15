@@ -1,17 +1,8 @@
-<route lang="yaml">
-name: index
-meta:
-  hidden: true
-  title: 首页
-  whiteList: true
-</route>
-
 <template>
   <div v-loading="true" class="h-full w-full"></div>
 </template>
 
 <script setup lang="ts">
-import { onBeforeMount } from 'vue'
 import { useRoute } from 'vue-router'
 import { decode, encode } from 'js-base64'
 import { useService } from '@angelyeast/service'
@@ -20,6 +11,14 @@ import { useToken } from '@angelyeast/micro-frontend'
 import { useAppStore } from '@/stores/app'
 defineOptions({
   name: 'AppHome'
+})
+definePage({
+  name: 'index',
+  meta: {
+    title: '首页',
+    hidden: true,
+    whiteList: true
+  }
 })
 const route = useRoute()
 const appStore = useAppStore()

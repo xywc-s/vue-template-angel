@@ -1,5 +1,4 @@
 import { ElLink } from 'element-plus'
-import { h } from 'vue'
 import type { VxeGridPropTypes } from 'vxe-pc-ui'
 
 export const UserListColumns: VxeGridPropTypes.Columns = [
@@ -11,17 +10,15 @@ export const UserListColumns: VxeGridPropTypes.Columns = [
     field: 'email',
     title: '邮箱',
     slots: {
-      default(params) {
-        return [
-          h(
-            ElLink,
-            {
-              type: 'primary'
-            },
-            () => params.row.email
-          )
-        ]
-      }
+      default: (params) => [
+        h(
+          ElLink,
+          {
+            type: 'primary'
+          },
+          () => params.row.email
+        )
+      ]
     }
   },
   {

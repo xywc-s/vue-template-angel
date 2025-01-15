@@ -12,8 +12,6 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue'
-import { useElementBounding, useResizeObserver } from '@vueuse/core'
 import { useAppInstance } from '@angelyeast/micro-frontend'
 import LayoutHeader from '@/layouts/components/Header.vue'
 defineOptions({
