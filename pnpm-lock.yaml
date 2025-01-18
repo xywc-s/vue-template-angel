@@ -51,8 +51,8 @@ specifiers:
   vue: ~3.5.12
   vue-i18n: ^10.0.4
   vue-router: ~4.4.5
-  vxe-pc-ui: ^4.2.51
-  vxe-table: ~4.8.10
+  vxe-pc-ui: ^4.3.74
+  vxe-table: ~4.10.5
 
 dependencies:
   '@angelyeast/micro-frontend': 3.2.1_vue@3.5.12
@@ -74,8 +74,8 @@ dependencies:
   vue: 3.5.12_typescript@5.6.3
   vue-i18n: 10.0.4_vue@3.5.12
   vue-router: 4.4.5_vue@3.5.12
-  vxe-pc-ui: 4.2.51_vue@3.5.12
-  vxe-table: 4.8.10_vue@3.5.12
+  vxe-pc-ui: 4.3.75_vue@3.5.12
+  vxe-table: 4.10.5_vue@3.5.12
 
 devDependencies:
   '@eslint/js': 9.14.0
@@ -162,7 +162,7 @@ packages:
       lodash-es: 4.17.21
       vue: 3.5.12_typescript@5.6.3
       vue-demi: 0.14.10_vue@3.5.12
-      vxe-table: 4.8.10_vue@3.5.12
+      vxe-table: 4.10.5_vue@3.5.12
     transitivePeerDependencies:
       - '@vue/composition-api'
     dev: false
@@ -2060,14 +2060,14 @@ packages:
       - vue
     dev: false
 
-  /@vxe-ui/core/4.0.16_vue@3.5.12:
-    resolution: {integrity: sha512-7d8485RYAv3tgr5+ckz5iK+Tt3yPjcXBaWcRdxRrxnDJNYVq6A4jAFT+Z9eHoFxqx60ASTOVCqnS8Tav/oPutA==}
+  /@vxe-ui/core/4.0.29_vue@3.5.12:
+    resolution: {integrity: sha512-F6ZJ7+x48qBDx7ME/GdmRN5OECha9wnNy0IIA8AAWHrjhTFY5yBBE+t2ULO6wgwkFB2E74CtYF/2/nprpGrdlA==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
       dom-zindex: 1.0.6
       vue: 3.5.12_typescript@5.6.3
-      xe-utils: 3.5.31
+      xe-utils: 3.7.0
     dev: false
 
   /@vxe-ui/plugin-render-element/4.0.7:
@@ -5359,18 +5359,18 @@ packages:
       '@vue/shared': 3.5.12
       typescript: 5.6.3
 
-  /vxe-pc-ui/4.2.51_vue@3.5.12:
-    resolution: {integrity: sha512-HWvO6J7ii7WOxh4mOFBg6ZuWFEM7ahUQEffREQtiOPEJHHomemfeTWVnE3OQoDNMtaCIBEs/1BWvSmDq1HgjMw==}
+  /vxe-pc-ui/4.3.75_vue@3.5.12:
+    resolution: {integrity: sha512-ApqD3zzEtgrWnPhFzc8FyGJaShGxFiK3pgRRr2UEnfS8xN2c3m1BH5PZRts69kXn1f+XLS0r4TnXO5LpBlQ+Lw==}
     dependencies:
-      '@vxe-ui/core': 4.0.16_vue@3.5.12
+      '@vxe-ui/core': 4.0.29_vue@3.5.12
     transitivePeerDependencies:
       - vue
     dev: false
 
-  /vxe-table/4.8.10_vue@3.5.12:
-    resolution: {integrity: sha512-GSZSIcu4Mi3eX5Xkah2FySx83h9ySrDIg7H7BhUrpv5s5xZUUC5pQeaB0ZFXl826Uh1vcD7cqzTEiOUkw+oE5w==}
+  /vxe-table/4.10.5_vue@3.5.12:
+    resolution: {integrity: sha512-X04AwhfZLaBy1gSiCsVd0EPurIaFwOOna9XzojF0eUr2c6rYF8u9IrhP+vSBmOj+yDiAENf8QjXFyLgNU3NTTg==}
     dependencies:
-      vxe-pc-ui: 4.2.51_vue@3.5.12
+      vxe-pc-ui: 4.3.75_vue@3.5.12
     transitivePeerDependencies:
       - vue
     dev: false
@@ -5413,8 +5413,8 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /xe-utils/3.5.31:
-    resolution: {integrity: sha512-oS4yv8qktvlE0wc9yYkitDidEmThc5qN0UTRvKCvrWnejxbTyIxbwfrdZmPKdKGZtB+/U8cEAMFywLJjHtD11A==}
+  /xe-utils/3.7.0:
+    resolution: {integrity: sha512-2pndXCEivB7+xWCdCDth/LJ5ngAAstUOoHTGBQauwTqc03M3Cl1tYbNhPUqi4Lcj+UNZnnc8fANbFWjb6TMx6A==}
     dev: false
 
   /xml-name-validator/4.0.0:
