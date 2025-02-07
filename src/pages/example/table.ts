@@ -1,5 +1,5 @@
 import { ElLink } from 'element-plus'
-import type { VxeGridPropTypes } from 'vxe-pc-ui'
+import type { VxeGridPropTypes } from 'vxe-table'
 
 export const UserListColumns: VxeGridPropTypes.Columns = [
   {

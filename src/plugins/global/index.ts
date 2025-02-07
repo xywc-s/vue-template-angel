@@ -27,6 +27,7 @@ export default {
 
     // useTable方法的表格默认值配置
     setTable({
+      bottomOffset: 5,
       pagerConfig: {
         pageSizeKey: 'rows'
       }

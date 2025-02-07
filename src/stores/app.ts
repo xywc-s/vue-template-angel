@@ -1,6 +1,3 @@
-import { defineStore } from 'pinia'
-import { ref } from 'vue'
-
 export const useAppStore = defineStore('app', () => {
   const minioPath = import.meta.env.VITE_MINIO_PATH
 

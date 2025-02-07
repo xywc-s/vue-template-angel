@@ -61,9 +61,7 @@ meta:
 </template>
 
 <script setup lang="ts">
-import { useToggle } from '@vueuse/core'
 import { ElLoadingService, ElTable, ElTableColumn } from 'element-plus'
-import { computed, ref } from 'vue'
 import { routes } from 'vue-router/auto-routes'
 import { useService } from '@angelyeast/service'
 import { useFetch } from '@angelyeast/repository'

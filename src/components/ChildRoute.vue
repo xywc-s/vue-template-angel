@@ -13,7 +13,6 @@
 </template>
 
 <script setup lang="ts">
-import { toRef } from 'vue'
 import { usePermission } from '@angelyeast/micro-frontend'
 import type { RouteRecordRaw } from 'vue-router'
 const props = defineProps<{

@@ -4,7 +4,6 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
 import { useUserListTable } from '@@/example'
 defineOptions({
   name: 'UserList2'
