@@ -1,11 +1,11 @@
 import js from '@eslint/js'
 import ts from 'typescript-eslint'
 import vue from 'eslint-plugin-vue'
-import standard from 'eslint-config-standard'
 import prettier from 'eslint-config-prettier'
 import pluginN from 'eslint-plugin-n'
 import pluginPromise from 'eslint-plugin-promise'
 import pluginImport from 'eslint-plugin-import'
+import neostandard from 'neostandard'
 
 export default ts.config(
   {
@@ -22,13 +22,13 @@ export default ts.config(
   js.configs.recommended,
 
   // standard
+  ...neostandard(),
   {
     plugins: {
       n: pluginN,
       import: pluginImport,
       promise: pluginPromise
-    },
-    rules: standard.rules
+    }
   },
 
   // ts
@@ -40,7 +40,7 @@ export default ts.config(
     rules: {
       '@typescript-eslint/no-unused-expressions': 'off',
       '@typescript-eslint/no-unused-vars': 'warn',
-      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-empty-object-type': [
         'error',
         {
@@ -90,7 +90,8 @@ export default ts.config(
       'n/no-callback-literal': 'off',
       'no-undef': 'off', // ts有校验, 不需要此规则
       'no-dupe-class-members': 0, // ts有校验, 不需要此规则
-      'no-redeclare': 0, // 禁用eslint默认的禁止重复声明, 因为会误报ts的函数重载
+      'no-redeclare': 'off', // 禁用eslint默认的禁止重复声明, 因为会误报ts的函数重载
+      camelcase: 'off',
       'import/order': [
         'error',
         {

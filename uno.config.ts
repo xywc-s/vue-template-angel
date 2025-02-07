@@ -18,7 +18,7 @@ export default defineConfig({
       extraProperties: {
         display: 'inline-block',
         'vertical-align': 'middle',
-        'font-size': '1.2em'
+        'font-size': '1em'
       },
       collections: {
         custom: FileSystemIconLoader(resolve(__dirname, 'src/assets/svg'))
@@ -44,7 +44,6 @@ export default defineConfig({
     'flex-top-between': 'flex items-start justify-between',
     'flex-center': 'flex items-center justify-center',
     'flex-center-between': 'flex items-center justify-between',
-    /** 可编辑组件的操作按钮样式 */
     box: 'w-full max-w-1000px mx-auto',
     panel: 'w-full max-w-600px mx-auto'
   }
