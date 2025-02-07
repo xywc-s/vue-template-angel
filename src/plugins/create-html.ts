@@ -1,13 +1,6 @@
 import { createHtmlPlugin } from 'vite-plugin-html'
-import type { ConfigEnv } from 'vite'
 
-interface Config extends ConfigEnv {
-  env: ImportMetaEnv
-}
-
-export default (config: Config) => {
-  const { env, command } = config
-  const base = command === 'serve' ? `http://localhost:${env.VITE_DEV_PORT}/` : './'
+export default () => {
   return createHtmlPlugin({
     inject: {
       tags: [
@@ -16,7 +9,7 @@ export default (config: Config) => {
           tag: 'script',
           attrs: {
             type: 'module',
-            src: base + 'src/main.ts'
+            src: 'src/main.ts'
           }
         }
       ]

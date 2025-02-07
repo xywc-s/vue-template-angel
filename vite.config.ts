@@ -23,7 +23,7 @@ export default defineConfig((config) => {
       Components(),
       StyleImport(),
       vueI18n(),
-      CreateHtml({ env, ...config }),
+      CreateHtml(),
       AutoImport()
     ],
     resolve: {
