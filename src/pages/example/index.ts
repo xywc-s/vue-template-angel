@@ -1,11 +1,11 @@
-import { UserListColumns } from '@@/example/table'
 import { useTable } from '@angelyeast/repository'
-import { useService } from '@angelyeast/service'
+import { Auth } from '@angelyeast/service'
+import { UserListColumns } from '@@/example/table'
 import type { Ref } from 'vue'
 import type { VxeGridInstance } from 'vxe-table'
 
 export const useUserListTable = ($table: Ref<VxeGridInstance>) => {
-  const { findUserList } = useService('Auth').User
+  const { findUserList } = Auth.User
 
   const { Table, tableOptions } = useTable({})
   Table.setColumns(UserListColumns)

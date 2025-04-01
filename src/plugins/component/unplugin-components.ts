@@ -7,10 +7,11 @@ import VxeTableResolver from './vxe-table-resolver'
 
 export default () =>
   Components({
+    extensions: ['vue', 'ts'],
     dts: './src/types/components.d.ts',
     types: [
       {
-        from: 'vue-router/auto',
+        from: 'vue-router',
         names: ['RouterLink', 'RouterView']
       }
     ],

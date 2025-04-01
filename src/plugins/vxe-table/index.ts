@@ -15,7 +15,11 @@ const useVxeTable: Plugin<VxeGlobalConfig[]> = {
       /** 组件内置文本国际化 */
       i18n: (key, args) => i18n.global.t(key, args),
       /** 全局自动翻译(使用组件时自定义的文本) */
-      translate: (key, args) => i18n.global.t(key, args)
+      translate: (key, args) => i18n.global.t(key, args),
+      size: 'small',
+      button: {
+        size: 'medium'
+      }
     })
 
     if (isPlainObject(options)) {

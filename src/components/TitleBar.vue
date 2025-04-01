@@ -10,8 +10,9 @@
           <span class="text-18px text-[#303133] ml-6px">{{ title }}</span>
         </div>
       </slot>
+      <slot name="left"></slot>
     </div>
-    <div class="gap-4px flex-shrink-0 flex">
+    <div class="gap-4px flex-shrink-0 flex flex-grow-1 justify-end">
       <slot name="right"></slot>
     </div>
   </div>

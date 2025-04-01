@@ -1,110 +1,209 @@
-<route lang="yaml">
-meta:
-  title: 路由同步
-  permission: YW
-</route>
-
 <template>
-  <div class="max-w-1200px mx-auto loading mt-20px">
+  <div class="box loading pt-20px pb-40px">
     <el-descriptions border :column="6">
       <template #title>
         <TitleBar title="路由同步"></TitleBar>
       </template>
       <template #extra>
-        <!-- <el-button :loading="buttonLoading" type="primary" @click="getApps">
-            <i class="uno-ep-download -ml-4px mr-4px"></i>
-            <span>拉取</span>
-          </el-button> -->
-        <el-button :loading="buttonLoading" type="success" @click="syncRoutes">
-          <i class="uno-ep-upload -ml-4px mr-4px"></i>
-          <span>推送</span>
-        </el-button>
+        <Button v-if="!app.id" status="warning" @click="initApp">初始化应用</Button>
+        <Button v-else preset="upload" :loading="buttonLoading" @click="syncRoutes">推送</Button>
       </template>
-      <el-descriptions-item :span="2" label="应用名" label-class-name="w-120px">
-        {{ app.name }}
-      </el-descriptions-item>
-      <el-descriptions-item :span="2" label="应用路径" label-class-name="w-120px">
-        {{ app.path }}
-      </el-descriptions-item>
-      <el-descriptions-item :span="2" label="中台启用状态" label-class-name="w-120px">
-        <el-switch></el-switch>
+      <el-descriptions-item v-for="item in appAttrs" :key="item.field" v-bind="item.props">
+        <el-switch
+          v-if="item.field === 'status'"
+          v-model="app.status"
+          :disabled="!app.id"
+          @change="statusChange"
+        ></el-switch>
+        <div v-else>{{ app[item.field] }}</div>
       </el-descriptions-item>
     </el-descriptions>
 
-    <TitleBar class="mt-20px mb-8px" title="路由配置">
-      <template #left>
-        <el-tooltip
-          raw-content
-          content="所有路由配置项均可直接在视图文件内配置<br>如果和子应用本身冲突,则可手动在本页面调整"
-          placement="top"
-        >
-          <i class="uno-ep-question-filled"></i>
-        </el-tooltip>
-      </template>
-    </TitleBar>
+    <TitleBar class="mt-20px mb-8px" title="路由配置"></TitleBar>
 
-    <ElTable :data="selectableRoutes" border>
-      <ElTableColumn label="路由(name/meta.title)">
-        <template #default="{ row }">
-          <div>{{ row.name }}</div>
-          <div>{{ row.meta?.title }}</div>
-        </template>
-      </ElTableColumn>
-      <ElTableColumn label="权限" prop="meta.permission"></ElTableColumn>
-      <ElTableColumn label="图标" prop="meta.icon">
-        <template #default="{ row }">
-          <i :class="row.meta.icon"></i>
-        </template>
-      </ElTableColumn>
-    </ElTable>
+    <VxeGrid
+      :data="selectableRoutes"
+      :columns="columns"
+      border
+      :row-config="{ keyField: 'name', useKey: true }"
+    >
+      <template #status="{ row }">
+        <i
+          :class="[
+            'uno-icon-park-solid:check-one',
+            'text-1.4em',
+            syncedRoutes.includes(row.name)
+              ? 'text-[var(--el-color-success)]'
+              : row.id
+                ? 'text-[var(--el-color-warning)]'
+                : 'text-[var(--el-color-info)]'
+          ]"
+        ></i>
+      </template>
+      <template #name="{ row }">
+        <ElTooltip :content="row.path" placement="top">
+          <div inline-block cursor="default">
+            <span>{{ row.meta?.title }}</span>
+            <el-divider direction="vertical"></el-divider>
+            <span>{{ row.name }}</span>
+          </div>
+        </ElTooltip>
+      </template>
+    </VxeGrid>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ElLoadingService, ElTable, ElTableColumn } from 'element-plus'
-import { routes } from 'vue-router/auto-routes'
-import { useService } from '@angelyeast/service'
-import { useFetch } from '@angelyeast/repository'
-import { useRouter } from 'vue-router'
-
-console.log('🚀 ~ file: route-sync.vue:152 ~ routes:', routes)
-
-defineOptions({
-  name: 'RouteSync'
-})
-const remoteAppRoutes = ref()
+import { DescriptionItemProps, ElLoadingService } from 'element-plus'
+import { BFF } from '@angelyeast/service'
+import { useFetch, validParams } from '@angelyeast/repository'
+import { RouteRecordNormalized, useRouter } from 'vue-router'
+import { isEqual, omit, pick, set, sortBy, unset } from 'lodash-es'
+import { VxeGridPropTypes } from 'vxe-table'
+import Button from '@#/Button'
+definePage({ meta: { title: '路由同步', permission: 'YW' } })
+/** 排除的路由属性 */
+const excludeKeys = [
+  'aliasOf',
+  'beforeEnter',
+  'children',
+  'components',
+  'enterCallbacks',
+  'instances',
+  'leaveGuards',
+  'updateGuards'
+] as const
+type RemoteRoute = Omit<RouteRecordNormalized, (typeof excludeKeys)[number]> & { id: number }
+const remoteAppRoutes = ref<RemoteRoute[]>([])
 const [buttonLoading, toggleButtonLoading] = useToggle(false)
-const app = {
+const app = ref({
+  id: '',
   name: import.meta.env.VITE_APP_NAME,
-  path: import.meta.env.VITE_APP_PATH
-}
+  /** 为了兼容旧系统，按旧系统的路径做特殊处理 */
+  path: import.meta.env.VITE_APP_PATH,
+  status: false
+})
+const attrProps = { span: 2, labelClassName: 'w-120px' }
+const appAttrs: Array<{
+  field: string
+  props: Partial<DescriptionItemProps>
+}> = [
+  { field: 'name', props: { ...attrProps, label: '应用名' } },
+  { field: 'path', props: { ...attrProps, label: '应用路径' } },
+  { field: 'status', props: { ...attrProps, label: '中台启用状态' } }
+]
 
-const selectableRoutes = computed(() =>
-  useRouter()
-    .getRoutes()
-    .filter((route) => route.name && !!route.meta?.sync)
+/** 路由配置表格列 */
+const columns: VxeGridPropTypes.Columns = [
+  {
+    field: 'status',
+    title: '同步状态',
+    width: '80px',
+    align: 'center',
+    slots: { default: 'status' }
+  },
+  { title: '路由', slots: { default: 'name' } },
+  { field: 'meta.permission', title: '权限', align: 'center', width: '100px' },
+  {
+    field: 'meta.icon',
+    title: '图标',
+    align: 'center',
+    width: '50px',
+    slots: { default: ({ row }) => h('i', { class: [row.meta.icon, 'text-1.4em'] }) }
+  },
+  {
+    title: '操作',
+    width: '80px',
+    align: 'center',
+    slots: {
+      default: ({ row }) =>
+        syncedRoutes.value.includes(row.name)
+          ? []
+          : Button({
+              preset: 'sync',
+              size: 'small',
+              mode: 'text',
+              loading: buttonLoading.value,
+              onClick: () => routeSync(row)
+            })
+    }
+  }
+]
+
+/** 可同步的所有路由 */
+const selectableRoutes = ref(
+  sortBy(
+    useRouter()
+      .getRoutes()
+      .filter((route) => route.name && !!route.meta?.sync)
+      .map((route) => {
+        if (route?.redirect) unset(route, 'redirect')
+        return omit(route, ...excludeKeys)
+      }),
+    'meta.order'
+  )
 )
-console.log('🚀 ~ selectableRoutes:', selectableRoutes.value)
 
 const syncRoutes = () => {
-  toggleButtonLoading(true)
-  // useFetch(() => useService('BFF').Apps(apps), {
-  //   loading: toggleButtonLoading
-  // })
+  // useNotify('一个个同步并认真检查。', 'warning')
 }
 
-useFetch(
-  () =>
-    useService('BFF').Apps.findOne({
-      where: app,
-      relations: ['routes']
-    }),
-  {
+/** 切换当前应用在中台配置中的启用状态 */
+const statusChange = (val) => {
+  useFetch(() => BFF.Apps.update(app.value), {
+    loading: ElLoadingService({ target: '.loading' }),
+    onError: () => (app.value.status = !val)
+  })
+}
+
+/** 中台环境中没有配置当前应用的路由，先完成应用配置的初始化 */
+const initApp = () => {
+  useFetch(() => BFF.Apps.save(validParams(app.value)), {
+    loading: toggleButtonLoading,
+    onSuccess: search
+  })
+}
+
+/** 搜索 */
+const search = () => {
+  const fn = BFF.Apps.findOne.bind(null, {
+    where: pick(app.value, 'name', 'path'),
+    relations: ['routes']
+  })
+  useFetch(fn, {
     loading: ElLoadingService({ target: '.loading' }),
     autoNotify: false,
     onSuccess: ({ data }) => {
-      if (data?.routes) remoteAppRoutes.value = data.routes
+      app.value.id = data.id
+      app.value.status = data.status
+      remoteAppRoutes.value = data.routes
+      updeteRouteSyncStatus()
     }
-  }
-)
+  })
+}
+
+/** 已完成同步的路由：中台配置和本地一致 */
+const syncedRoutes = ref<string[]>([])
+/** 根据中台配置更新本地路由信息 */
+const updeteRouteSyncStatus = () => {
+  selectableRoutes.value.forEach((route) => {
+    const remoteRoute = remoteAppRoutes.value.find((o) => o.name === route.name)
+    if (!remoteRoute) return
+    set(route, 'id', remoteRoute.id)
+    if (route?.redirect) unset(route, 'redirect')
+    if (isEqual(remoteRoute, route)) syncedRoutes.value.push(route.name as string)
+  })
+}
+
+/** 同步路由信息到中台 */
+const routeSync = (row) => {
+  const { save, update } = BFF.Route
+  const fn = () =>
+    row.id
+      ? update({ id: row.id, app: app.value, routeInfo: row })
+      : save({ app: app.value, routeInfo: row })
+  useFetch(fn, { loading: ElLoadingService({ target: '.loading' }), onSuccess: search })
+}
+
+search()
 </script>

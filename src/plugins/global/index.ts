@@ -1,4 +1,4 @@
-import { setServiceConfig } from '@angelyeast/service'
+import { BFF, setServiceConfig } from '@angelyeast/service'
 import { setFileServer, setTable } from '@angelyeast/repository'
 import VXETable from '@/plugins/vxe-table'
 import directives from '@/plugins/directives'
@@ -17,7 +17,7 @@ export default {
 
     // 后端服务配置
     setServiceConfig({ baseURL: import.meta.env.VITE_API_MICRO })
-    setServiceConfig('BFF', { baseURL: import.meta.env.VITE_API_BFF })
+    BFF.setConfig({ baseURL: import.meta.env.VITE_API_BFF })
 
     // 云文件服务
     setFileServer({

@@ -1,12 +1,10 @@
 import js from '@eslint/js'
-import ts from 'typescript-eslint'
+import ts, { configs as tsConfigs, plugin as tsPlugin, parser as tsParse } from 'typescript-eslint'
 import vue from 'eslint-plugin-vue'
 import prettier from 'eslint-config-prettier'
-import pluginN from 'eslint-plugin-n'
-import pluginPromise from 'eslint-plugin-promise'
-import pluginImport from 'eslint-plugin-import'
-import neostandard from 'neostandard'
-
+import { flatConfigs } from 'eslint-plugin-import'
+import promisePlugin from 'eslint-plugin-promise'
+import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript'
 export default ts.config(
   {
     name: 'app/files-to-lint',
@@ -18,34 +16,53 @@ export default ts.config(
     ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**']
   },
 
-  // js
-  js.configs.recommended,
-
-  // standard
-  ...neostandard(),
+  // import
   {
-    plugins: {
-      n: pluginN,
-      import: pluginImport,
-      promise: pluginPromise
+    extends: [flatConfigs.recommended, flatConfigs.typescript],
+    settings: {
+      'import/resolver': {
+        typescript: createTypeScriptImportResolver({ project: 'tsconfig.json' }),
+        node: true
+      }
+    },
+    rules: {
+      'import/order': [
+        'error',
+        {
+          groups: [
+            'builtin',
+            'external',
+            'internal',
+            'unknown',
+            'parent',
+            'sibling',
+            'index',
+            'object',
+            'type'
+          ]
+        }
+      ]
     }
   },
 
+  // promise
+  promisePlugin.configs['flat/recommended'],
+  { rules: { 'promise/always-return': 'off' } },
+
+  // js
+  js.configs.recommended,
+
   // ts
-  ...ts.configs.recommended,
+  ...tsConfigs.recommended,
   {
-    plugins: {
-      '@typescript-eslint': ts.plugin
-    },
+    plugins: { '@typescript-eslint': tsPlugin },
     rules: {
       '@typescript-eslint/no-unused-expressions': 'off',
       '@typescript-eslint/no-unused-vars': 'warn',
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-empty-object-type': [
         'error',
-        {
-          allowInterfaces: 'with-single-extends'
-        }
+        { allowInterfaces: 'with-single-extends' }
       ]
     }
   },
@@ -56,16 +73,12 @@ export default ts.config(
     files: ['*.vue', '**/*.vue'],
     languageOptions: {
       parserOptions: {
-        parser: ts.parser,
+        parser: tsParse,
         ecmaVersion: 'latest',
         sourceType: 'module',
-        ecmaFeatures: {
-          jsx: true
-        }
+        ecmaFeatures: { jsx: true }
       }
-    }
-  },
-  {
+    },
     rules: {
       // https://eslint.vuejs.org/rules/ 查看具体规则 0: 关闭, 等价于off
       'vue/no-unused-vars': 'error',
@@ -91,28 +104,8 @@ export default ts.config(
       'no-undef': 'off', // ts有校验, 不需要此规则
       'no-dupe-class-members': 0, // ts有校验, 不需要此规则
       'no-redeclare': 'off', // 禁用eslint默认的禁止重复声明, 因为会误报ts的函数重载
-      camelcase: 'off',
-      'import/order': [
-        'error',
-        {
-          groups: [
-            'builtin',
-            'external',
-            'internal',
-            'unknown',
-            'parent',
-            'sibling',
-            'index',
-            'object',
-            'type'
-          ]
-        }
-      ]
+      camelcase: 'off'
     },
-    languageOptions: {
-      globals: {
-        definePage: 'readonly'
-      }
-    }
+    languageOptions: { globals: { definePage: 'readonly' } }
   }
 )

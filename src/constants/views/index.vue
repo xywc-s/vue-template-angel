@@ -5,7 +5,7 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import { decode, encode } from 'js-base64'
-import { useService } from '@angelyeast/service'
+import { Auth, Open } from '@angelyeast/service'
 import { useNotify, isWorkWechat } from '@angelyeast/repository'
 import { useToken } from '@angelyeast/micro-frontend'
 import { useAppStore } from '@/stores/app'
@@ -54,7 +54,7 @@ onBeforeMount(async () => {
     pass()
   } else if (code) {
     // 企业微信登录回调拿到url上的鉴权code
-    const jwt = await useService('Auth').loginByWeChatCode(code)
+    const jwt = await Auth.loginByWeChatCode(code)
     if (!jwt?.access_token) return useNotify('企业微信授权code登录失败！', 'error')
     setJWT(jwt)
     pass()
@@ -68,9 +68,9 @@ onBeforeMount(async () => {
     const state = appStore.rewrite ? encode(`${appStore.rewrite}`, true) : ''
     if (isWorkWechat()) {
       const encodeURI = encodeURIComponent(location.href)
-      useService('OPEN').workWechatAuth(AppID, encodeURI, state)
+      Open.workWechatAuth(AppID, encodeURI, state)
     } else {
-      useService('OPEN').middleAuth(MiddleURL, urlPrefix, state)
+      Open.middleAuth(MiddleURL, urlPrefix, state)
     }
   }
 })

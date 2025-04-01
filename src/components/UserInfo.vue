@@ -105,6 +105,7 @@
             <div class="flex">
               <div class="title flex-shrink-0">
                 <i class="uno-mdi-wechat" />
+                企微
               </div>
               <span class="value">
                 <el-link @click="() => copyText(user!.wechatId)">{{ user?.wechatId }}</el-link>
@@ -119,7 +120,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useService } from '@angelyeast/service'
+import { Auth } from '@angelyeast/service'
 import { copyText, Queue, useDevice } from '@angelyeast/repository'
 import { usePermission } from '@angelyeast/micro-frontend'
 import type { User, WechatJSON } from '@angelyeast/model'
@@ -179,7 +180,7 @@ const getUser = async () => {
   if (user.value && user.value[valueField.value] === props.value) return false
 
   // 加入异步请求队列
-  const res = await queue.push(useService('Auth').User.findByUnique, props.value)
+  const res = await queue.push(Auth.User.findByUnique, props.value)
 
   if (res?.success && res?.object) {
     const wechatJson: WechatJSON = JSON.parse(res.object.weChatJson.replace(/\\"/g, '"'))
@@ -194,7 +195,7 @@ const getUserDepartmentList = async () => {
   const list = (
     await Promise.all(
       user.value.departmentCodeList.map((code) =>
-        queue.push(useService('Auth').Department.findDepartmentAndAllParent, code)
+        queue.push(Auth.Department.findDepartmentAndAllParent, code)
       )
     )
   ).map((o) =>

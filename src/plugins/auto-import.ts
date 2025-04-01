@@ -10,6 +10,6 @@ export default () =>
         dayjs: [['default', 'dayjs']]
       }
     ],
-    ignore: ['useFetch'],
+    ignore: ['useFetch', 'usePermission'],
     dts: 'src/types/auto-imports.d.ts'
   })
