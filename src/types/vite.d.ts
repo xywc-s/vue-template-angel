@@ -1,7 +1,3 @@
-/// <reference types="vite/client" />
-/// <reference types="vite-plugin-pages/client" />
-
-/* eslint no-unused-vars: 0 */
 interface ImportMetaEnv {
   readonly VITE_DEV_PORT: number
   readonly VITE_USER_TOKEN: string

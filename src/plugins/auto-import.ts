@@ -7,7 +7,7 @@ export default () =>
       '@vueuse/core',
       'pinia',
       {
-        dayjs: [['default', 'dayjs']]
+        '@/plugins/dayjs': [['default', 'dayjs']]
       }
     ],
     ignore: ['useFetch', 'usePermission'],
