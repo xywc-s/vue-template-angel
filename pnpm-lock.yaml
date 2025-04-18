@@ -44,7 +44,6 @@ specifiers:
   vite: ^5.4.10
   vite-plugin-html: ^3.2.2
   vite-plugin-style-import: ^2.0.0
-  vite-plugin-vue-layouts: ^0.11.0
   vue: ~3.5.12
   vue-i18n: ^10.0.4
   vue-router: ~4.4.5
@@ -102,7 +101,6 @@ devDependencies:
   vite: 5.4.11_f7eqgiqe6omr7us7iteeqwtg5i
   vite-plugin-html: 3.2.2_vite@5.4.11
   vite-plugin-style-import: 2.0.0_vite@5.4.11
-  vite-plugin-vue-layouts: 0.11.0_4n5qwehuhpanu33fivc4vsicyi
 
 packages:
 
@@ -1084,8 +1082,8 @@ packages:
     engines: {node: '>= 16'}
     dev: true
 
-  /@intlify/shared/11.1.2:
-    resolution: {integrity: sha512-dF2iMMy8P9uKVHV/20LA1ulFLL+MKSbfMiixSmn6fpwqzvix38OIc7ebgnFbBqElvghZCW9ACtzKTGKsTGTWGA==}
+  /@intlify/shared/11.1.3:
+    resolution: {integrity: sha512-pTFBgqa/99JRA2H1qfyqv97MKWJrYngXBA/I0elZcYxvJgcCw3mApAoPW3mJ7vx3j+Ti0FyKUFZ4hWxdjKaxvA==}
     engines: {node: '>= 16'}
     dev: true
 
@@ -1109,7 +1107,7 @@ packages:
     dependencies:
       '@eslint-community/eslint-utils': 4.4.1_eslint@9.14.0
       '@intlify/bundle-utils': 9.0.0_vue-i18n@10.0.4
-      '@intlify/shared': 11.1.2
+      '@intlify/shared': 11.1.3
       '@intlify/vue-i18n-extensions': 7.0.0_vue-i18n@10.0.4+vue@3.5.12
       '@rollup/pluginutils': 5.1.3
       '@typescript-eslint/scope-manager': 8.14.0
@@ -5190,22 +5188,6 @@ packages:
       magic-string: 0.25.9
       pathe: 0.2.0
       vite: 5.4.11_f7eqgiqe6omr7us7iteeqwtg5i
-    dev: true
-
-  /vite-plugin-vue-layouts/0.11.0_4n5qwehuhpanu33fivc4vsicyi:
-    resolution: {integrity: sha512-uh6NW7lt+aOXujK4eHfiNbeo55K9OTuB7fnv+5RVc4OBn/cZull6ThXdYH03JzKanUfgt6QZ37NbbtJ0og59qw==}
-    peerDependencies:
-      vite: ^4.0.0 || ^5.0.0
-      vue: ^3.2.4
-      vue-router: ^4.0.11
-    dependencies:
-      debug: 4.3.7
-      fast-glob: 3.3.2
-      vite: 5.4.11_f7eqgiqe6omr7us7iteeqwtg5i
-      vue: 3.5.12_typescript@5.6.3
-      vue-router: 4.4.5_vue@3.5.12
-    transitivePeerDependencies:
-      - supports-color
     dev: true
 
   /vite/5.4.11_f7eqgiqe6omr7us7iteeqwtg5i:
