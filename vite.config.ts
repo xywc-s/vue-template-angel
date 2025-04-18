@@ -2,7 +2,6 @@ import { defineConfig, loadEnv } from 'vite'
 import Unocss from 'unocss/vite'
 import CreateHtml from './src/plugins/create-html'
 import vueI18n from './src/plugins/i18n/vue-i18n'
-import Layouts from './src/plugins/router/layouts'
 import Pages from './src/plugins/router/pages'
 import StyleImport from './src/plugins/component/style-import'
 import Components from './src/plugins/component/unplugin-components'
@@ -18,7 +17,6 @@ export default defineConfig((config) => {
     plugins: [
       Pages(env),
       Vue(),
-      Layouts(),
       Unocss(),
       Components(),
       StyleImport(),

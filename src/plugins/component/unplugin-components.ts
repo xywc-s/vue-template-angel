@@ -9,6 +9,7 @@ export default () =>
   Components({
     extensions: ['vue', 'ts'],
     dts: './src/types/components.d.ts',
+    deep: false,
     types: [
       {
         from: 'vue-router',
