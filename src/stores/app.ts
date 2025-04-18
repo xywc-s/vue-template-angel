@@ -3,7 +3,7 @@ export const useAppStore = defineStore('app', () => {
 
   const rewrite = ref<string>()
 
-  type LayoutType = 'FloatMenus'
+  type LayoutType = 'FloatMenus' | 'Blank'
   const layout = ref<LayoutType>('FloatMenus')
 
   const setLayout = (v: LayoutType) => {

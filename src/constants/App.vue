@@ -15,9 +15,11 @@ import { computed } from 'vue'
 import { useLanguage } from '@angelyeast/micro-frontend'
 import { useAppStore } from '@/stores/app'
 import FloatMenus from '@/layouts/float-menus.vue'
+import Blank from '@/layouts/blank.vue'
 
 const layouts = {
-  [FloatMenus.name as string]: FloatMenus
+  [FloatMenus.name as string]: FloatMenus,
+  [Blank.name as string]: Blank
 }
 
 const { layout } = storeToRefs(useAppStore())
