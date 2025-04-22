@@ -79,7 +79,6 @@ const [buttonLoading, toggleButtonLoading] = useToggle(false)
 const app = ref({
   id: '',
   name: import.meta.env.VITE_APP_NAME,
-  /** 为了兼容旧系统，按旧系统的路径做特殊处理 */
   path: import.meta.env.VITE_APP_PATH,
   status: false
 })
@@ -137,7 +136,9 @@ const selectableRoutes = ref(
       .getRoutes()
       .filter((route) => route.name && !!route.meta?.sync)
       .map((route) => {
-        if (route?.redirect) unset(route, 'redirect')
+        if (Object.hasOwn(route, 'redirect')) unset(route, 'redirect')
+        if (route.path.startsWith('/') && !route.path.startsWith(app.value.path))
+          route.path = app.value.path + route.path
         return omit(route, ...excludeKeys)
       }),
     'meta.order'
@@ -190,7 +191,6 @@ const updeteRouteSyncStatus = () => {
     const remoteRoute = remoteAppRoutes.value.find((o) => o.name === route.name)
     if (!remoteRoute) return
     set(route, 'id', remoteRoute.id)
-    if (route?.redirect) unset(route, 'redirect')
     if (isEqual(remoteRoute, route)) syncedRoutes.value.push(route.name as string)
   })
 }
