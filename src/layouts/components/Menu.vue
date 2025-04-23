@@ -14,8 +14,8 @@
     body-class="!pa-0"
     header-class="!pa-0 !ma-0"
     class="!w-220px !top-8vh !bottom-8vh rounded-rb-10px rounded-rt-10px !h-auto"
+    @mouseleave="showSidebar = false"
   >
-    <!-- @mouseleave="showSidebar = false" -->
     <template #header>
       <div class="px-16px py-10px box-border border-b-1 border-b-solid border-b-gray-200">
         <UserInfo :value="user?.id">
