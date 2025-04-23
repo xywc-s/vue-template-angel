@@ -56,13 +56,13 @@ onBeforeMount(async () => {
     // 企业微信登录回调拿到url上的鉴权code
     const jwt = await Auth.loginByWeChatCode(code)
     if (!jwt?.access_token) return useNotify('企业微信授权code登录失败！', 'error')
-    setJWT(jwt)
+    await setJWT(jwt)
     pass()
   } else if (token) {
     // 中台扫码登录回调拿到url上的token
     const jwt = JSON.parse(decode(token.split('.')[1]))
     jwt.access_token = token
-    setJWT(jwt)
+    await setJWT(jwt)
     pass()
   } else {
     const state = appStore.rewrite ? encode(`${appStore.rewrite}`, true) : ''
