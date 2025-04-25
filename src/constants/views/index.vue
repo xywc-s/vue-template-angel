@@ -1,5 +1,5 @@
 <template>
-  <div v-loading="true" class="h-full w-full"></div>
+  <div v-loading="true" w="full" :style="{ height: height + 'px' }"></div>
 </template>
 
 <script setup lang="ts">
@@ -22,7 +22,7 @@ definePage({
 })
 const route = useRoute()
 const appStore = useAppStore()
-const { checkTokenValid, setJWT } = useToken()
+const { setJWT } = useToken()
 
 const MiddleURL = import.meta.env.VITE_MIDDLE_LOGIN_URL
 const AppID = import.meta.env.VITE_WECHAT_APPID
@@ -32,9 +32,12 @@ const code = currentUrl.searchParams.get('code') || (route.query.code as string)
 const rewrite = currentUrl.searchParams.get('state') || (route.query.rewrite as string)
 const urlPrefix = `${location.origin}${location.pathname}`
 
+const height = document.body.clientHeight
+
 /** 根据记录的最初访问路由重定向到目标页面 */
 const pass = () => {
   if (rewrite) return location.replace(`${urlPrefix}#${decode(rewrite)}`)
+  if (appStore.rewrite) return location.replace(`${urlPrefix}#${appStore.rewrite}`)
   /**
    * 当记录的访问路由不存在时说明访问的是项目根目录
    * 根目录作为项目鉴权入口, 不允许被作为目标路由直接访问
@@ -50,9 +53,7 @@ const pass = () => {
 }
 
 onBeforeMount(async () => {
-  if (checkTokenValid()) {
-    pass()
-  } else if (code) {
+  if (code) {
     // 企业微信登录回调拿到url上的鉴权code
     const jwt = await Auth.loginByWeChatCode(code)
     if (!jwt?.access_token) return useNotify('企业微信授权code登录失败！', 'error')
