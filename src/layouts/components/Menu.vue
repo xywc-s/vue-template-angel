@@ -39,11 +39,13 @@
         <template v-for="{ path, meta, children, name } in menus" :key="name ?? path">
           <el-sub-menu v-if="children" :index="path">
             <template #title>
-              <div>{{ meta?.title ?? path }}</div>
+              <div>{{ meta?.title ? $t(meta.title) : path }}</div>
             </template>
             <ChildRoute :routes="children" :base-path="path"></ChildRoute>
           </el-sub-menu>
-          <el-menu-item v-else :index="path">{{ meta?.title ?? path }}</el-menu-item>
+          <el-menu-item v-else :index="path">
+            {{ meta?.title ? $t(meta.title) : path }}
+          </el-menu-item>
         </template>
       </el-menu>
     </ElScrollbar>
