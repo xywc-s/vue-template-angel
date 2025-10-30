@@ -82,35 +82,38 @@ useAppStore().router.push({ name: 'app-user-detail' })
 
 # API
 
-基于后端分布式微服务架构, 项目根据可能用到的服务对 API 相关设置进行了服务配置解耦.
+API服务由 `@angelyeast/service` 模块统一管理和提供
 
-#### TODO 修复api相关配置说明
-
-1. 服务地址在环境配置文件下配置对应的环境变量, 注意环境变量需要以 `VITE_` 开头, 例如 `VITE_API_CIMS`, 用于请求 CIMS 服务提供的 API.
-2. 相关配置统一存放在 `src/api` 文件夹下, `config.js` 存放不同服务接口需要装配的配置, `interceptors/*` 存放请求、响应拦截器配置.
-3. 各个服务器的请求实例和接口配置统一存放在 `src/api/service` 文件夹下, 为不同服务各自创建请求实例, 并根据不同服务的不同要求灵活装配对应的请求头和拦截器.
-4. 将每个服务包装成一个服务类, 不同模块包装为服务类的静态对象, 不同模块下的接口包装为静态对象里面的方法, 在 API 服务的入口文件 `src/api/index.js` 将服务类导出, 这样在使用的时候便能从统一的入口文件导入不同的服务, 服务-模块-接口方法的结构一目了然. 例如
+1. 服务地址在环境配置文件下配置对应的环境变量, 例如 `VITE_API_MICRO`, 表示微服务的请求地址.
+2. 各个服务器的请求实例和接口由 `@angelyeast/service` 模块统一提供
 
 ```js
-import { Auth, MMS, CIMS, BFF } from '@/api'
+import { Auth, MMS, CIMS, AI, Open } from '@angelyeast/service'
 Auth.User.findByUnique('usercode')
 CIMS.Dictionary.findAll({ page: 1, rows: 100 })
 ```
 
-当然, 你也可以直接从对应的服务入口分别导入对应的服务, 但个人认为这没什么必要. 例如
+3. `@angelyeast/service` 提供了一些便利的工具函数。
+
+创建一个新的微服务实例, 它是一个基于 axios 实例的扩展，具备 axios 实例的所有能力，且是单例的。
 
 ```js
-import { Auth } from '@/api/service/auth'
-Auth.User.findByUnique('usercode')
+import { MicroService } from '@angelyeast/service'
+const Material = new MicroService('material')
+Material.get('/xxx')
+Material.post('/xxx')
 ```
 
-如果你喜欢, 你甚至可以从不同的服务模块入口直接导入指定的接口请求函数, 例如
+如果你只是需要临时测试一个新的接口，或者需要使用一些模块没有提供的接口
 
 ```js
-import { findByUnique, findUserByCodes, findUserList } from '@/service/auth/user'
-findByUnique('usercode')
-findUserByCodes(['usercode', 'usercode'])
-findUserList()
+import { useGet, usePost, useRequest } from '@angelyeast/service'
+useGet('/xxx')
+usePost('/xxx', params)
+useRequest({
+  url: '/xxx',
+  ...
+})
 ```
 
 # 插件
