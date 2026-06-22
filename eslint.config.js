@@ -104,7 +104,12 @@ export default ts.config(
       'no-undef': 'off', // ts有校验, 不需要此规则
       'no-dupe-class-members': 0, // ts有校验, 不需要此规则
       'no-redeclare': 'off', // 禁用eslint默认的禁止重复声明, 因为会误报ts的函数重载
-      camelcase: 'off'
+      camelcase: 'off',
+      // props 必须定义默认值
+      'vue/require-default-prop': 'off',
+      'vue/no-reserved-component-names': 'off',
+      // 组件名必须多个单词, 忽略 Button
+      'vue/multi-word-component-names': 'off'
     },
     languageOptions: { globals: { definePage: 'readonly' } }
   }
