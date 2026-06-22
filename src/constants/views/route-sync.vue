@@ -5,8 +5,8 @@
         <TitleBar title="路由同步"></TitleBar>
       </template>
       <template #extra>
-        <Button v-if="!app.id" status="warning" @click="initApp">初始化应用</Button>
-        <Button v-else preset="upload" :loading="buttonLoading" @click="syncRoutes">推送</Button>
+        <Btn v-if="!app.id" status="warning" @click="initApp">初始化应用</Btn>
+        <Btn v-else preset="upload" :loading="buttonLoading" @click="syncRoutes">推送</Btn>
       </template>
       <el-descriptions-item v-for="item in appAttrs" :key="item.field" v-bind="item.props">
         <el-switch
@@ -60,7 +60,7 @@ import { useFetch, validParams } from '@angelyeast/repository'
 import { RouteRecordNormalized, useRouter } from 'vue-router'
 import { isEqual, omit, pick, set, sortBy, unset } from 'lodash-es'
 import { VxeGridPropTypes } from 'vxe-table'
-import Button from '@#/Button'
+import Btn from '@#/Btn.vue'
 definePage({ meta: { title: '路由同步', permission: 'YW' } })
 /** 排除的路由属性 */
 const excludeKeys = [
@@ -118,7 +118,7 @@ const columns: VxeGridPropTypes.Columns = [
       default: ({ row }) =>
         syncedRoutes.value.includes(row.name)
           ? []
-          : Button({
+          : h(Btn, {
               preset: 'sync',
               size: 'small',
               mode: 'text',

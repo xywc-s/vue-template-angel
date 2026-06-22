@@ -7,7 +7,7 @@
           @click="$emit('clickTitle')"
         >
           <i v-if="!!icon" :class="['icon', icon]"></i>
-          <span class="text-18px text-[#303133] ml-6px">{{ title }}</span>
+          <span class="ml-6px">{{ title }}</span>
         </div>
       </slot>
       <slot name="left"></slot>

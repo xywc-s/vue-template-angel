@@ -1,8 +1,16 @@
-// @unocss-include
-import { get } from 'lodash-es'
-import { h, SetupContext } from 'vue'
-import { VxeButton, VxeButtonProps, VxeButtonEmits, type VxeButtonEventProps } from 'vxe-pc-ui'
+<template>
+  <VxeButton v-bind="{ ..._props, ...$attrs }">
+    <template v-for="slotName in Object.keys($slots)" #[slotName]="slotProps" :key="slotName">
+      <slot :name="slotName" v-bind="slotProps || {}"></slot>
+    </template>
+  </VxeButton>
+</template>
+<script setup lang="ts">
+import { get, omit } from 'lodash-es'
+import { mergeProps } from 'vue'
+import type { VxeButtonProps } from 'vxe-pc-ui'
 
+defineOptions({ name: 'Btn', inheritAttrs: false })
 type ButtonType =
   | 'add'
   | 'view'
@@ -18,105 +26,98 @@ type ButtonType =
   | 'download'
   | 'export'
 
-type Presets =
-  | Record<ButtonType, VxeButtonProps & VxeButtonEventProps>
-  | Record<string, VxeButtonProps & VxeButtonEventProps>
-type Props = VxeButtonProps &
-  VxeButtonEventProps & {
-    /** 预设（包含一系列默认值） */
-    preset?: ButtonType
-  }
-
-const CommonPorps: Props = {
+type Presets = Record<ButtonType, VxeButtonProps> | Record<string, VxeButtonProps>
+export type ButtonProps = VxeButtonProps & { preset?: ButtonType }
+const CommonPorps: VxeButtonProps = {
   status: 'primary'
 }
-
-export const ButtonPresets: Presets = {
+const ButtonPresets: Presets = {
   view: {
     ...CommonPorps,
-    content: '查看',
+    content: 'View',
     mode: 'text',
     icon: 'uno-ep-view'
   },
   add: {
     ...CommonPorps,
-    size: 'medium',
-    content: '添加',
+    size: 'mini',
+    content: 'Add',
     icon: 'uno-ep-plus'
   },
   edit: {
     ...CommonPorps,
     mode: 'text',
-    content: '编辑',
+    content: 'Edit',
     icon: 'uno-ep-edit'
   },
   delete: {
     ...CommonPorps,
     mode: 'text',
-    content: '删除',
+    content: 'Delete',
     status: 'danger',
     icon: 'uno-ep-delete'
   },
   submit: {
     ...CommonPorps,
-    content: '提交',
+    content: 'Submit',
     status: 'success',
     icon: 'uno-ep-check'
   },
   save: {
     ...CommonPorps,
     status: 'primary',
-    content: '保存',
+    content: 'Save',
     icon: 'uno-ep-circle-check'
   },
   search: {
     ...CommonPorps,
     status: '',
-    content: '搜索',
+    content: 'Search',
     icon: 'uno-ep-search'
   },
   reset: {
     ...CommonPorps,
-    content: '重置',
+    content: 'Reset',
     status: 'danger',
     icon: 'uno-ep-refresh'
   },
   cancel: {
     ...CommonPorps,
-    content: '取消',
+    content: 'Cancel',
     status: '',
     icon: 'uno-ep-close'
   },
   sync: {
     ...CommonPorps,
-    content: '同步',
+    content: 'Sync',
     status: 'success',
     icon: 'uno-ep-refresh'
   },
   upload: {
     ...CommonPorps,
-    content: '上传',
+    content: 'Upload',
     status: 'success',
     icon: 'uno-ep-upload'
   },
   download: {
     ...CommonPorps,
-    content: '下载',
-    status: 'success',
+    content: 'Download',
+    mode: 'text',
+    status: 'primary',
     icon: 'uno-ep-download'
   },
   export: {
     ...CommonPorps,
-    content: '导出',
+    content: 'Export',
     status: 'warning',
     icon: 'uno-ep-download'
   }
 }
-
-export default (props: Props, ctx?: SetupContext<VxeButtonEmits>) => {
-  const _props =
-    props.preset && get(ButtonPresets, props.preset, null)
-      ? { ...ButtonPresets[props.preset], ...props }
-      : { ...props }
-  return h(VxeButton, _props, ctx?.slots)
-}
+const props = defineProps<ButtonProps>()
+const _props = computed(() =>
+  mergeProps(
+    omit(props, 'preset') || {},
+    props.preset ? (get(ButtonPresets, props.preset) as unknown as any) : {}
+  )
+)
+</script>

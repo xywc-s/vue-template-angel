@@ -1,11 +1,11 @@
-import VxeUIPluginRenderElement from '@vxe-ui/plugin-render-element'
+import { default as VxeUIPluginRenderElement } from '@vxe-ui/plugin-render-element'
 import '@vxe-ui/plugin-render-element/dist/style.css'
 import 'vxe-pc-ui/lib/style.css'
 import 'vxe-table/lib/style.css'
 import { ElInput, ElLink } from 'element-plus'
 import { isPlainObject } from 'lodash-es'
-import { VxeInput, VxePager } from 'vxe-pc-ui'
-import VXETable, { VxeUI, VxeGlobalConfig } from 'vxe-table'
+import { VxePager, VxeUI } from 'vxe-pc-ui'
+import { default as VXETable, VxeGlobalConfig } from 'vxe-table'
 import i18n from '../i18n'
 import type { Plugin } from 'vue'
 
@@ -28,10 +28,8 @@ const useVxeTable: Plugin<VxeGlobalConfig[]> = {
 
     app.component('ElLink', ElLink)
     app.component('ElInput', ElInput)
-    app.component('VxeInput', VxeInput)
     // ElementPlus渲染器
     VxeUI.use(VxeUIPluginRenderElement)
-
     VxeUI.component(VxePager)
     app.use(VXETable)
   }
