@@ -1,4 +1,7 @@
+@use 'element-plus/theme-chalk/src/dark/css-vars.scss' as *;
 @import url('@angelyeast/repository/lib/style');
+@import url('./vxe-table.scss');
+
 html {
   line-height: normal;
 }
@@ -14,9 +17,30 @@ body {
   position: relative;
   &::before {
     content: '*';
-    position: absolute;
-    left: -10px;
-    top: -2px;
-    color: red;
+    color: var(--vxe-ui-form-validate-error-color);
+    margin-right: 0.2em;
+    font-weight: normal;
+    vertical-align: middle;
+  }
+}
+
+.dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 100%;
+  background-color: var(--el-color-primary);
+  &.danger {
+    background-color: var(--el-color-danger);
+  }
+  &.success {
+    background-color: var(--el-color-success);
+  }
+  &.info {
+    background-color: var(--el-color-info);
+  }
+  &.small {
+    width: 4px;
+    height: 4px;
   }
 }

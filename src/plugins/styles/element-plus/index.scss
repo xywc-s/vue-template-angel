@@ -1,0 +1,22 @@
+// 浅色模式主题色
+// @forward 'element-plus/theme-chalk/src/common/var.scss' with (
+//   $colors: (
+//     'primary': (
+//       'base': rgb(18, 49, 111)
+//     )
+//   )
+// );
+
+// @use './dark.scss';
+
+:root {
+  --el-aside-width: 160px;
+  --el-menu-item-height: 40px;
+  --el-fill-color-light: #fdfdfd;
+  --el-select-disabled-color: var(--el-input-text-color, var(--el-text-color-regular));
+  --el-disabled-text-color: var(--el-input-text-color, var(--el-text-color-regular));
+}
+
+.el-radio__input.is-disabled + span.el-radio__label {
+  color: var(--el-input-text-color, var(--el-text-color-regular));
+}

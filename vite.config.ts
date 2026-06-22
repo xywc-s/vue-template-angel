@@ -39,6 +39,7 @@ export default defineConfig((config) => {
     css: {
       preprocessorOptions: {
         scss: {
+          additionalData: `@use "@/plugins/styles/element-plus/index.scss" as *;`,
           api: 'modern-compiler'
         }
       }
